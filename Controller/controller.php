@@ -185,6 +185,8 @@ switch ($opcion1) {
             case "editar_ajuste":
                 $ID_AJUSTE_PROD = $_REQUEST['ID_AJUSTE_PROD'];
                 $ajusteCab = $ajustesModel->getCabAjuste($ID_AJUSTE_PROD);
+                $listaDetallesAjusteEditar=$ajustesModel->getDetAjustes($ID_AJUSTE_PROD);
+                $_SESSION['listaDetallesAjusteEditar'] = serialize($listaDetallesAjusteEditar);
                 $_SESSION['ajusteCab'] = serialize($ajusteCab);
                 header('Location: ../View/Ajustes/editarAjuste.php');
                 break;
@@ -230,6 +232,7 @@ switch ($opcion1) {
                 $ID_PROD = $_REQUEST['ID_PROD'];
                 $cantidad = $_REQUEST['cantidad'];
                 $tipoMovimiento = $_REQUEST['optradio'];
+                $ID_USU = $_REQUEST['ID_USU'];
 
                 $prod = $productoModel->getProducto($ID_PROD); //OBtenemos el producto
 
@@ -246,7 +249,7 @@ switch ($opcion1) {
                         if ($cantidad == 0) {
                             $_SESSION['ErrorStock'] = "Error: La cantidad debe ser mayor a cero";
                         } else {
-                            $listaAjusteDet = $ajustesModel->adicionarDetalle($listaAjusteDet, $ID_PROD, $tipoMovimiento, $cantidad);
+                            $listaAjusteDet = $ajustesModel->adicionarDetalle($listaAjusteDet, $ID_PROD, $ID_USU, $tipoMovimiento, $cantidad);
                             $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet);
                         }
                     }
@@ -290,7 +293,7 @@ switch ($opcion1) {
 
                 break;
                 
-            case "editar_ajuste_detalles":
+            case "guardar_ajuste_detalles":
                 //obtenemos los parametros del formulario:
                 $ID_AJUSTE_PROD = $_REQUEST['ID_AJUSTE_PROD'];
                 $MOTIVO_AJUSTE_PROD = $_REQUEST['MOTIVO_AJUSTE_PROD'];

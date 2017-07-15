@@ -6,11 +6,13 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
     include_once '../../Model/AjustesModel.php';
     include_once '../../Model/AjusteDet.php';
     include_once '../../Model/Producto.php';
+    include_once '../../Model/Usuario.php';
     include_once '../../Model/ProductosModel.php';
     $ajustesModel = new AjustesModel();
     $productosModel = new ProductosModel();
     $NOM = $_SESSION['NOMBRE_USUARIO'];
     $TIPO = $_SESSION['TIPO_USUARIO'];
+    $USUARIO_ACTIVO = unserialize($_SESSION['USUARIO_ACTIVO']);
     ?>
     <html>
         <head>
@@ -155,7 +157,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         <div class="panel-body">
                             <form action="../../Controller/controller.php">
                                 <input type="hidden" name="opcion1" value="ajuste">
-                                <input type="hidden" name="opcion2" value="insertar_ajuste_detalles">            
+                                <input type="hidden" name="opcion2" value="insertar_ajuste_detalles"> 
                                 <div class="input-group">
                                     <span class="input-group-addon">Código </span>
                                     <input type="text" class="form-control" disabled value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
@@ -189,6 +191,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                             <form action="../../Controller/controller.php">
                                 <input type="hidden" name="opcion1" value="ajuste">
                                 <input type="hidden" name="opcion2" value="insertar_detalle_ajuste">
+                                <input type="hidden" name="ID_USU" value="<?php echo $USUARIO_ACTIVO->getID_USU(); ?>">
                                 <div class="form-inline">
                                     <div class="form-group">
                                         <ul class="nav nav-pills">
