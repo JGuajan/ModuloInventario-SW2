@@ -219,6 +219,11 @@ switch ($opcion1) {
                 $_SESSION['ID_AJUSTE_PROD'] = $ajustesModel->generarCodigoAjuste();
                 header('Location: ../View/Ajustes/nuevoAjuste.php');
                 break;
+            
+            case "cancelar_ajuste":
+                unset($_SESSION['listaAjusteDet']);
+                header('Location: ../View/Ajustes/inicioAjuste.php');
+                break;
 
             case "insertar_detalle_ajuste":
                 //obtenemos los parametros del formulario:

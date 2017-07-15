@@ -158,7 +158,8 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                 <input type="hidden" name="opcion2" value="insertar_ajuste_detalles">            
                                 <div class="input-group">
                                     <span class="input-group-addon">Código </span>
-                                    <input type="text" class="form-control" name="ID_AJUSTE_PROD" value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
+                                    <input type="text" class="form-control" disabled value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
+                                    <input type="hidden" class="form-control" name="ID_AJUSTE_PROD" value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
                                 </div><br>
                                 <div class="input-group">
                                     <span class="input-group-addon">Motivo </span>
@@ -171,7 +172,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                 ?>
                                 <div class="form-group">
                                     <input type="submit" value="GUARDAR AJUSTE" id="btnGuardar" class="btn btn-success"> 
-                                    <input type="button" value="CANCELAR" id="btnGuardar" class="btn btn-danger"> 
+                                    <a href="../../Controller/controller.php?opcion1=ajuste&opcion2=cancelar_ajuste" id="btnGuardar" class="btn btn-danger">CANCELAR</a>
                                 </div> 
                             </form>
                         </div>
@@ -202,7 +203,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                     }
                                                     ?>
                                                 </select></li>
-                                            <li><a href="#listaProd" data-toggle="modal"><h4>Busqueda inteligente</h4></a></li>
+                                            <li><a href="#listaProd" data-toggle="modal">Busqueda inteligente</a></li>
                                         </ul>
                                     </div>
                                 </div>
