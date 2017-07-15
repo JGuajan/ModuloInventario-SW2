@@ -11,11 +11,12 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
     $productosModel = new ProductosModel();
     $NOM = $_SESSION['NOMBRE_USUARIO'];
     $TIPO = $_SESSION['TIPO_USUARIO'];
+    $ajusteCab = unserialize($_SESSION['ajusteCab']);
     ?>
     <html>
         <head>
             <meta charset="UTF-8">
-            <title>NUEVO AJUSTE</title>
+            <title>EDITAR AJUSTE</title>
             <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">				
 
             <!--Importación de Bootstrap al proyecto-->
@@ -145,7 +146,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="col-lg-12" style="border-bottom: 1px solid #c5c5c5">
-                                <h1><span class="glyphicon glyphicon-cog"></span> NUEVO AJUSTE DE PRODUCTOS</h1></div>
+                                <h1><span class="glyphicon glyphicon-cog"></span> EDICIÓN DE AJUSTE DE PRODUCTOS</h1></div>
                         </div>
                     </div>
 
@@ -155,15 +156,15 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         <div class="panel-body">
                             <form action="../../Controller/controller.php">
                                 <input type="hidden" name="opcion1" value="ajuste">
-                                <input type="hidden" name="opcion2" value="insertar_ajuste_detalles">            
+                                <input type="hidden" name="opcion2" value="editar_ajuste_detalles">            
                                 <div class="input-group">
                                     <span class="input-group-addon">Código </span>
-                                    <input type="text" class="form-control" disabled value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
-                                    <input type="hidden" class="form-control" name="ID_AJUSTE_PROD" value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
+                                    <input type="text" class="form-control" disabled value="<?php echo $ajusteCab->getID_AJUSTE_PROD(); ?>">
+                                    <input type="hidden" class="form-control" name="ID_AJUSTE_PROD" value="<?php echo $ajusteCab->getID_AJUSTE_PROD(); ?>">
                                 </div><br>
                                 <div class="input-group">
                                     <span class="input-group-addon">Motivo </span>
-                                    <input type="text" class="form-control" name="MOTIVO_AJUSTE_PROD" size="150" maxlength="150" placeholder="Ingrese el motivo del ajuste" required >
+                                    <input type="text" class="form-control" name="MOTIVO_AJUSTE_PROD" maxlength="150" value="<?php echo $ajusteCab->getMOTIVO_AJUSTE_PROD(); ?>" placeholder="Ingrese el motivo del ajuste" required >
                                 </div><br>
                                 <?php
                                 if (isset($_SESSION['ErrorDetalleAjuste'])) {

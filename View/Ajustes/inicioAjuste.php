@@ -176,9 +176,9 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                     foreach ($listado as $aju) {
                                                         ?>
                                                         <tr>
-                                                    <input type="hidden" value="<?php echo $aju->getID_AJUSTE_PROD(); ?>" id="ID_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>">
+<!--                                                    <input type="hidden" value="<?php echo $aju->getID_AJUSTE_PROD(); ?>" id="ID_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>">
                                                     <input type="hidden" value="<?php echo $aju->getMOTIVO_AJUSTE_PROD(); ?>" id="MOTIVO_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>" >
-                                                    <input type="hidden" value="<?php echo $aju->getFECHA_AJUSTE_PROD(); ?>" id="FECHA_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>" >
+                                                    <input type="hidden" value="<?php echo $aju->getFECHA_AJUSTE_PROD(); ?>" id="FECHA_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>" >-->
 
                                                     <td align="center"><a onclick="return confirImprimir
                                                    ('<?php echo $aju->getID_AJUSTE_PROD(); ?>', 
@@ -191,7 +191,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                         if ($aju->getESTADO_IMP_AJUSTE_PROD() == 'Impreso') {
                                                             echo '--';
                                                         } else {
-                                                            echo "<a href='#editAJU' onclick='obtener_datos(" . $aju->getID_AJUSTE_PROD() . "') data-toggle='modal'><span class='glyphicon glyphicon-pencil'>Editar</a>";
+                                                            echo "<a href='../../Controller/controller.php?opcion1=ajuste&opcion2=editar_ajuste&ID_AJUSTE_PROD=".$aju->getID_AJUSTE_PROD()."'><span class='glyphicon glyphicon-pencil'>Editar</a>";
                                                         }
                                                         ?>
                                                     </td>                                                                                  
