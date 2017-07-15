@@ -52,6 +52,14 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     });
                 }
             </script>
+            
+            <script LANGUAGE="JavaScript">
+                function ErrorStock(msjError)
+                {
+                    alert(msjError);
+                }
+            </script>
+            
         </head>
         <body>
             <div class="container-fluid">
@@ -184,7 +192,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                     <div class="form-group">
                                         <label>PRODUCTO:</label>
                                         <select name="ID_PROD" id="CboIDProducto" class="form-control" onchange="ObtenerDatosProducto($('#CboIDProducto').val());
-                                                return false;" required>
+                                                return false;">
                                             <option value="" disabled selected>Seleccione un Producto</option>
                                             <?php
                                             $listaProductos = $productosModel->getProductos();
@@ -204,13 +212,32 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                             <th>GRAVA IVA</th>
                                             <th>STOCK</th>
                                     </thead>
+                                     <tbody>
+                                        <?php
+                                        if (isset($_SESSION['producto'])) {
+                                            $producto = unserialize($_SESSION['producto']);
+                                            echo "<tr class='success'>";
+                                            echo "<input type='hidden' name='ID_PROD' value='" . $producto->getID_PROD() . "'>";
+                                            echo "<td>" . $producto->getNOMBRE_PROD() . "</td>";
+                                            echo "<td>" . $producto->getPVP_PROD() . "</td>";
+                                            if ($producto->getGRAVA_IVA_PROD() == "S")
+                                                echo "<td>SI</td>";
+                                            else
+                                                echo "<td>NO</td>";
+
+                                            echo "<td>" . $producto->getSTOCK_PROD() . "</td>";
+                                            echo "</tr>";
+                                        }
+                                        ?>
+                                    </tbody>
                                 </table>
 
 
                                 <!--Mensaje de error en caso de stock no valido-->
                                 <?php
                                 if (isset($_SESSION['ErrorStock'])) {
-                                    echo "<div class='alert alert-danger'>" . $_SESSION['ErrorStock'] . "</div>";
+                                    echo "<script language='javascript'> window.addEventListener('load', ErrorStock('" . $_SESSION['ErrorStock'] . "'), false); </script>";
+                                    unset($_SESSION['ErrorStock']);
                                 }
                                 ?>
 

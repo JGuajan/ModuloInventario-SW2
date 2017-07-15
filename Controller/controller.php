@@ -14,6 +14,7 @@ $productoModel = new ProductosModel();
 $opcion1 = $_REQUEST['opcion1'];
 $opcion2 = $_REQUEST['opcion2'];
 
+unset($_SESSION['ErrorStock']);
 unset($_SESSION['ErrorBaseDatos']);
 unset($_SESSION['ErrorInicioSesion']);
 unset($_SESSION['E-MAIL_USU']);
@@ -224,14 +225,26 @@ switch ($opcion1) {
                 $cantidad = $_REQUEST['cantidad'];
                 $tipoMovimiento = $_REQUEST['optradio'];
 
+                 $prod=$productoModel->getProducto($ID_PROD); //OBtenemos el producto
+                
                 if (!isset($_SESSION['listaAjusteDet'])) {
                     $listaAjusteDet = array();
                 } else {
                     $listaAjusteDet = unserialize($_SESSION['listaAjusteDet']);
                 }
                 try {
-                    $listaAjusteDet = $ajustesModel->adicionarDetalle($listaAjusteDet, $ID_PROD, $tipoMovimiento, $cantidad);
-                    $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet);
+                    //-------------------------------
+                    if($cantidad>$prod->getSTOCK_PROD() &&  $tipoMovimiento!="I"){
+                        $_SESSION['ErrorStock']="Error: La cantidad ingresada es mayor al stock actual del producto";
+                    }else{
+                        if($cantidad==0){
+                            $_SESSION['ErrorStock']="Error: La cantidad debe ser mayor a cero";
+                        }else{
+                             $listaAjusteDet = $ajustesModel->adicionarDetalle($listaAjusteDet, $ID_PROD, $tipoMovimiento, $cantidad);
+                             $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet); 
+                        }
+                    }
+                    //-------------------------------                    
                 } catch (Exception $e) {
                     $ErrorDetalleAjuste = $e->getMessage();
                     $_SESSION['ErrorDetalleAjuste'] = $ErrorDetalleAjuste;
