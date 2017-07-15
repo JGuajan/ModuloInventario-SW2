@@ -15,6 +15,7 @@ $opcion1 = $_REQUEST['opcion1'];
 $opcion2 = $_REQUEST['opcion2'];
 
 unset($_SESSION['ErrorStock']);
+unset($_SESSION['producto']);
 unset($_SESSION['ErrorBaseDatos']);
 unset($_SESSION['ErrorInicioSesion']);
 unset($_SESSION['E-MAIL_USU']);
@@ -308,6 +309,35 @@ switch ($opcion1) {
                 <td>" . $producto->getSTOCK_PROD() . "</td>
                 </tr>
                 </tbody>";
+                break;
+                
+            case "recargarDatosProductoBusquedaInteligente":
+                unset($_SESSION['ErrorStock']);
+                $ID_PROD = $_REQUEST['ID_PROD'];
+                $producto = $productoModel->getProducto($ID_PROD);
+                $_SESSION['producto']=serialize($producto);
+                header('Location: ../View/Ajustes/nuevoAjuste.php');
+//                $estadoProd = null;
+//                if ($producto->getGRAVA_IVA_PROD() == "S") {
+//                    $estadoProd = "SI";
+//                } else {
+//                    $estadoProd = "NO";
+//                }             
+//                echo "<thead>
+//                <tr>
+//                <th width='40%'>PRODUCTO</th>
+//                <th width='20%'>PRECIO</th>
+//                <th width='20%'>GRAVA IVA</th>
+//                <th>STOCK</th>
+//                </thead>
+//                <tbody>
+//                <tr class = 'info'>
+//                <td>" . $producto->getNOMBRE_PROD() . "</td>
+//                <td>" . $producto->getPVP_PROD() . "</td>
+//                <td>" . $estadoProd . "</td>
+//                <td>" . $producto->getSTOCK_PROD() . "</td>
+//                </tr>
+//                </tbody>";  
                 break;
         }
         break;

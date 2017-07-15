@@ -190,29 +190,33 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                 <input type="hidden" name="opcion2" value="insertar_detalle_ajuste">
                                 <div class="form-inline">
                                     <div class="form-group">
-                                        <label>PRODUCTO:</label>
-                                        <select name="ID_PROD" id="CboIDProducto" class="form-control" onchange="ObtenerDatosProducto($('#CboIDProducto').val());
-                                                return false;">
-                                            <option value="" disabled selected>Seleccione un Producto</option>
-                                            <?php
-                                            $listaProductos = $productosModel->getProductos();
-                                            foreach ($listaProductos as $prod) {
-                                                echo "<option value='" . $prod->getID_PROD() . "'>" . $prod->getNOMBRE_PROD() . "</option>";
-                                            }
-                                            ?>
-                                        </select>
+                                        <ul class="nav nav-pills">
+                                            <li><label>PRODUCTO:</label>
+                                                <select name="ID_PROD" id="CboIDProducto" class="form-control" onchange="ObtenerDatosProducto($('#CboIDProducto').val());
+                                                        return false;">
+                                                    <option value="" disabled selected>Seleccione un Producto</option>
+                                                    <?php
+                                                    $listaProductos = $productosModel->getProductos();
+                                                    foreach ($listaProductos as $prod) {
+                                                        echo "<option value='" . $prod->getID_PROD() . "'>" . $prod->getNOMBRE_PROD() . "</option>";
+                                                    }
+                                                    ?>
+                                                </select></li>
+                                            <li><a href="#listaProd" data-toggle="modal"><h4>Busqueda inteligente</h4></a></li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <br><br>
-                                <table class="table table-striped table-bordered table-condensed table-hover" id="TblProd">
-                                    <thead>
+                                 <table class="table table-striped table-bordered table-condensed table-hover" id="TblProd">
+                                    <thead>    
                                         <tr> 
                                             <th>PRODUCTO</th>
                                             <th>PRECIO</th>
                                             <th>GRAVA IVA</th>
                                             <th>STOCK</th>
+                                        </tr> 
                                     </thead>
-                                     <tbody>
+                                    <tbody>
                                         <?php
                                         if (isset($_SESSION['producto'])) {
                                             $producto = unserialize($_SESSION['producto']);
@@ -315,6 +319,68 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         </div>
                     </div>
                     <!--Fin Detalle ajuste-->
+                    
+                    
+                    
+                    
+                    <!--Ventana emergente para Busqueda inteligente de productos-->
+                    <div class="modal fade" id="listaProd">
+                        <div class="modal-dialog modal-lg">
+                            <!--<form class="form-horizontal" action="#ventanasEmergentes">-->
+                            <form class="form-horizontal" action="../../Controller/controller.php">
+
+                                <div class="modal-content">
+                                    <!-- Header de la ventana -->
+                                    <div class="modal-header bg-success">
+                                        <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h3 class="modal-title"><span class="glyphicon glyphicon-search"></span> Búsqueda de productos</h3>
+                                    </div>
+
+                                    <!-- Contenido de la ventana -->
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>            
+                                                    <table class="uk-table uk-table-hover uk-table-striped" id="example" cellspacing="0" width="100%">
+                                                        <thead>    
+                                                            <tr> 
+                                                                <th>ID PRODUCTO</th>
+                                                                <th>NOMBRE</th>
+                                                                <th>STOCK</th>
+                                                                <th>ACCIÓN</th>
+                                                            </tr> 
+                                                        </thead> 
+                                                        <tbody>
+                                                            <?php
+                                                            $listaProductos = $productosModel->getProductos();
+                                                            foreach ($listaProductos as $prod) {
+                                                                echo "<tr class='success'>";
+                                                                echo "<td>" . $prod->getID_PROD() . "</td>";
+                                                                echo "<td>" . $prod->getNOMBRE_PROD() . "</td>";
+                                                                echo "<td>" . $prod->getSTOCK_PROD() . "</td>";
+                                                                echo "<td><center><a href='../../controller/controller.php?opcion1=ajuste&opcion2=recargarDatosProductoBusquedaInteligente&ID_PROD=" . $prod->getID_PROD() . "'>Agregar</a></center></td>";
+                                                                echo "</tr>";
+                                                            }
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
+                                                    
+                                                     <script src="../../Bootstrap/DataTables/main.js"></script>
+                                                     <script src="../../Bootstrap/DataTables/jquery-1.12.4.js"></script>
+                                                     <script src="../../Bootstrap/DataTables/jquery.dataTables.min.js"></script>
+                                                     <!--<script src="https://cdn.datatables.net/1.10.15/js/dataTables.uikit.min.js"></script>--> 
+                                                     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/uikit.min.css">-->
+                                                     <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.uikit.min.css">-->
+                                                     <link rel="stylesheet" href="../../Bootstrap/DataTables/jquery.dataTables.min.css">
+                                                            
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
         </body>
     </html>
