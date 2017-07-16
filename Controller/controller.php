@@ -185,7 +185,7 @@ switch ($opcion1) {
             case "editar_ajuste":
                 $ID_AJUSTE_PROD = $_REQUEST['ID_AJUSTE_PROD'];
                 $ajusteCab = $ajustesModel->getCabAjuste($ID_AJUSTE_PROD);
-                $listaDetallesAjusteEditar=$ajustesModel->getDetAjustes($ID_AJUSTE_PROD);
+                $listaDetallesAjusteEditar=$ajustesModel->getDetallesAjuste($ID_AJUSTE_PROD);
                 $_SESSION['listaDetallesAjusteEditar'] = serialize($listaDetallesAjusteEditar);
                 $_SESSION['ajusteCab'] = serialize($ajusteCab);
                 header('Location: ../View/Ajustes/editarAjuste.php');

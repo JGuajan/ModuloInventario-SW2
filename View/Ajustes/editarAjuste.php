@@ -6,11 +6,13 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
     include_once '../../Model/AjustesModel.php';
     include_once '../../Model/AjusteDet.php';
     include_once '../../Model/Producto.php';
+    include_once '../../Model/Usuario.php';
     include_once '../../Model/ProductosModel.php';
     $ajustesModel = new AjustesModel();
     $productosModel = new ProductosModel();
     $NOM = $_SESSION['NOMBRE_USUARIO'];
     $TIPO = $_SESSION['TIPO_USUARIO'];
+    $USUARIO_ACTIVO = unserialize($_SESSION['USUARIO_ACTIVO']);
     $ajusteCab = unserialize($_SESSION['ajusteCab']);
     ?>
     <html>

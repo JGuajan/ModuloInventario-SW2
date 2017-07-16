@@ -10,6 +10,18 @@ class AjusteDet {
     private $CAMBIO_STOCK_PROD;
     private $TIPOMOV_DETAJUSTE_PROD;
 
+    public function __construct($ID_DETALLE_AJUSTE_PROD, $ID_PROD, $NOMBRE_PROD, $PVP_PROD, $ID_AJUSTE_PROD, $ID_USU, $CAMBIO_STOCK_PROD, $TIPOMOV_DETAJUSTE_PROD) {
+        $this->ID_DETALLE_AJUSTE_PROD = $ID_DETALLE_AJUSTE_PROD;
+        $this->ID_PROD = $ID_PROD;
+        $this->NOMBRE_PROD = $NOMBRE_PROD;
+        $this->PVP_PROD = $PVP_PROD;
+        $this->ID_AJUSTE_PROD = $ID_AJUSTE_PROD;
+        $this->ID_USU = $ID_USU;
+        $this->CAMBIO_STOCK_PROD = $CAMBIO_STOCK_PROD;
+        $this->TIPOMOV_DETAJUSTE_PROD = $TIPOMOV_DETAJUSTE_PROD;
+    }
+
+    
     public function getID_DETALLE_AJUSTE_PROD() {
         return $this->ID_DETALLE_AJUSTE_PROD;
     }

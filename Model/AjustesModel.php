@@ -197,16 +197,16 @@ class AjustesModel {
     // METODO PARA OBTENER DETALLES DE UN AJUSTE
     public function getDetallesAjuste($ID_AJUSTE_PROD) {          
         $pdo = Database::connect();
-        $sql = "select D.ID_DETALLE_AJUSTE_PROD, P.ID_PROD, P.NOMBRE_PROD, P.PVP_PROD, D.CAMBIO_STOCK_PROD, D.TIPOMOV_DETAJUSTE_PROD, "
-                     ."P.COSTO_PROD, P.GRABA_IVA_PROD, D.ID_AJUSTE_PROD "
-                ."from INV_TAB_DETALLE_AJUSTE_PROD D, INV_TAB_PRODUCTOS P "
-                ."where D.ID_AJUSTE_PROD='$ID_AJUSTE_PROD' AND P.ID_PROD=D.ID_PROD";
+        $sql = "select D.ID_DETALLE_AJUSTE_PROD, P.ID_PROD, P.NOMBRE_PROD, P.PVP_PROD, "
+                . "D.ID_AJUSTE_PROD, U.ID_USU, D.CAMBIO_STOCK_PROD, D.TIPOMOV_DETAJUSTE_PROD "
+                ."from INV_TAB_DETALLE_AJUSTE_PROD D, INV_TAB_PRODUCTOS P, INV_TAB_USUARIOS U "
+                ."where D.ID_AJUSTE_PROD='$ID_AJUSTE_PROD' AND P.ID_PROD=D.ID_PROD AND U.ID_USU=D.ID_USU";
         $resultado = $pdo->query($sql);
         $listadoDetAjustes = array();
         foreach ($resultado as $res) {
-            $VistaDet_ajuste = new VistaAjusteDet($res['ID_DETALLE_AJUSTE_PROD'],$res['NOMBRE_PROD'],$res['CAMBIO_STOCK_PROD'],$res['TIPOMOV_DETAJUSTE_PROD'],
-                                                  $res['COSTO_PROD'],$res['GRABA_IVA_PROD'],$res['ID_AJUSTE_PROD']);
-            array_push($listadoDetAjustes, $VistaDet_ajuste);
+            $ajusteDet = new ajusteDet($res['ID_DETALLE_AJUSTE_PROD'], $res['ID_PROD'], $res['NOMBRE_PROD'], $res['PVP_PROD'], 
+                    $res['ID_AJUSTE_PROD'], $res['ID_USU'], $res['CAMBIO_STOCK_PROD'], $res['TIPOMOV_DETAJUSTE_PROD']);
+            array_push($listadoDetAjustes, $ajusteDet);
         }
         Database::disconnect();
         return $listadoDetAjustes;
