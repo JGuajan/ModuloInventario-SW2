@@ -191,6 +191,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                             <form action="../../Controller/controller.php">
                                 <input type="hidden" name="opcion1" value="ajuste">
                                 <input type="hidden" name="opcion2" value="insertar_detalle_ajuste">
+                                <input type="hidden" name="aux" value="nuevo">
                                 <input type="hidden" name="ID_USU" value="<?php echo $USUARIO_ACTIVO->getID_USU(); ?>">
                                 <div class="form-inline">
                                     <div class="form-group">

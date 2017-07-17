@@ -185,8 +185,8 @@ switch ($opcion1) {
             case "editar_ajuste":
                 $ID_AJUSTE_PROD = $_REQUEST['ID_AJUSTE_PROD'];
                 $ajusteCab = $ajustesModel->getCabAjuste($ID_AJUSTE_PROD);
-                $listaDetallesAjusteEditar=$ajustesModel->getDetallesAjuste($ID_AJUSTE_PROD);
-                $_SESSION['listaDetallesAjusteEditar'] = serialize($listaDetallesAjusteEditar);
+                $listaAjusteDet=$ajustesModel->getDetallesAjuste($ID_AJUSTE_PROD);
+                $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet);
                 $_SESSION['ajusteCab'] = serialize($ajusteCab);
                 header('Location: ../View/Ajustes/editarAjuste.php');
                 break;
@@ -219,6 +219,7 @@ switch ($opcion1) {
             case "nuevo_ajuste":
                 unset($_SESSION['listadoAjustes']);
                 $_SESSION['ID_AJUSTE_PROD'] = $ajustesModel->generarCodigoAjuste();
+                unset($_SESSION['listaAjusteDet']);
                 header('Location: ../View/Ajustes/nuevoAjuste.php');
                 break;
 
@@ -233,6 +234,7 @@ switch ($opcion1) {
                 $cantidad = $_REQUEST['cantidad'];
                 $tipoMovimiento = $_REQUEST['optradio'];
                 $ID_USU = $_REQUEST['ID_USU'];
+                $aux = $_REQUEST['aux'];
 
                 $prod = $productoModel->getProducto($ID_PROD); //OBtenemos el producto
 
@@ -258,7 +260,12 @@ switch ($opcion1) {
                     $ErrorDetalleAjuste = $e->getMessage();
                     $_SESSION['ErrorDetalleAjuste'] = $ErrorDetalleAjuste;
                 }
-                header('Location: ../View/Ajustes/nuevoAjuste.php');
+                
+                if($aux=="nuevo"){
+                    header('Location: ../View/Ajustes/nuevoAjuste.php');
+                }else{
+                    header('Location: ../View/Ajustes/editarAjuste.php');
+                }
                 break;
 
             case "eliminar_detalle":
@@ -301,17 +308,18 @@ switch ($opcion1) {
                 if (isset($_SESSION['listaAjusteDet'])) {
                     $listaAjusteDet = unserialize($_SESSION['listaAjusteDet']);
                     try {
-                        $ajustesModel->insertarAjusteDetalles($listaAjusteDet, $ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD);
+                        $ajustesModel->actualizarAjusteDetalles($listaAjusteDet, $ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD);
                         unset($_SESSION['listaAjusteDet']);
                         $listadoAjustes = $ajustesModel->getCabAjustes();
                         $_SESSION['listadoAjustes'] = serialize($listadoAjustes);
                         header('Location: ../View/Ajustes/inicioAjuste.php');
                     } catch (Exception $e) {
                         $_SESSION['ErrorBaseDatos'] = $e->getMessage();
+                        header('Location: ../View/Producto/inicioProductos.php');
                     }
                 } else {
                     $_SESSION['ErrorDetalleAjuste'] = "Debe registrar por lo menos un detalle de Ajuste antes de guardar";
-                    header('Location: ../View/Ajustes/nuevoAjuste.php');
+                    header('Location: ../View/Ajustes/editarAjuste.php');
                 }
 
                 break;

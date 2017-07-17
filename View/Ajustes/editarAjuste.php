@@ -143,6 +143,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         </div>
                     </div>
                 </div>
+                
                 <!--Título de la página-->
                 <div class="container">
                     <div class="row">
@@ -192,6 +193,8 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                             <form action="../../Controller/controller.php">
                                 <input type="hidden" name="opcion1" value="ajuste">
                                 <input type="hidden" name="opcion2" value="insertar_detalle_ajuste">
+                                <input type="hidden" name="aux" value="edicion">
+                                <input type="hidden" name="ID_USU" value="<?php echo $USUARIO_ACTIVO->getID_USU(); ?>">
                                 <div class="form-inline">
                                     <div class="form-group">
                                         <ul class="nav nav-pills">
@@ -285,8 +288,8 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                     <tbody>
                                         <?php
                                         //verificamos si existe en sesion el listado de clientes:
-                                        if (isset($_SESSION['listaDetallesAjusteEditar'])) {
-                                            $listado = unserialize($_SESSION['listaDetallesAjusteEditar']);
+                                        if (isset($_SESSION['listaAjusteDet'])) {
+                                            $listado = unserialize($_SESSION['listaAjusteDet']);
                                             foreach ($listado as $ajusteDet) {
                                                 $prod=$productosModel->getProducto($ajusteDet->getID_PROD());
                                                 echo "<tr class='success'>";

@@ -193,24 +193,23 @@ class AjustesModel {
         array_push($listaAjusteDet, $ajusteDet);
         return $listaAjusteDet;
     }
-    
+
     // METODO PARA OBTENER DETALLES DE UN AJUSTE
-    public function getDetallesAjuste($ID_AJUSTE_PROD) {          
+    public function getDetallesAjuste($ID_AJUSTE_PROD) {
         $pdo = Database::connect();
         $sql = "select D.ID_DETALLE_AJUSTE_PROD, P.ID_PROD, P.NOMBRE_PROD, P.PVP_PROD, "
                 . "D.ID_AJUSTE_PROD, U.ID_USU, D.CAMBIO_STOCK_PROD, D.TIPOMOV_DETAJUSTE_PROD "
-                ."from INV_TAB_DETALLE_AJUSTE_PROD D, INV_TAB_PRODUCTOS P, INV_TAB_USUARIOS U "
-                ."where D.ID_AJUSTE_PROD='$ID_AJUSTE_PROD' AND P.ID_PROD=D.ID_PROD AND U.ID_USU=D.ID_USU";
+                . "from INV_TAB_DETALLE_AJUSTE_PROD D, INV_TAB_PRODUCTOS P, INV_TAB_USUARIOS U "
+                . "where D.ID_AJUSTE_PROD='$ID_AJUSTE_PROD' AND P.ID_PROD=D.ID_PROD AND U.ID_USU=D.ID_USU";
         $resultado = $pdo->query($sql);
         $listadoDetAjustes = array();
         foreach ($resultado as $res) {
-            $ajusteDet = new ajusteDet($res['ID_DETALLE_AJUSTE_PROD'], $res['ID_PROD'], $res['NOMBRE_PROD'], $res['PVP_PROD'], 
-                    $res['ID_AJUSTE_PROD'], $res['ID_USU'], $res['CAMBIO_STOCK_PROD'], $res['TIPOMOV_DETAJUSTE_PROD']);
+            $ajusteDet = new ajusteDet($res['ID_DETALLE_AJUSTE_PROD'], $res['ID_PROD'], $res['NOMBRE_PROD'], $res['PVP_PROD'], $res['ID_AJUSTE_PROD'], $res['ID_USU'], $res['CAMBIO_STOCK_PROD'], $res['TIPOMOV_DETAJUSTE_PROD']);
             array_push($listadoDetAjustes, $ajusteDet);
         }
         Database::disconnect();
         return $listadoDetAjustes;
-    }  
+    }
 
     // METODO PARA ELIMINAR UN DETALLE DE AJUSTE
     public function eliminarDetalle($listaAjusteDet, $ID_DETALLE_AJUSTE_PROD) {
@@ -228,6 +227,21 @@ class AjustesModel {
         return $listaAjusteDet;
     }
 
+    // METODO PARA OBTENER UN DETALLE DE AJUSTE
+    public function getDetalle($ID_DETALLE_AJUSTE_PROD) {
+        $pdo = Database::connect();
+        $sql = "select D.ID_DETALLE_AJUSTE_PROD, P.ID_PROD, P.NOMBRE_PROD, P.PVP_PROD, "
+                . "D.ID_AJUSTE_PROD, U.ID_USU, D.CAMBIO_STOCK_PROD, D.TIPOMOV_DETAJUSTE_PROD "
+                . "from INV_TAB_DETALLE_AJUSTE_PROD D, INV_TAB_PRODUCTOS P, INV_TAB_USUARIOS U "
+                . "where ID_DETALLE_AJUSTE_PROD=? AND P.ID_PROD=D.ID_PROD AND U.ID_USU=D.ID_USU";
+        $consulta = $pdo->prepare($sql);
+        $consulta->execute(array($ID_DETALLE_AJUSTE_PROD));
+        $res = $consulta->fetch(PDO::FETCH_ASSOC);
+        $detalle = new AjusteDet($res['ID_DETALLE_AJUSTE_PROD'], $res['ID_PROD'], $res['NOMBRE_PROD'], $res['PVP_PROD'], $res['ID_AJUSTE_PROD'], $res['ID_USU'], $res['CAMBIO_STOCK_PROD'], $res['TIPOMOV_DETAJUSTE_PROD']);
+        Database::disconnect();
+        return $detalle;
+    }
+
     // METODO PARA INSERTAR UN AJUSTE CON DETALLES
     public function insertarAjusteDetalles($listaAjusteDet, $ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD) {
         $pdo = Database::connect();
@@ -238,15 +252,13 @@ class AjustesModel {
             $consulta->execute(array($ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD));
             //guardamos los detalles:
             foreach ($listaAjusteDet as $det) {
-                
-                // Falta agregar el campo ID_USU .. revisar base de datos para el orden
                 $sql = "insert into inv_tab_detalle_ajuste_prod(ID_DETALLE_AJUSTE_PROD, ID_PROD, ID_AJUSTE_PROD, ID_USU, CAMBIO_STOCK_PROD, TIPOMOV_DETAJUSTE_PROD) values(?,?,?,?,?,?)";
                 $consulta = $pdo->prepare($sql);
                 //en cada detalle asignamos el numero de ajuste padre:
-                if($det->getTIPOMOV_DETAJUSTE_PROD() == "I"){
-                    $cantidad=$det->getCAMBIO_STOCK_PROD();
-                }else{
-                    $cantidad=$det->getCAMBIO_STOCK_PROD()*-1;
+                if ($det->getTIPOMOV_DETAJUSTE_PROD() == "I") {
+                    $cantidad = $det->getCAMBIO_STOCK_PROD();
+                } else {
+                    $cantidad = $det->getCAMBIO_STOCK_PROD() * -1;
                 }
                 $consulta->execute(array($det->getID_DETALLE_AJUSTE_PROD(),
                     $det->getID_PROD(),
@@ -261,21 +273,55 @@ class AjustesModel {
         }
         Database::disconnect();
     }
+
+    // METODO PARA GUARDAR LOS CAMBIOS DEL AJUSTE
+    public function actualizarAjusteDetalles($listaAjusteDet, $ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD) {
+        $pdo = Database::connect();
+        $sql = "update INV_TAB_AJUSTES_PRODUCTOS SET MOTIVO_AJUSTE_PROD=? WHERE ID_AJUSTE_PROD=?";
+        $consulta = $pdo->prepare($sql);
+        try {
+            $consulta->execute(array($MOTIVO_AJUSTE_PROD, $ID_AJUSTE_PROD));
+            //guardamos los detalles:
+            foreach ($listaAjusteDet as $det) {
+                if (is_null($this->getDetalle($det->getID_DETALLE_AJUSTE_PROD())->getID_DETALLE_AJUSTE_PROD())) {
+                    $sql = "insert into inv_tab_detalle_ajuste_prod(ID_DETALLE_AJUSTE_PROD, ID_PROD, ID_AJUSTE_PROD, ID_USU, CAMBIO_STOCK_PROD, TIPOMOV_DETAJUSTE_PROD) values(?,?,?,?,?,?)";
+                    $consulta = $pdo->prepare($sql);
+                    //en cada detalle asignamos el numero de ajuste padre:
+                    if ($det->getTIPOMOV_DETAJUSTE_PROD() == "I") {
+                        $cantidad = $det->getCAMBIO_STOCK_PROD();
+                    } else {
+                        $cantidad = $det->getCAMBIO_STOCK_PROD() * -1;
+                    }
+                    $consulta->execute(array($det->getID_DETALLE_AJUSTE_PROD(),
+                        $det->getID_PROD(),
+                        $ID_AJUSTE_PROD,
+                        $det->getID_USU(),
+                        $cantidad,
+                        $det->getTIPOMOV_DETAJUSTE_PROD()));
+                }
+            }
+        } catch (PDOException $e) {
+            Database::disconnect();
+            throw new Exception($e->getMessage());
+        }
+        Database::disconnect();
+    }
     
-    public function getDetAjustes($ID_AJUSTE_PROD) {          
+
+    public function getDetAjustes($ID_AJUSTE_PROD) {
         $pdo = Database::connect();
         $sql = "select D.ID_DETALLE_AJUSTE_PROD, P.NOMBRE_PROD,	D.CAMBIO_STOCK_PROD, D.TIPOMOV_DETAJUSTE_PROD, "
-                     ."P.COSTO_PROD, P.GRABA_IVA_PROD, D.ID_AJUSTE_PROD "
-                ."from INV_TAB_DETALLE_AJUSTE_PROD D, INV_TAB_PRODUCTOS P "
-                ."where D.ID_AJUSTE_PROD='$ID_AJUSTE_PROD' AND P.ID_PROD=D.ID_PROD";
+                . "P.COSTO_PROD, P.GRABA_IVA_PROD, D.ID_AJUSTE_PROD "
+                . "from INV_TAB_DETALLE_AJUSTE_PROD D, INV_TAB_PRODUCTOS P "
+                . "where D.ID_AJUSTE_PROD='$ID_AJUSTE_PROD' AND P.ID_PROD=D.ID_PROD";
         $resultado = $pdo->query($sql);
         $listadoDetAjustes = array();
         foreach ($resultado as $res) {
-            $VistaDet_ajuste = new VistaAjusteDet($res['ID_DETALLE_AJUSTE_PROD'],$res['NOMBRE_PROD'],$res['CAMBIO_STOCK_PROD'],$res['TIPOMOV_DETAJUSTE_PROD'],
-                                                  $res['COSTO_PROD'],$res['GRABA_IVA_PROD'],$res['ID_AJUSTE_PROD']);
+            $VistaDet_ajuste = new VistaAjusteDet($res['ID_DETALLE_AJUSTE_PROD'], $res['NOMBRE_PROD'], $res['CAMBIO_STOCK_PROD'], $res['TIPOMOV_DETAJUSTE_PROD'], $res['COSTO_PROD'], $res['GRABA_IVA_PROD'], $res['ID_AJUSTE_PROD']);
             array_push($listadoDetAjustes, $VistaDet_ajuste);
         }
         Database::disconnect();
         return $listadoDetAjustes;
-    }  
+    }
+
 }
