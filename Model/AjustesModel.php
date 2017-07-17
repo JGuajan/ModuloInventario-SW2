@@ -275,7 +275,7 @@ class AjustesModel {
     }
 
     // METODO PARA GUARDAR LOS CAMBIOS DEL AJUSTE
-    public function actualizarAjusteDetalles($listaAjusteDet, $ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD) {
+    public function actualizarAjusteDetalles($listaAjusteDet, $listaDetPorEliminar, $ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD) {
         $pdo = Database::connect();
         $sql = "update INV_TAB_AJUSTES_PRODUCTOS SET MOTIVO_AJUSTE_PROD=? WHERE ID_AJUSTE_PROD=?";
         $consulta = $pdo->prepare($sql);
@@ -300,13 +300,22 @@ class AjustesModel {
                         $det->getTIPOMOV_DETAJUSTE_PROD()));
                 }
             }
+
+            // Eliminacion de detalles en la edición
+            foreach ($listaDetPorEliminar as $elim) {
+                if (!is_null($this->getDetalle($elim)->getID_DETALLE_AJUSTE_PROD())) {
+//                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    $sql = "delete from inv_tab_detalle_ajuste_prod where ID_DETALLE_AJUSTE_PROD=?";
+                    $consulta = $pdo->prepare($sql);
+                    $consulta->execute(array($elim));
+                }
+            }
         } catch (PDOException $e) {
             Database::disconnect();
             throw new Exception($e->getMessage());
         }
         Database::disconnect();
     }
-    
 
     public function getDetAjustes($ID_AJUSTE_PROD) {
         $pdo = Database::connect();

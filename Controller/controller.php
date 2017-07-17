@@ -185,7 +185,7 @@ switch ($opcion1) {
             case "editar_ajuste":
                 $ID_AJUSTE_PROD = $_REQUEST['ID_AJUSTE_PROD'];
                 $ajusteCab = $ajustesModel->getCabAjuste($ID_AJUSTE_PROD);
-                $listaAjusteDet=$ajustesModel->getDetallesAjuste($ID_AJUSTE_PROD);
+                $listaAjusteDet = $ajustesModel->getDetallesAjuste($ID_AJUSTE_PROD);
                 $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet);
                 $_SESSION['ajusteCab'] = serialize($ajusteCab);
                 header('Location: ../View/Ajustes/editarAjuste.php');
@@ -225,6 +225,7 @@ switch ($opcion1) {
 
             case "cancelar_ajuste":
                 unset($_SESSION['listaAjusteDet']);
+                unset($_SESSION['listaDetPorEliminar']);
                 header('Location: ../View/Ajustes/inicioAjuste.php');
                 break;
 
@@ -260,10 +261,10 @@ switch ($opcion1) {
                     $ErrorDetalleAjuste = $e->getMessage();
                     $_SESSION['ErrorDetalleAjuste'] = $ErrorDetalleAjuste;
                 }
-                
-                if($aux=="nuevo"){
+
+                if ($aux == "nuevo") {
                     header('Location: ../View/Ajustes/nuevoAjuste.php');
-                }else{
+                } else {
                     header('Location: ../View/Ajustes/editarAjuste.php');
                 }
                 break;
@@ -271,10 +272,27 @@ switch ($opcion1) {
             case "eliminar_detalle":
                 //obtenemos los parametros del formulario:
                 $ID_DETALLE_AJUSTE_PROD = $_REQUEST['ID_DETALLE_AJUSTE_PROD'];
+                $aux = $_REQUEST['aux'];
+
                 $listaAjusteDet = unserialize($_SESSION['listaAjusteDet']);
                 $listaAjusteDet = $ajustesModel->eliminarDetalle($listaAjusteDet, $ID_DETALLE_AJUSTE_PROD);
-                $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet);
-                header('Location: ../View/Ajustes/nuevoAjuste.php');
+
+                if ($aux == "nuevo") {
+                    $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet);
+                    header('Location: ../View/Ajustes/nuevoAjuste.php');
+                } else {
+                    if (!isset($_SESSION['listaDetPorEliminar'])) {
+                        $listaDetPorEliminar = array();
+                        $_SESSION['listaDetPorEliminar'] = serialize($listaDetPorEliminar);
+                    } else {
+                        $listaDetPorEliminar = unserialize($_SESSION['listaDetPorEliminar']);
+                        array_push($listaDetPorEliminar, $ID_DETALLE_AJUSTE_PROD);
+                        $_SESSION['listaDetPorEliminar'] = serialize($listaDetPorEliminar);
+                    }
+                    $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet);
+                    header('Location: ../View/Ajustes/editarAjuste.php');
+                }
+
                 break;
 
             case "insertar_ajuste_detalles":
@@ -299,7 +317,7 @@ switch ($opcion1) {
                 }
 
                 break;
-                
+
             case "guardar_ajuste_detalles":
                 //obtenemos los parametros del formulario:
                 $ID_AJUSTE_PROD = $_REQUEST['ID_AJUSTE_PROD'];
@@ -307,9 +325,11 @@ switch ($opcion1) {
 
                 if (isset($_SESSION['listaAjusteDet'])) {
                     $listaAjusteDet = unserialize($_SESSION['listaAjusteDet']);
+                    $listaDetPorEliminar = unserialize($_SESSION['listaDetPorEliminar']);
                     try {
-                        $ajustesModel->actualizarAjusteDetalles($listaAjusteDet, $ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD);
+                        $ajustesModel->actualizarAjusteDetalles($listaAjusteDet, $listaDetPorEliminar, $ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD);
                         unset($_SESSION['listaAjusteDet']);
+                        unset($_SESSION['listaDetPorEliminar']);
                         $listadoAjustes = $ajustesModel->getCabAjustes();
                         $_SESSION['listadoAjustes'] = serialize($listadoAjustes);
                         header('Location: ../View/Ajustes/inicioAjuste.php');
