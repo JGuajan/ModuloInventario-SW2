@@ -164,7 +164,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                          <script src="../../Bootstrap/DataTables/jquery.dataTables.min.js"></script>
                                          <link rel="stylesheet" href="../../Bootstrap/DataTables/jquery.dataTables.min.css">
                                         <!-- Tabla en la que se listaras los productos de la Base de Datos -->
-                                        <table class="table table-striped table-bordered table-condensed table-condensed" id="example" cellspacing="0" width="100%">
+                                        <table class="table table-responsive table-bordered table-striped table-striped" id="example" cellspacing="0" width="100%">
                                             <thead>
                                             <tr>
                                                 <th colspan="1">ACCIONES</th>

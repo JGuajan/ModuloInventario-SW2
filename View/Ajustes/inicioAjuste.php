@@ -153,12 +153,16 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     <div class="col-md-12">
                         <div class="panel panel-info">
                             <div class="panel-heading"><h4>Lista de Ajustes</h4></div>
-                            <div class="panel-body">
+                            <div class="panel-title">
                                 <div class="col-lg-12">
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-bordered table-condensed table-hover" data-toggle="table" data-pagination="true">
-<!--                                            <thead>
-                                                <tr> -->
+                                        <script src="../../Bootstrap/DataTables/ajustes.js"></script>
+                                        <script src="../../Bootstrap/DataTables/jquery-1.12.4.js"></script>
+                                        <script src="../../Bootstrap/DataTables/jquery.dataTables.min.js"></script>
+                                        <link rel="stylesheet" href="../../Bootstrap/DataTables/jquery.dataTables.min.css">
+                                        <table class="table table-striped table-bordered table-condensed table-condensed" id="example" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr> 
                                                     <th colspan="2">ACCIONES</th>
                                                     <th>CODIGO AJUSTE</th>
                                                     <th>MOTIVO AJUSTE</th>
@@ -166,8 +170,8 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                     <th>FECHA IMPRESIÓN</th>
                                                     <th>ESTADO DE IMPRESIÓN</th>
                                                 </tr>
-<!--                                            </thead>
-                                            <tbody>-->
+                                            </thead>
+                                            <tbody>
                                                 <?php
                                                 // Verificamos si existe la variable de sesión que contiene la lista de Usuarios
                                                 if (isset($_SESSION['listadoAjustes'])) {
@@ -176,39 +180,39 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                     foreach ($listado as $aju) {
                                                         ?>
                                                         <tr>
-<!--                                                    <input type="hidden" value="<?php echo $aju->getID_AJUSTE_PROD(); ?>" id="ID_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>">
+            <!--                                                    <input type="hidden" value="<?php echo $aju->getID_AJUSTE_PROD(); ?>" id="ID_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>">
                                                     <input type="hidden" value="<?php echo $aju->getMOTIVO_AJUSTE_PROD(); ?>" id="MOTIVO_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>" >
                                                     <input type="hidden" value="<?php echo $aju->getFECHA_AJUSTE_PROD(); ?>" id="FECHA_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>" >-->
 
-                                                    <td align="center"><a onclick="return confirImprimir
-                                                   ('<?php echo $aju->getID_AJUSTE_PROD(); ?>', 
-                                                    '<?php echo $aju->getMOTIVO_AJUSTE_PROD(); ?>', 
-                                                    '<?php echo $aju->getFECHA_AJUSTE_PROD(); ?>');" 
-                                                    href='../../Controller/controller.php?opcion1=ajuste&opcion2=imprimir_ajuste&ID_AJUSTE_PROD=<?php echo $aju->getID_AJUSTE_PROD(); ?>&MOTIVO_AJUSTE_PROD=<?php echo $aju->getMOTIVO_AJUSTE_PROD(); ?>'>
-                                                    <span class='glyphicon glyphicon-print'>Imprimir</span></a></td>
-                                                    <td align="center"> 
+                                                            <td align="center"><a onclick="return confirImprimir
+                                    ('<?php echo $aju->getID_AJUSTE_PROD(); ?>',
+                                            '<?php echo $aju->getMOTIVO_AJUSTE_PROD(); ?>',
+                                            '<?php echo $aju->getFECHA_AJUSTE_PROD(); ?>');" 
+                                                                                  href='../../Controller/controller.php?opcion1=ajuste&opcion2=imprimir_ajuste&ID_AJUSTE_PROD=<?php echo $aju->getID_AJUSTE_PROD(); ?>&MOTIVO_AJUSTE_PROD=<?php echo $aju->getMOTIVO_AJUSTE_PROD(); ?>'>
+                                                                    <span class='glyphicon glyphicon-print'>Imprimir</span></a></td>
+                                                            <td align="center"> 
+                                                                <?php
+                                                                if ($aju->getESTADO_IMP_AJUSTE_PROD() == 'Impreso') {
+                                                                    echo '--';
+                                                                } else {
+                                                                    echo "<a href='../../Controller/controller.php?opcion1=ajuste&opcion2=editar_ajuste&ID_AJUSTE_PROD=" . $aju->getID_AJUSTE_PROD() . "'><span class='glyphicon glyphicon-pencil'>Editar</a>";
+                                                                }
+                                                                ?>
+                                                            </td>                                                                                  
+
+                                                            <td><?php echo $aju->getID_AJUSTE_PROD(); ?></td>
+                                                            <td><?php echo $aju->getMOTIVO_AJUSTE_PROD() ?></td>
+                                                            <td><?php echo $aju->getFECHA_AJUSTE_PROD() ?></td>
+                                                            <td><?php echo $aju->getFECHA_IMP_AJUSTE_PROD() ?></td>
+                                                            <td><?php echo $aju->getESTADO_IMP_AJUSTE_PROD() ?></td>                    
+
+                                                        </tr>
                                                         <?php
-                                                        if ($aju->getESTADO_IMP_AJUSTE_PROD() == 'Impreso') {
-                                                            echo '--';
-                                                        } else {
-                                                            echo "<a href='../../Controller/controller.php?opcion1=ajuste&opcion2=editar_ajuste&ID_AJUSTE_PROD=".$aju->getID_AJUSTE_PROD()."'><span class='glyphicon glyphicon-pencil'>Editar</a>";
-                                                        }
-                                                        ?>
-                                                    </td>                                                                                  
-
-                                                    <td><?php echo $aju->getID_AJUSTE_PROD(); ?></td>
-                                                    <td><?php echo $aju->getMOTIVO_AJUSTE_PROD() ?></td>
-                                                    <td><?php echo $aju->getFECHA_AJUSTE_PROD() ?></td>
-                                                    <td><?php echo $aju->getFECHA_IMP_AJUSTE_PROD() ?></td>
-                                                    <td><?php echo $aju->getESTADO_IMP_AJUSTE_PROD() ?></td>                    
-
-
-                                                    <?php
+                                                    }
                                                 }
-                                            }
-                                            ?>
+                                                ?>
 
-                                            </tr>
+
 
                                             </tbody>
                                         </table>
