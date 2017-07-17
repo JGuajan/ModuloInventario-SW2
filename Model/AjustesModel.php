@@ -170,20 +170,13 @@ class AjustesModel {
         $producto = $productoModel->getProducto($ID_PROD);
 
         //Creamos un nuevo detalle AjusteDet:
-        $ajusteDet = new AjusteDet();
         $id_detalle_ajuste = null;
         if (!empty($listaAjusteDet)) {
             $id_detalle_ajuste = $this->generarCodigoDetalleAjusteArray(end($listaAjusteDet));
         } else {
             $id_detalle_ajuste = $this->generarCodigoDetalleAjusteBD();
         }
-        $ajusteDet->setID_DETALLE_AJUSTE_PROD($id_detalle_ajuste);
-        $ajusteDet->setID_PROD($ID_PROD);
-        $ajusteDet->setNOMBRE_PROD($producto->getNOMBRE_PROD());
-        $ajusteDet->setPVP_PROD($producto->getPVP_PROD());
-        $ajusteDet->setID_USU($ID_USU);
-        $ajusteDet->setCAMBIO_STOCK_PROD($cantidad);
-        $ajusteDet->setTIPOMOV_DETAJUSTE_PROD($tipoMovimiento);
+        $ajusteDet = new AjusteDet($id_detalle_ajuste,$ID_PROD,$producto->getNOMBRE_PROD(),$producto->getPVP_PROD(),"NULL",$ID_USU,$cantidad,$tipoMovimiento);
 
         if (!isset($listaAjusteDet)) {
             $listaAjusteDet = array();
