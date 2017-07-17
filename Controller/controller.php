@@ -335,7 +335,6 @@ switch ($opcion1) {
                         header('Location: ../View/Ajustes/inicioAjuste.php');
                     } catch (Exception $e) {
                         $_SESSION['ErrorBaseDatos'] = $e->getMessage();
-                        header('Location: ../View/Producto/inicioProductos.php');
                     }
                 } else {
                     $_SESSION['ErrorDetalleAjuste'] = "Debe registrar por lo menos un detalle de Ajuste antes de guardar";
