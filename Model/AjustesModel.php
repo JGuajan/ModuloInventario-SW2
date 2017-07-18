@@ -297,7 +297,6 @@ class AjustesModel {
             // Eliminacion de detalles en la edición
             foreach ($listaDetPorEliminar as $elim) {
                 if (!is_null($this->getDetalle($elim)->getID_DETALLE_AJUSTE_PROD())) {
-//                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $sql = "delete from inv_tab_detalle_ajuste_prod where ID_DETALLE_AJUSTE_PROD=?";
                     $consulta = $pdo->prepare($sql);
                     $consulta->execute(array($elim));

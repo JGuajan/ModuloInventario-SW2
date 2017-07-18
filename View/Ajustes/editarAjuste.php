@@ -55,14 +55,14 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     });
                 }
             </script>
-            
+
             <script LANGUAGE="JavaScript">
                 function ErrorStock(msjError)
                 {
                     alert(msjError);
                 }
             </script>
-            
+
         </head>
         <body>
             <div class="container-fluid">
@@ -143,7 +143,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         </div>
                     </div>
                 </div>
-                
+
                 <!--Título de la página-->
                 <div class="container">
                     <div class="row">
@@ -200,7 +200,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                         <ul class="nav nav-pills">
                                             <li><label>PRODUCTO:</label>
                                                 <select name="ID_PROD" id="CboIDProducto" class="form-control" onchange="ObtenerDatosProducto($('#CboIDProducto').val());
-                                                        return false;">
+                                                            return false;">
                                                     <option value="" disabled selected>Seleccione un Producto</option>
                                                     <?php
                                                     $listaProductos = $productosModel->getProductos();
@@ -214,7 +214,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                     </div>
                                 </div>
                                 <br><br>
-                                 <table class="table table-striped table-bordered table-condensed table-hover" id="TblProd">
+                                <table class="table table-striped table-bordered table-condensed table-hover" id="TblProd">
                                     <thead>    
                                         <tr> 
                                             <th>PRODUCTO</th>
@@ -291,21 +291,21 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                         if (isset($_SESSION['listaAjusteDet'])) {
                                             $listado = unserialize($_SESSION['listaAjusteDet']);
                                             foreach ($listado as $ajusteDet) {
-                                                $prod=$productosModel->getProducto($ajusteDet->getID_PROD());
+                                                $prod = $productosModel->getProducto($ajusteDet->getID_PROD());
                                                 echo "<tr class='success'>";
                                                 echo "<td><a href='../../controller/controller.php?opcion1=ajuste&opcion2=eliminar_detalle&ID_DETALLE_AJUSTE_PROD=" . $ajusteDet->getID_DETALLE_AJUSTE_PROD() . "&aux=edicion'>Eliminar</a></td>";
                                                 echo "<td>" . $ajusteDet->getID_DETALLE_AJUSTE_PROD() . "</td>";
                                                 echo "<td>" . $ajusteDet->getNOMBRE_PROD() . "</td>";
                                                 echo "<td>" . $ajusteDet->getCAMBIO_STOCK_PROD() . "</td>";
-                                                if($ajusteDet->getTIPOMOV_DETAJUSTE_PROD()=="I"){
+                                                if ($ajusteDet->getTIPOMOV_DETAJUSTE_PROD() == "I") {
                                                     echo "<td>INGRESO</td>";
-                                                }else{
+                                                } else {
                                                     echo "<td>SALIDA</td>";
                                                 }
                                                 echo "<td>" . $ajusteDet->getPVP_PROD() . "</td>";
-                                                if($prod->getGRAVA_IVA_PROD()=="S"){
+                                                if ($prod->getGRAVA_IVA_PROD() == "S") {
                                                     echo "<td>SI</td>";
-                                                }else{
+                                                } else {
                                                     echo "<td>NO</td>";
                                                 }
                                                 echo "</tr>";
@@ -326,10 +326,10 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         </div>
                     </div>
                     <!--Fin Detalle ajuste-->
-                    
-                    
-                    
-                    
+
+
+
+
                     <!--Ventana emergente para Busqueda inteligente de productos-->
                     <div class="modal fade" id="listaProd">
                         <div class="modal-dialog modal-lg">
@@ -370,15 +370,15 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                             ?>
                                                         </tbody>
                                                     </table>
-                                                    
-                                                     <script src="../../Bootstrap/DataTables/main.js"></script>
-                                                     <script src="../../Bootstrap/DataTables/jquery-1.12.4.js"></script>
-                                                     <script src="../../Bootstrap/DataTables/jquery.dataTables.min.js"></script>
-                                                     <!--<script src="https://cdn.datatables.net/1.10.15/js/dataTables.uikit.min.js"></script>--> 
-                                                     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/uikit.min.css">-->
-                                                     <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.uikit.min.css">-->
-                                                     <link rel="stylesheet" href="../../Bootstrap/DataTables/jquery.dataTables.min.css">
-                                                            
+
+                                                    <script src="../../Bootstrap/DataTables/main.js"></script>
+                                                    <script src="../../Bootstrap/DataTables/jquery-1.12.4.js"></script>
+                                                    <script src="../../Bootstrap/DataTables/jquery.dataTables.min.js"></script>
+                                                    <!--<script src="https://cdn.datatables.net/1.10.15/js/dataTables.uikit.min.js"></script>--> 
+                                                    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.24.3/css/uikit.min.css">-->
+                                                    <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.uikit.min.css">-->
+                                                    <link rel="stylesheet" href="../../Bootstrap/DataTables/jquery.dataTables.min.css">
+
                                                 </div>
                                             </div>
                                         </div>

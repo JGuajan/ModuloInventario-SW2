@@ -283,6 +283,7 @@ switch ($opcion1) {
                 } else {
                     if (!isset($_SESSION['listaDetPorEliminar'])) {
                         $listaDetPorEliminar = array();
+                        array_push($listaDetPorEliminar, $ID_DETALLE_AJUSTE_PROD);
                         $_SESSION['listaDetPorEliminar'] = serialize($listaDetPorEliminar);
                     } else {
                         $listaDetPorEliminar = unserialize($_SESSION['listaDetPorEliminar']);
