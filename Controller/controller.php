@@ -153,6 +153,107 @@ switch ($opcion1) {
     // A J U S T E S
     case "ajuste":
         switch ($opcion2) {
+            
+            case "listar_detalles_ajustes":
+                $ID_PROD = $_REQUEST['ID_PROD'];
+                $FECHA_IN = $_REQUEST['FECHA_IN'];
+                $FECHA_FIN = $_REQUEST['FECHA_FIN'];
+                $listadoDetalles = $ajustesModel->getDetAjusProducto($ID_PROD,$FECHA_IN,$FECHA_FIN);
+                $tipoMov = null;
+                echo "<thead>
+                <tr>
+                <th>CÓDIGO AJUSTE</th>
+                <th>CÓDIGO DETALLE</th>
+                <th>USUARIO</th>
+                <th>CANTIDAD</th>
+                <th>TIPO MOVIMIENTO</th>
+                </thead>";
+                foreach ($listadoDetalles as $rep) {
+                    
+                    if ($rep->getTIPOMOV_DETAJUSTE_PROD() == "I") {
+                        $tipoMov = "INGRESO";
+                    } else {
+                        $tipoMov = "SALIDA";
+                    }
+
+                    echo "<tbody>
+                <tr class = 'info'>
+                <td>" . $rep->getID_AJUSTE_PROD() . "</td>
+                <td>" . $rep->getID_DETALLE_AJUSTE_PROD() . "</td>
+                <td>" . $rep->getNOMAPE_USU() . "</td>
+                <td>" . $rep->getCAMBIO_STOCK_PROD() . "</td>
+                <td>" . $tipoMov . "</td>
+                </tr>
+                </tbody>";
+                }
+                break;
+            
+            case "listar_detalles_fact_venta":
+                $ID_PROD = $_REQUEST['ID_PROD'];
+                $FECHA_IN = $_REQUEST['FECHA_IN'];
+                $FECHA_FIN = $_REQUEST['FECHA_FIN'];
+                $listadoDetalles = $ajustesModel->getDetFacVenta($ID_PROD,$FECHA_IN,$FECHA_FIN);
+                $tipoMov = null;
+                echo "<thead>
+                <tr>
+                <th>CANTIDAD</th>
+                <th>CÓDIGO FACTURA</th>
+                <th>CÓDIGO DETALLE</th>
+                <th>DESCRIPCIÓN</th>
+                <th>VALOR UNIT.</th>
+                <th>VALOR TOT.</th>
+                </thead>";
+                foreach ($listadoDetalles as $rep) {
+
+                echo "<tbody>
+                <tr class = 'info'>
+                <td>" . $rep->getCANTIDAD_DET_FAC_VENTA() . "</td>
+                <td>" . $rep->getID_CAB_FAC_VENTA() . "</td>
+                <td>" . $rep->getID_DET_FAC_VENTA() . "</td>
+                <td>" . $rep->getDESCRIPCION_PROD() . "</td>
+                <td>" . $rep->getPVPUNIT_DET_FAC_VENTA() . "</td>
+                <td>" . $rep->getPVPTOT_DET_FAC_VENTA() . "</td>
+                </tr>
+                </tbody>";
+                }
+                break;
+                
+            case "listar_detalles_fact_compra":
+                $ID_PROD = $_REQUEST['ID_PROD'];
+                $FECHA_IN = $_REQUEST['FECHA_IN'];
+                $FECHA_FIN = $_REQUEST['FECHA_FIN'];
+                $listadoDetalles = $ajustesModel->getDetFacCompra($ID_PROD,$FECHA_IN,$FECHA_FIN);
+                $tipoMov = null;
+                echo "<thead>
+                <tr>
+                <th>CANTIDAD</th>
+                <th>COÓDIGO FACTURA</th>
+                <th>CÓDIGO DETALLE</th>
+                <th>DESCRIPCIÓN</th>
+                <th>VALOR UNIT.</th>
+                <th>VALOR TOT.</th>
+                </thead>";
+                foreach ($listadoDetalles as $rep) {
+
+                echo "<tbody>
+                <tr class = 'info'>
+                <td>" . $rep->getCANTIDAD_DET_FAC_COMPRA() . "</td>
+                <td>" . $rep->getID_CAB_FAC_COMPRA() . "</td>
+                <td>" . $rep->getID_DET_FAC_COMPRA() . "</td>
+                <td>" . $rep->getDESCRIPCION_PROD() . "</td>
+                <td>" . $rep->getPVPUNIT_DET_FAC_COMPRA() . "</td>
+                <td>" . $rep->getPVPTOT_DET_FAC_COMPRA() . "</td>
+                </tr>
+                </tbody>";
+                }
+                break;
+
+            case "obtener_titulo":
+                $ID_PROD = $_REQUEST['ID_PROD'];
+                $producto = $productoModel->getProducto($ID_PROD);
+                echo '<span class="glyphicon glyphicon-list-alt"></span> Reportes de Movimientos de "' . $producto->getNOMBRE_PROD() . '"';
+                break;
+        
             case "listar_ajustes":
                 $listadoAjustes = $ajustesModel->getCabAjustes();
                 $_SESSION['listadoAjustes'] = serialize($listadoAjustes);

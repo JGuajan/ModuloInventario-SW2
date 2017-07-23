@@ -107,10 +107,11 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     <div class="col-md-6 col-md-offset-3">
                         <div class="btn-toolbar">
                             <div class="btn-group btn-group-justified">
+                                <a class="btn btn-danger alert-danger  " href="../Principal/iniciop.php">INICIO</a>
                                 <a class="btn btn-primary" href="../../View/Ajustes/inicioAjuste.php">AJUSTES</a>
                                 <a class="btn btn-primary" href="../../View/Producto/inicioProductos.php">PRODUCTOS</a>
                                 <a class="btn btn-primary" href="../../View/Usuario/inicioUsuarios.php">USUARIOS</a>
-                                <a class="btn btn-danger alert-danger  " href="../Principal/iniciop.php">INICIO</a>
+                                <a class="btn btn-primary" href="../../View/Reportes/ReportesMovimientosProducto.php">REPORTES</a>
                             </div>
                         </div>
                     </div>

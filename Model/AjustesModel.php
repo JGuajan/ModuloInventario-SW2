@@ -6,6 +6,9 @@ include_once 'AjusteDet.php';
 include_once 'Producto.php';
 include_once 'ProductosModel.php';
 include_once 'VistaAjusteDet.php';
+include_once 'RepDetAjuProd.php';
+include_once 'RepDetFacVenta.php';
+include_once 'RepDetFacCompra.php';
 
 class AjustesModel {
 
@@ -34,6 +37,82 @@ class AjustesModel {
         $Cab_ajuste = new CabeceraAjuste($res['ID_AJUSTE_PROD'], $res['MOTIVO_AJUSTE_PROD'], $res['FECHA_AJUSTE_PROD'], $res['FECHA_IMPRESION_AJUS_PROD'], $res['ESTADO_IMP_AJUSTE_PROD']);
         Database::disconnect();
         return $Cab_ajuste;
+    }
+    
+    //Método para obtener la información requerida en reportes de Movimeintos de Detalles de Ajustes de Productos
+    public function getDetAjusProducto($ID_PROD,$FECHA_IN,$FECHA_FIN) {
+        //Obtención de informacion de la Base de Datos mediante consulta sql
+        $pdo = Database::connect();
+        $sql = "select D.ID_AJUSTE_PROD as 'CODIGO_AJUSTE', D.ID_DETALLE_AJUSTE_PROD as 'CODIGO_DETALLE',
+               CONCAT(U.NOMBRES_USU,' ',U.APELLIDOS_USU) as 'USUARIO', D.CAMBIO_STOCK_PROD as 'CANTIDAD',
+               D.TIPOMOV_DETAJUSTE_PROD as 'TIPO_MOVIMIENTO'
+               FROM inv_tab_detalle_ajuste_prod D INNER JOIN inv_tab_usuarios U
+               ON D.ID_USU=U.ID_USU INNER JOIN inv_tab_ajustes_productos A
+               ON A.ID_AJUSTE_PROD=D.ID_AJUSTE_PROD
+               WHERE D.ID_PROD='".$ID_PROD."' and A.FECHA_AJUSTE_PROD BETWEEN '".$FECHA_IN."' AND '".$FECHA_FIN."'";
+        
+        $resultado = $pdo->query($sql);
+        
+        $listadoDetalles = array();
+        foreach ($resultado as $res) {
+            $repdetajuprod = new RepDetAjuProd($res['CODIGO_AJUSTE'],$res['CODIGO_DETALLE'], $res['USUARIO'], $res['CANTIDAD'], $res['TIPO_MOVIMIENTO']);
+            array_push($listadoDetalles, $repdetajuprod);
+        }
+        
+        Database::disconnect();
+
+        // Retornamos el Usuario encontrado
+        return $listadoDetalles;
+    }
+    
+    //Método para obtener la información requerida en reportes de Movimeintos de Detalles de Facturas de Venta de Productos
+    public function getDetFacVenta($ID_PROD,$FECHA_IN,$FECHA_FIN) {
+        //Obtención de informacion de la Base de Datos mediante consulta sql
+        $pdo = Database::connect();
+        $sql = "SELECT D.CANTIDAD_DET_FAC_VENTA as 'CANTIDAD', D.ID_CAB_FAC_VENTA as 'CODIGO_FACTURA',
+                D.ID_DET_FAC_VENTA as 'CODIGO_DETALLE', P.DESCRIPCION_PROD as 'DESCRIPCIÓN',
+                D.PVPUNIT_DET_FAC_VENTA as 'VALOR_UNIT.', D.PVPTOT_DET_FAC_VENTA as 'VALOR_TOT.'
+                FROM com_tab_detalle_venta_prod D INNER JOIN com_tab_ventas_producto C ON D.ID_CAB_FAC_VENTA=C.ID_CAB_FAC_VENTA
+                INNER JOIN inv_tab_productos P ON P.ID_PROD=D.ID_PROD
+                WHERE D.ID_PROD='".$ID_PROD."' AND C.FECHA_CAB_FAC_VENTA BETWEEN '".$FECHA_IN."' AND '".$FECHA_FIN."'";
+        
+        $resultado = $pdo->query($sql);
+        
+        $listadoDetalles = array();
+        foreach ($resultado as $res) {
+            $repdetfacventa = new RepDetFacVenta($res['CANTIDAD'],$res['CODIGO_FACTURA'], $res['CODIGO_DETALLE'], $res['DESCRIPCIÓN'], $res['VALOR_UNIT.'], $res['VALOR_TOT.']);
+            array_push($listadoDetalles, $repdetfacventa);
+        }
+        
+        Database::disconnect();
+
+        // Retornamos el Usuario encontrado
+        return $listadoDetalles;
+    }
+    
+    //Método para obtener la información requerida en reportes de Movimientos de Detalles de Facturas de Compra de Productos
+    public function getDetFacCompra($ID_PROD,$FECHA_IN,$FECHA_FIN) {
+        //Obtención de informacion de la Base de Datos mediante consulta sql
+        $pdo = Database::connect();
+        $sql = "SELECT D.CANTIDAD_DET_FAC_COMPRA as 'CANTIDAD', D.ID_CAB_FAC_COMPRA as 'CODIGO_FACTURA',
+                D.ID_DET_FAC_COMPRA as 'CODIGO_DETALLE', P.DESCRIPCION_PROD as 'DESCRIPCIÓN',
+                D.PVPUNIT_DET_FAC_COMPRA as 'VALOR_UNIT.', D.PVPTOT_DET_FAC_COMPRA as 'VALOR_TOT.'
+                FROM com_tab_detalle_compra_prod D INNER JOIN com_tab_compras_producto C ON D.ID_CAB_FAC_COMPRA=C.ID_CAB_FAC_COMPRA
+                INNER JOIN inv_tab_productos P ON P.ID_PROD=D.ID_PROD
+                WHERE D.ID_PROD='".$ID_PROD."' AND C.FECHA_CAB_FAC_COMPRA BETWEEN '".$FECHA_IN."' AND '".$FECHA_FIN."'";
+        
+        $resultado = $pdo->query($sql);
+        
+        $listadoDetalles = array();
+        foreach ($resultado as $res) {
+            $repdetfaccompra = new RepDetFacCompra($res['CANTIDAD'],$res['CODIGO_FACTURA'], $res['CODIGO_DETALLE'], $res['DESCRIPCIÓN'], $res['VALOR_UNIT.'], $res['VALOR_TOT.']);
+            array_push($listadoDetalles, $repdetfaccompra);
+        }
+        
+        Database::disconnect();
+
+        // Retornamos el Usuario encontrado
+        return $listadoDetalles;
     }
 
     // METODO PARA INSERTAR UN AJUSTE (CABECERA)
