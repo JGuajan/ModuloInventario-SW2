@@ -315,7 +315,7 @@ and open the template in the editor.
                                                     <select id="ID_TIPO" name="ID_TIPO">
                                                         <option value="1">CEDULA</option>
                                                         <option value="2">RUC</option>
-                                                        <option value="3">PASAPORTE</option>
+<!--                                                        <option value="3">PASAPORTE</option>-->
                                                     </select>
                                                 </div>
                                                 <div class="col-md-7">
@@ -483,13 +483,13 @@ and open the template in the editor.
                                                     <div class="col-md-3 col-md-offset-1">
                                                         <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Identificación </label>
                                                     </div>
-                                                    <div class="col-md-7">
+<!--                                                    <div class="col-md-7">
                                                         <select>
                                                             <option value="1">CEDULA</option>
                                                             <option value="2">RUC</option>
                                                             <option value="3">PASAPORTE</option>
                                                         </select>
-                                                    </div>
+                                                    </div>-->
                                                     <div class="col-md-7">
                                                         <input  type="text" readonly="readonly" id="mod_cedula" maxlength="13" minlength="10" class="form-control" name="mod_cedula" required />
                                                     </div>

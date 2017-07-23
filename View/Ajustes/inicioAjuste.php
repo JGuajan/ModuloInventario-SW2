@@ -142,8 +142,8 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         <!--La class nav nav-pills nos permite hacer menús-->
                         <ul class="nav nav-pills">
                             <li role="presentation"><a href="../../Controller/controller.php?opcion1=ajuste&opcion2=listar_ajustes"><h4>MOSTRAR TODOS</h4></a></li>
-                            <li role="presentation"><a href="#nuevoAJU" data-toggle="modal"><h4>NUEVO AJUSTE</h4></a></li>
-                            <li role="presentation"><a href="../../Controller/controller.php?opcion1=ajuste&opcion2=nuevo_ajuste" data-toggle="modal"><h4>NEW</h4></a></li>
+<!--                            <li role="presentation"><a href="#nuevoAJU" data-toggle="modal"><h4>NUEVO AJUSTE</h4></a></li>-->
+                            <li role="presentation"><a href="../../Controller/controller.php?opcion1=ajuste&opcion2=nuevo_ajuste" data-toggle="modal"><h4>NUEVO AJUSTE</h4></a></li>
                             <!--<li role="presentation"><a href="nuevoAjuste.php"><h4>NUEVO AJUSTE</h4></a></li>-->
                         </ul>
                     </div>
@@ -223,21 +223,21 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     </div>
                 </div>
 
-                <!--Ventana emergente para Nuevo ajuste-->
+<!--                Ventana emergente para Nuevo ajuste
                 <div class="modal fade" id="nuevoAJU">
                     <div class="modal-dialog">
-                        <!--<form class="form-horizontal" action="#ventanasEmergentes">-->
+                        <form class="form-horizontal" action="#ventanasEmergentes">
                         <form class="form-horizontal" action="../../Controller/controller.php">
                             <input type="hidden" name="opcion1" value="ajuste">
                             <input type="hidden" name="opcion2" value="insertar_ajuste">
                             <div class="modal-content">
-                                <!-- Header de la ventana -->
+                                 Header de la ventana 
                                 <div class="modal-header bg-success">
                                     <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                     <h3 class="modal-title"><span class="glyphicon glyphicon-cog"></span> Nuevo Ajuste</h3>
                                 </div>
 
-                                <!-- Contenido de la ventana -->
+                                 Contenido de la ventana 
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -248,7 +248,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                 <div class="col-md-7">
                                                     <?php echo $ajustesModel->generarCodigoAjuste(); ?>
                                                     <input type="hidden" name="ID_AJUSTE_PROD" value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
-                                                   <!--<input type="text" class="form-control" placeholder="Ingrese sus Apellidos" required />-->
+                                                   <input type="text" class="form-control" placeholder="Ingrese sus Apellidos" required />
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -264,7 +264,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                     </div>
                                 </div>
 
-                                <!-- Footer de la ventana -->
+                                 Footer de la ventana 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                     <button class="btn btn-success">Guardar Ajuste</button>
@@ -273,7 +273,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         </form>
                     </div>
                 </div>
-
+-->
 
 
                 <!--Ventana emergente para Editar ajuste-->
