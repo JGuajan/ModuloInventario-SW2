@@ -328,7 +328,7 @@ and open the template in the editor.
                                                     <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Nombres </label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <input onkeypress="return SoloLetras(event);" type="text" class="form-control" name="NOMBRES_USU" placeholder="Ingrese sus Nombres" required />
+                                                    <input onkeypress="return SoloLetras(event);" type="text" class="form-control" name="NOMBRES_USU" placeholder="Ingrese sus Nombres" required pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|" />
                                                 </div>
                                             </div>
 
@@ -337,7 +337,7 @@ and open the template in the editor.
                                                     <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Apellidos </label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <input onkeypress="return SoloLetras(event);" type="text" class="form-control" name="APELLIDOS_USU" placeholder="Ingrese sus Apellidos" required="true" />
+                                                    <input onkeypress="return SoloLetras(event);" type="text" class="form-control" name="APELLIDOS_USU" placeholder="Ingrese sus Apellidos" required="true" required pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|"/>
                                                 </div>
                                             </div>
 
@@ -355,7 +355,7 @@ and open the template in the editor.
                                                     <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Ciudad </label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <input onkeypress="return SoloLetras(event);" type="text" class="form-control" name="CIUDAD_NAC_USU" placeholder="Ingrese la Ciudad de Nacimiento" required="true"/>
+                                                    <input onkeypress="return SoloLetras(event);" type="text" class="form-control" name="CIUDAD_NAC_USU" placeholder="Ingrese la Ciudad de Nacimiento" required="true" required pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|"/>
                                                 </div>
                                             </div>
 
@@ -364,7 +364,7 @@ and open the template in the editor.
                                                     <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Dirección </label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <input type="text" class="form-control" name="DIRECCION_USU" placeholder="Ingrese su Dirección" required="true"/>
+                                                    <input type="text" class="form-control" name="DIRECCION_USU" placeholder="Ingrese su Dirección" required="true" required pattern="|^[a-zA-Z0-9]+(\s*[a-zA-Z0-9]*)*[a-zA-Z0-9]+$|"/>
                                                 </div>
                                             </div>
 
@@ -500,7 +500,7 @@ and open the template in the editor.
                                                         <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Nombres </label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        <input onkeypress="return SoloLetras(event);"type="text" class="form-control" id="mod_nombre" name="mod_nombre"  required />
+                                                        <input onkeypress="return SoloLetras(event);"type="text" class="form-control" id="mod_nombre" name="mod_nombre"  required pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -508,7 +508,7 @@ and open the template in the editor.
                                                         <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Apellidos </label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        <input onkeypress="return SoloLetras(event);"type="text" class="form-control" id="mod_apellido" name="mod_apellido"  required />
+                                                        <input onkeypress="return SoloLetras(event);"type="text" class="form-control" id="mod_apellido" name="mod_apellido"  required pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -524,7 +524,7 @@ and open the template in the editor.
                                                         <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Ciudad </label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        <input onkeypress="return SoloLetras(event);"type="text" class="form-control" id="mod_ciudad" name="mod_ciudad"  required />
+                                                        <input onkeypress="return SoloLetras(event);"type="text" class="form-control" id="mod_ciudad" name="mod_ciudad"  required pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -532,7 +532,7 @@ and open the template in the editor.
                                                         <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Dirección </label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        <input onkeypress="return SoloLetras(event)"type="text" class="form-control" id="mod_direccion" name="mod_direccion"  required />
+                                                        <input onkeypress="return SoloLetras(event)"type="text" class="form-control" id="mod_direccion" name="mod_direccion"  required pattern="|^[a-zA-Z0-9]+(\s*[a-zA-Z0-9]*)*[a-zA-Z0-9]+$|" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">

@@ -165,7 +165,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                 </div><br>
                                 <div class="input-group">
                                     <span class="input-group-addon">Motivo </span>
-                                    <input type="text" class="form-control" name="MOTIVO_AJUSTE_PROD" size="150" maxlength="150" placeholder="Ingrese el motivo del ajuste" required >
+                                    <input type="text" class="form-control" name="MOTIVO_AJUSTE_PROD" size="150" maxlength="150" placeholder="Ingrese el motivo del ajuste" required pattern="|^[a-zA-Z0-9]+(\s*[a-zA-Z0-9]*)*[a-zA-Z0-9]+$|" >
                                 </div><br>
                                 <?php
                                 if (isset($_SESSION['ErrorDetalleAjuste'])) {
@@ -387,6 +387,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     </div>
                 </div>
         </body>
+        
     </html>
     <?php
 } else {
