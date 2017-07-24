@@ -183,7 +183,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
 
 
                     <!--Detalle ajuste-->
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" id="detalles_ajuste">
                         <div class="panel-heading">DETALLES DEL AJUSTE</div>
                         <div class="panel-body">
 
