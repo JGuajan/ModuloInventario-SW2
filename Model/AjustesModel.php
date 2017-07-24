@@ -276,6 +276,9 @@ class AjustesModel {
         $resultado = $pdo->query($sql);
         $listadoDetAjustes = array();
         foreach ($resultado as $res) {
+            if($res['TIPOMOV_DETAJUSTE_PROD']=="S"){
+                $res['CAMBIO_STOCK_PROD']=$res['CAMBIO_STOCK_PROD']*-1;
+            }
             $ajusteDet = new ajusteDet($res['ID_DETALLE_AJUSTE_PROD'], $res['ID_PROD'], $res['NOMBRE_PROD'], $res['PVP_PROD'], $res['ID_AJUSTE_PROD'], $res['ID_USU'], $res['CAMBIO_STOCK_PROD'], $res['TIPOMOV_DETAJUSTE_PROD']);
             array_push($listadoDetAjustes, $ajusteDet);
         }
