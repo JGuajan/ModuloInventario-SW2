@@ -53,6 +53,18 @@ switch ($opcion1) {
     // U S U A R I O 
     case "usuario":
         switch ($opcion2) {
+
+            case "listarBodegueros":
+                // Obtenemos el array que contiene el listado de Usuarios
+                $listadoUsuariosB = $usuariosModel->getUsuariosBodegueros();
+
+                // Guardamos los datos en una variable de sesion serializada
+                $_SESSION['listadoUsuariosB'] = serialize($listadoUsuariosB);
+
+                // Redireccionamos a la pagina principal para visualizar
+                header('Location: ../View/Reportes/ReporteBodegueros.php');
+                break;
+
             case "listar":
                 // Obtenemos el array que contiene el listado de Usuarios
                 $listadoUsuarios = $usuariosModel->getUsuarios();
@@ -153,12 +165,12 @@ switch ($opcion1) {
     // A J U S T E S
     case "ajuste":
         switch ($opcion2) {
-            
+
             case "listar_detalles_ajustes":
                 $ID_PROD = $_REQUEST['ID_PROD'];
                 $FECHA_IN = $_REQUEST['FECHA_IN'];
                 $FECHA_FIN = $_REQUEST['FECHA_FIN'];
-                $listadoDetalles = $ajustesModel->getDetAjusProducto($ID_PROD,$FECHA_IN,$FECHA_FIN);
+                $listadoDetalles = $ajustesModel->getDetAjusProducto($ID_PROD, $FECHA_IN, $FECHA_FIN);
                 $tipoMov = null;
                 echo "<thead>
                 <tr>
@@ -169,7 +181,7 @@ switch ($opcion1) {
                 <th>TIPO MOVIMIENTO</th>
                 </thead>";
                 foreach ($listadoDetalles as $rep) {
-                    
+
                     if ($rep->getTIPOMOV_DETAJUSTE_PROD() == "I") {
                         $tipoMov = "INGRESO";
                     } else {
@@ -187,12 +199,12 @@ switch ($opcion1) {
                 </tbody>";
                 }
                 break;
-            
+
             case "listar_detalles_fact_venta":
                 $ID_PROD = $_REQUEST['ID_PROD'];
                 $FECHA_IN = $_REQUEST['FECHA_IN'];
                 $FECHA_FIN = $_REQUEST['FECHA_FIN'];
-                $listadoDetalles = $ajustesModel->getDetFacVenta($ID_PROD,$FECHA_IN,$FECHA_FIN);
+                $listadoDetalles = $ajustesModel->getDetFacVenta($ID_PROD, $FECHA_IN, $FECHA_FIN);
                 $tipoMov = null;
                 echo "<thead>
                 <tr>
@@ -205,7 +217,7 @@ switch ($opcion1) {
                 </thead>";
                 foreach ($listadoDetalles as $rep) {
 
-                echo "<tbody>
+                    echo "<tbody>
                 <tr class = 'info'>
                 <td>" . $rep->getCANTIDAD_DET_FAC_VENTA() . "</td>
                 <td>" . $rep->getID_CAB_FAC_VENTA() . "</td>
@@ -217,12 +229,12 @@ switch ($opcion1) {
                 </tbody>";
                 }
                 break;
-                
+
             case "listar_detalles_fact_compra":
                 $ID_PROD = $_REQUEST['ID_PROD'];
                 $FECHA_IN = $_REQUEST['FECHA_IN'];
                 $FECHA_FIN = $_REQUEST['FECHA_FIN'];
-                $listadoDetalles = $ajustesModel->getDetFacCompra($ID_PROD,$FECHA_IN,$FECHA_FIN);
+                $listadoDetalles = $ajustesModel->getDetFacCompra($ID_PROD, $FECHA_IN, $FECHA_FIN);
                 $tipoMov = null;
                 echo "<thead>
                 <tr>
@@ -235,7 +247,7 @@ switch ($opcion1) {
                 </thead>";
                 foreach ($listadoDetalles as $rep) {
 
-                echo "<tbody>
+                    echo "<tbody>
                 <tr class = 'info'>
                 <td>" . $rep->getCANTIDAD_DET_FAC_COMPRA() . "</td>
                 <td>" . $rep->getID_CAB_FAC_COMPRA() . "</td>
@@ -253,7 +265,7 @@ switch ($opcion1) {
                 $producto = $productoModel->getProducto($ID_PROD);
                 echo '<span class="glyphicon glyphicon-list-alt"></span> Reportes de Movimientos de "' . $producto->getNOMBRE_PROD() . '"';
                 break;
-        
+
             case "listar_ajustes":
                 $listadoAjustes = $ajustesModel->getCabAjustes();
                 $_SESSION['listadoAjustes'] = serialize($listadoAjustes);

@@ -6,7 +6,7 @@ class ProductosModel {
     public function getProductos() {
         // Obtención de informacion de la Base de Datos mediante consulta sql
         $pdo = Database::connect();
-        $sql = "select * from INV_TAB_PRODUCTOS order by ID_PROD";
+        $sql = "select * from INV_TAB_PRODUCTOS order by NOMBRE_PROD";
         $resultado = $pdo->query($sql);
 
         //transformamos los registros en objetos de tipo Producto y guardamos en array

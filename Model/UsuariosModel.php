@@ -24,6 +24,26 @@ class UsuariosModel {
         // Retornamos el listado resultante:
         return $listadoUsuarios;
     }
+    
+    public function getUsuariosBodegueros() {
+        // Obtención de informacion de la Base de Datos mediante consulta sql
+        $pdo = Database::connect();
+        $sql = "select * from inv_tab_usuarios where ID_TIPO_USU='TUSU-0002' order by ID_USU";
+        $resultado = $pdo->query($sql);
+
+        //transformamos los registros en objetos de tipo Usuario y guardamos en array
+        $listadoUsuariosB = array();
+        foreach ($resultado as $res) {
+            $usuario = new Usuario($res['ID_USU'], $res['ID_TIPO_USU'], $res['CEDULA_RUC_PASS_USU'], $res['NOMBRES_USU'], $res['APELLIDOS_USU'], $res['FECH_NAC_USU'], $res['CIUDAD_NAC_USU'], $res['DIRECCION_USU'], $res['FONO_USU'], $res['E_MAIL_USU'], $res['ESTADO_USU'], $res['CLAVE_USU']);
+            array_push($listadoUsuariosB, $usuario);
+        }
+
+        // Desconección de la Base de Datos
+        Database::disconnect();
+
+        // Retornamos el listado resultante:
+        return $listadoUsuariosB;
+    }
 
     // Método para Obtener información de un usuario especificando su Id
     public function getUsuario($ID_USU) { 
