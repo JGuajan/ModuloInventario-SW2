@@ -205,8 +205,13 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                             <td><?php echo $aju->getMOTIVO_AJUSTE_PROD() ?></td>
                                                             <td><?php echo $aju->getFECHA_AJUSTE_PROD() ?></td>
                                                             <td><?php echo $aju->getFECHA_IMP_AJUSTE_PROD() ?></td>
-                                                            <td><?php echo $aju->getESTADO_IMP_AJUSTE_PROD() ?></td>                    
-
+                                                            <?php
+                                                            if($aju->getFECHA_IMP_AJUSTE_PROD()=="S"){
+                                                                echo "<td>SI</td>";
+                                                            }else{
+                                                                echo "<td>NO</td>";
+                                                            }
+                                                            ?>
                                                         </tr>
                                                         <?php
                                                     }
