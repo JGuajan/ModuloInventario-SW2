@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 session_start();
-if (isset($_SESSION['USUARIO_ACTIVO'])) {
+//if (isset($_SESSION['USUARIO_ACTIVO'])) {
     include_once '../../Model/CabeceraAjuste.php';
     include_once '../../Model/AjustesModel.php';
     include_once '../../Model/AjusteDet.php';
@@ -401,7 +401,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
         </body>
     </html>
     <?php
-} else {
-    header('Location: ../login.php');
-}
+//} else {
+//    header('Location: ../login.php');
+//}
 ?>
