@@ -113,7 +113,16 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                 <a class="btn btn-primary" href="../../View/Ajustes/inicioAjuste.php">AJUSTES</a>
                                 <a class="btn btn-primary" href="../../View/Producto/inicioProductos.php">PRODUCTOS</a>
                                 <a class="btn btn-primary" href="../../View/Usuario/inicioUsuarios.php">USUARIOS</a>
-                                <a class="btn btn-primary" href="../../View/Reportes/ReportesMovimientosProducto.php">REPORTES</a>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary dropdown-toggle" id="dropdownReportes" aria-extended="true" type="button" data-toggle="dropdown">
+                                        <label class="control-label">Reportes <span class="caret"></span></label>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownReportes">
+                                        <li><a href="../../View/Reportes/ReportesMovimientosProducto.php">Reportes de Movimientos</a></li>
+                                        <li><a href="../../View/Reportes/ReporteBodegueros.php">Reportes de Bodegueros</a></li>
+                                        <li><a href="../../View/Reportes/ReporteProductos.php">Reportes de Productos</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
