@@ -20,7 +20,7 @@ class AjustesModel {
         $resultado = $pdo->query($sql);
         $listadoCabAjustes = array();
         foreach ($resultado as $res) {
-            $Cab_ajuste = new CabeceraAjuste($res['ID_AJUSTE_PROD'], $res['MOTIVO_AJUSTE_PROD'], $res['FECHA_AJUSTE_PROD'], $res['FECHA_IMPRESION_AJUS_PROD'], $res['ESTADO_IMP_AJUSTE_PROD']);
+           $Cab_ajuste = new CabeceraAjuste($res['ID_AJUSTE_PROD'], $res['MOTIVO_AJUSTE_PROD'], $res['FECHA_AJUSTE_PROD'], $res['FECHA_IMP_AJUSTE_PROD'], $res['ESTADO_IMP_AJUSTE_PROD']);
             array_push($listadoCabAjustes, $Cab_ajuste);
         }
         Database::disconnect();
@@ -34,7 +34,7 @@ class AjustesModel {
         $consulta = $pdo->prepare($sql);
         $consulta->execute(array($ID_AJUSTE_PROD));
         $res = $consulta->fetch(PDO::FETCH_ASSOC);
-        $Cab_ajuste = new CabeceraAjuste($res['ID_AJUSTE_PROD'], $res['MOTIVO_AJUSTE_PROD'], $res['FECHA_AJUSTE_PROD'], $res['FECHA_IMPRESION_AJUS_PROD'], $res['ESTADO_IMP_AJUSTE_PROD']);
+        $Cab_ajuste = new CabeceraAjuste($res['ID_AJUSTE_PROD'], $res['MOTIVO_AJUSTE_PROD'], $res['FECHA_AJUSTE_PROD'], $res['FECHA_IMP_AJUSTE_PROD'], $res['ESTADO_IMP_AJUSTE_PROD']);
         Database::disconnect();
         return $Cab_ajuste;
     }
@@ -154,7 +154,24 @@ class AjustesModel {
         }
         Database::disconnect();
     }
-
+ // erika METODO PARA ACTUALIZAR LA FECHA DE IMPRESION Y CAMBIAR EL ESTADO DE IMPRESION 
+    public function actualizarImpAjuste($ID_AJUSTE_PROD) {
+        $pdo = Database::connect();
+                if($this->getCabAjuste($ID_AJUSTE_PROD)->getFECHA_IMP_AJUSTE_PROD()!=null){
+                    $sql = "update INV_TAB_AJUSTES_PRODUCTOS set ESTADO_IMP_AJUSTE_PROD='S' where ID_AJUSTE_PROD=?";
+                }else{
+                    $sql = "update INV_TAB_AJUSTES_PRODUCTOS set FECHA_IMP_AJUSTE_PROD=CURRENT_TIMESTAMP,ESTADO_IMP_AJUSTE_PROD='S' where ID_AJUSTE_PROD=?"; 
+                }
+        $consulta = $pdo->prepare($sql);
+        try {
+            $consulta->execute(array($ID_AJUSTE_PROD));
+        } catch (PDOException $e) {
+            Database::disconnect();
+            throw new Exception($e->getMessage());
+        }
+        Database::disconnect();
+    }
+    
     // METODO PARA GENERAR AUTOMATICAMENTE EL CODIGO DE AJUSTE (CABECERA) -- AJUS-0001
     public function generarCodigoAjuste() {
         $pdo = Database::connect();

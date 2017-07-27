@@ -38,6 +38,10 @@ and open the template in the editor.
             <script src="../../Bootstrap/js/validaciones.js"></script>
             <link href="../../Bootstrap/css/bootstrap.css" rel="stylesheet" />
             <link rel="../../stylesheet" href="Bootstrap/css/bootstrap-theme.css">
+            
+            <script src = "../../SweetAlert/sweetalert.min.js" type="text/javascript"></script>
+            <link href="../../SweetAlert/sweetalert.css" rel="stylesheet" type="text/css">
+            
             <style type="text/css">
                 div{
                     font-family: Calibri Light;
@@ -49,7 +53,7 @@ and open the template in the editor.
             <script LANGUAGE="JavaScript">
                 function confirEliminar()
                 {
-                    var agree = confirm("Esta seguro que desea eliminar el usuario?");
+                    swal agree = confirm("Esta seguro que desea eliminar el usuario?");
                     if (agree)
                         return  true;
                     else
@@ -77,7 +81,7 @@ and open the template in the editor.
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $NOM; ?> </a></li>
                                     <li><a href=""><span class="glyphicon glyphicon-edit"></span> <?php echo $TIPO; ?> </a></li>
-                                    <li><a href="../login.php"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion </a></li>
+                                    <li><a href="../../Controller/controller.php?opcion1=cerrar_sesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion </a></li>
                                 </ul>
                             </div>
                         </div>

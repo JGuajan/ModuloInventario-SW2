@@ -71,7 +71,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $NOM; ?> </a></li>
                                     <li><a href=""><span class="glyphicon glyphicon-edit"></span> <?php echo $TIPO; ?> </a></li>
-                                    <li><a href="../login.php"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion </a></li>
+                                    <li><a href="../../Controller/controller.php?opcion1=cerrar_sesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -91,7 +91,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         <!--Contenedor de las imagenes--> 
                         <div class="carousel-inner" role="listbox">
                             <div class="item">
-                                <img src="../../View/Imagenes/banner12.jpg" width="100%" alt="Imagen 1">
+                                <img src="../../View/Imagenes/banner.jpg" width="100%" alt="Imagen 1">
                             </div>
                             <div class="item active">
                                 <img src="../../View/Imagenes/banner6.jpg" width="100%" alt="Imagen 2">

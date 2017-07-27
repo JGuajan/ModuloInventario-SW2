@@ -49,7 +49,11 @@ switch ($opcion1) {
             header('Location: ../View/login.php');
         }
         break;
-
+//erika   implementamos el cerrar sesion 
+    case"cerrar_sesion":
+        session_destroy();
+        header('Location: ../View/login.php');
+        break;
     // U S U A R I O 
     case "usuario":
         switch ($opcion2) {
@@ -321,6 +325,8 @@ switch ($opcion1) {
             case "imprimir_ajuste":
                 $cod = $_REQUEST['ID_AJUSTE_PROD'];
                 $mot = $_REQUEST['MOTIVO_AJUSTE_PROD'];
+                // erika INSERTAMOS EL AJUSTE MODEL   $ajustesModel->actualizarImpAjuste($cod);
+                $ajustesModel->actualizarImpAjuste($cod);
                 $listadoDetAjuste = $ajustesModel->getDetAjustes($cod);
                 $_SESSION['listadoDetAjuste'] = serialize($listadoDetAjuste);
                 $_SESSION['cod'] = $cod;

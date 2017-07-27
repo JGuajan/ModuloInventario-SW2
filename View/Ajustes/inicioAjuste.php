@@ -24,7 +24,8 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
             <link rel="../../stylesheet" href="Bootstrap/css/bootstrap-theme.css">
             <script src="../../Bootstrap/js/validaciones.js"></script>
 
-
+            <script src = "../../SweetAlert/sweetalert.min.js" type="text/javascript"></script>
+            <link href="../../SweetAlert/sweetalert.css" rel="stylesheet" type="text/css">
             <style type="text/css">
                 div{
                     font-family: Calibri Light;
@@ -66,7 +67,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $NOM; ?> </a></li>
                                     <li><a href=""><span class="glyphicon glyphicon-edit"></span> <?php echo $TIPO; ?> </a></li>
-                                    <li><a href="../login.php"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion </a></li>
+                                    <li><a href="../../Controller/controller.php?opcion1=cerrar_sesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -86,7 +87,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         <!--Contenedor de las imagenes--> 
                         <div class="carousel-inner" role="listbox">
                             <div class="item">
-                                <img src="../../View/Imagenes/banner11.jpg" width="100%" alt="Imagen 1">
+                                <img src="../../View/Imagenes/banner4.jpg" width="100%" alt="Imagen 1">
                             </div>
                             <div class="item active">
                                 <img src="../../View/Imagenes/banner9.jpg" width="100%" alt="Imagen 2">
@@ -152,7 +153,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         <!--La class nav nav-pills nos permite hacer menús-->
                         <ul class="nav nav-pills">
                             <li role="presentation"><a href="../../Controller/controller.php?opcion1=ajuste&opcion2=listar_ajustes"><h4>MOSTRAR TODOS</h4></a></li>
-<!--                            <li role="presentation"><a href="#nuevoAJU" data-toggle="modal"><h4>NUEVO AJUSTE</h4></a></li>-->
+                            <!--                            <li role="presentation"><a href="#nuevoAJU" data-toggle="modal"><h4>NUEVO AJUSTE</h4></a></li>-->
                             <li role="presentation"><a href="../../Controller/controller.php?opcion1=ajuste&opcion2=nuevo_ajuste" data-toggle="modal"><h4>NUEVO AJUSTE</h4></a></li>
                             <!--<li role="presentation"><a href="nuevoAjuste.php"><h4>NUEVO AJUSTE</h4></a></li>-->
                         </ul>
@@ -190,43 +191,45 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                     foreach ($listado as $aju) {
                                                         ?>
                                                         <tr>
-            <!--                                                    <input type="hidden" value="<?php echo $aju->getID_AJUSTE_PROD(); ?>" id="ID_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>">
+                                                    <input type="hidden" value="<?php echo $aju->getID_AJUSTE_PROD(); ?>" id="ID_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>">
                                                     <input type="hidden" value="<?php echo $aju->getMOTIVO_AJUSTE_PROD(); ?>" id="MOTIVO_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>" >
-                                                    <input type="hidden" value="<?php echo $aju->getFECHA_AJUSTE_PROD(); ?>" id="FECHA_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>" >-->
+                                                    <input type="hidden" value="<?php echo $aju->getFECHA_AJUSTE_PROD(); ?>" id="FECHA_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>" >
 
-                                                            <td align="center"><a onclick="return confirImprimir
-                                    ('<?php echo $aju->getID_AJUSTE_PROD(); ?>',
-                                            '<?php echo $aju->getMOTIVO_AJUSTE_PROD(); ?>',
-                                            '<?php echo $aju->getFECHA_AJUSTE_PROD(); ?>');" 
-                                                                                  href='../../Controller/controller.php?opcion1=ajuste&opcion2=imprimir_ajuste&ID_AJUSTE_PROD=<?php echo $aju->getID_AJUSTE_PROD(); ?>&MOTIVO_AJUSTE_PROD=<?php echo $aju->getMOTIVO_AJUSTE_PROD(); ?>'>
-                                                                    <span class='glyphicon glyphicon-print'>Imprimir</span></a></td>
-                                                            <td align="center"> 
-                                                                <?php
-                                                                if ($aju->getESTADO_IMP_AJUSTE_PROD() == 'Impreso') {
-                                                                    echo '--';
-                                                                } else {
-                                                                    echo "<a href='../../Controller/controller.php?opcion1=ajuste&opcion2=editar_ajuste&ID_AJUSTE_PROD=" . $aju->getID_AJUSTE_PROD() . "'><span class='glyphicon glyphicon-pencil'>Editar</a>";
-                                                                }
-                                                                ?>
-                                                            </td>                                                                                  
-
-                                                            <td><?php echo $aju->getID_AJUSTE_PROD(); ?></td>
-                                                            <td><?php echo $aju->getMOTIVO_AJUSTE_PROD() ?></td>
-                                                            <td><?php echo $aju->getFECHA_AJUSTE_PROD() ?></td>
-                                                            <td><?php echo $aju->getFECHA_IMP_AJUSTE_PROD() ?></td>
-                                                            <?php
-                                                            if($aju->getFECHA_IMP_AJUSTE_PROD()=="S"){
-                                                                echo "<td>SI</td>";
-                                                            }else{
-                                                                echo "<td>NO</td>";
-                                                            }
-                                                            ?>
-                                                        </tr>
+                                                    <td align="center"><a onclick="return confirImprimir
+                                        ('<?php echo $aju->getID_AJUSTE_PROD(); ?>',
+                                                '<?php echo $aju->getMOTIVO_AJUSTE_PROD(); ?>',
+                                                '<?php echo $aju->getFECHA_AJUSTE_PROD(); ?>');" 
+                                                                          href='../../Controller/controller.php?opcion1=ajuste&opcion2=imprimir_ajuste&ID_AJUSTE_PROD=<?php echo $aju->getID_AJUSTE_PROD(); ?>&MOTIVO_AJUSTE_PROD=<?php echo $aju->getMOTIVO_AJUSTE_PROD(); ?>'>
+                                                            <span class='glyphicon glyphicon-print'>Imprimir</span></a></td>
+                                                    <td align="center"> 
                                                         <?php
-                                                    }
-                                                }
-                                                ?>
+//                                                        erika solo cambiamos s
+                                                        if ($aju->getESTADO_IMP_AJUSTE_PROD() == 'S') {
+                                                            echo '--';
+                                                        } else {
+                                                            echo "<a href='../../Controller/controller.php?opcion1=ajuste&opcion2=editar_ajuste&ID_AJUSTE_PROD=" . $aju->getID_AJUSTE_PROD() . "'><span class='glyphicon glyphicon-pencil'>Editar</a>";
+//                                                            echo "<a href='#editAJU' onclick='obtener_datos(" . $aju->getID_AJUSTE_PROD() . "') data-toggle='modal'><span class='glyphicon glyphicon-pencil'>Editar</a>";
+                                                        }
+                                                        ?>
+                                                    </td>                                                                                  
 
+                                                    <td><?php echo $aju->getID_AJUSTE_PROD(); ?></td>
+                                                    <td><?php echo $aju->getMOTIVO_AJUSTE_PROD() ?></td>
+                                                    <td><?php echo $aju->getFECHA_AJUSTE_PROD() ?></td>
+                                                    <td><?php echo $aju->getFECHA_IMP_AJUSTE_PROD() ?></td>
+                                                    <!--erika ponemos-->
+                                                    <td><?php
+                                                        if ($aju->getESTADO_IMP_AJUSTE_PROD() == 'S') {
+                                                            echo 'IMPRESO';
+                                                        } else {
+                                                            echo 'NO IMPRESO';
+                                                        }
+                                                        ?></td>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                            </tr>
 
 
                                             </tbody>
@@ -238,57 +241,57 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     </div>
                 </div>
 
-<!--                Ventana emergente para Nuevo ajuste
-                <div class="modal fade" id="nuevoAJU">
-                    <div class="modal-dialog">
-                        <form class="form-horizontal" action="#ventanasEmergentes">
-                        <form class="form-horizontal" action="../../Controller/controller.php">
-                            <input type="hidden" name="opcion1" value="ajuste">
-                            <input type="hidden" name="opcion2" value="insertar_ajuste">
-                            <div class="modal-content">
-                                 Header de la ventana 
-                                <div class="modal-header bg-success">
-                                    <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h3 class="modal-title"><span class="glyphicon glyphicon-cog"></span> Nuevo Ajuste</h3>
-                                </div>
-
-                                 Contenido de la ventana 
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="col-md-3 col-md-offset-1">
-                                                    <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Codigo</label>
+                <!--                Ventana emergente para Nuevo ajuste
+                                <div class="modal fade" id="nuevoAJU">
+                                    <div class="modal-dialog">
+                                        <form class="form-horizontal" action="#ventanasEmergentes">
+                                        <form class="form-horizontal" action="../../Controller/controller.php">
+                                            <input type="hidden" name="opcion1" value="ajuste">
+                                            <input type="hidden" name="opcion2" value="insertar_ajuste">
+                                            <div class="modal-content">
+                                                 Header de la ventana 
+                                                <div class="modal-header bg-success">
+                                                    <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h3 class="modal-title"><span class="glyphicon glyphicon-cog"></span> Nuevo Ajuste</h3>
                                                 </div>
-                                                <div class="col-md-7">
-                                                    <?php echo $ajustesModel->generarCodigoAjuste(); ?>
-                                                    <input type="hidden" name="ID_AJUSTE_PROD" value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
-                                                   <input type="text" class="form-control" placeholder="Ingrese sus Apellidos" required />
+                
+                                                 Contenido de la ventana 
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <div class="col-md-3 col-md-offset-1">
+                                                                    <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Codigo</label>
+                                                                </div>
+                                                                <div class="col-md-7">
+                <?php echo $ajustesModel->generarCodigoAjuste(); ?>
+                                                                    <input type="hidden" name="ID_AJUSTE_PROD" value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
+                                                                   <input type="text" class="form-control" placeholder="Ingrese sus Apellidos" required />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-md-3 col-md-offset-1">
+                                                                    <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Motivo </label>
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <input type="text" class="form-control" name="MOTIVO_AJUSTE_PROD" size="150" maxlength="150" placeholder="Ingrese el motivo del ajuste" required />
+                                                                </div>
+                                                            </div>
+                
+                                                        </div>
+                                                    </div>
+                                                </div>
+                
+                                                 Footer de la ventana 
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                    <button class="btn btn-success">Guardar Ajuste</button>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="col-md-3 col-md-offset-1">
-                                                    <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Motivo </label>
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <input type="text" class="form-control" name="MOTIVO_AJUSTE_PROD" size="150" maxlength="150" placeholder="Ingrese el motivo del ajuste" required />
-                                                </div>
-                                            </div>
-
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
-
-                                 Footer de la ventana 
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                    <button class="btn btn-success">Guardar Ajuste</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
--->
+                -->
 
 
                 <!--Ventana emergente para Editar ajuste-->
