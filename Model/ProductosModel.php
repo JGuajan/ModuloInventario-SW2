@@ -6,7 +6,7 @@ class ProductosModel {
     public function getProductos() {
         // Obtención de informacion de la Base de Datos mediante consulta sql
         $pdo = Database::connect();
-        $sql = "select * from INV_TAB_PRODUCTOS order by NOMBRE_PROD";
+        $sql = 'select * from inv_tab_productos order by "NOMBRE_PROD"';
         $resultado = $pdo->query($sql);
 
         //transformamos los registros en objetos de tipo Producto y guardamos en array
@@ -25,7 +25,7 @@ class ProductosModel {
     public function getProducto($ID_PROD) {
         //Obtención de informacion de la Base de Datos mediante consulta sql
         $pdo = Database::connect();
-        $sql = "select * from INV_TAB_PRODUCTOS where ID_PROD=?";
+        $sql = 'select * from inv_tab_productos where "ID_PROD"=?';
         $consulta = $pdo->prepare($sql);
         $consulta->execute(array($ID_PROD));
 
@@ -42,7 +42,7 @@ class ProductosModel {
         // Conexión a Base de Datos y creación de consulta sql
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "insert into INV_TAB_PRODUCTOS(ID_PROD, NOMBRE_PROD, DESCRIPCION_PROD, GRABA_IVA_PROD, COSTO_PROD,PVP_PROD, ESTADO_PROD) values(?,?,?,?,?,?,?)";
+        $sql = 'insert into inv_tab_productos("ID_PROD", "NOMBRE_PROD", "DESCRIPCION_PROD", "GRABA_IVA_PROD", "COSTO_PROD","PVP_PROD", "ESTADO_PROD") values(?,?,?,?,?,?,?)';
         $consulta = $pdo->prepare($sql);
 
         //Ejecutamos la consulta y pasamos los parametros
@@ -61,7 +61,7 @@ class ProductosModel {
         // Conexión a BD y ejecución de consulta sql
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "delete from INV_TAB_PRODUCTOS where ID_PROD=?";
+        $sql = 'delete from INV_TAB_PRODUCTOS where "ID_PROD"=?';
         $consulta = $pdo->prepare($sql);
         $consulta->execute(array($ID_PROD));
         Database::disconnect();
@@ -71,7 +71,7 @@ class ProductosModel {
                                       $PVP_PROD, $ESTADO_PROD) {
         // Conexión a BD y creación de consulta sql
         $pdo = Database::connect();
-        $sql = "update INV_TAB_PRODUCTOS set  NOMBRE_PROD=?, DESCRIPCION_PROD=?, GRABA_IVA_PROD=?, COSTO_PROD=?, PVP_PROD=?, ESTADO_PROD=? where ID_PROD=?";
+        $sql = 'update INV_TAB_PRODUCTOS set  "NOMBRE_PROD"=?, "DESCRIPCION_PROD"=?, "GRABA_IVA_PROD"=?, "COSTO_PROD"=?, "PVP_PROD"=?, "ESTADO_PROD"=? where "ID_PROD"=?';
         $consulta = $pdo->prepare($sql);
 
         //Ejecutamos la consulta y pasamos los parametros
@@ -115,7 +115,7 @@ class ProductosModel {
 
 public function generarCodigoProducto() {
         $pdo = Database::connect();
-        $sql = "select max(ID_PROD) as cod from INV_TAB_PRODUCTOS";
+        $sql = 'select max("ID_PROD") as cod from INV_TAB_PRODUCTOS';
         $consulta = $pdo->prepare($sql);
         $consulta->execute();
         $res = $consulta->fetch(PDO::FETCH_ASSOC);

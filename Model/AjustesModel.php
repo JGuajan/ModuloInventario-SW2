@@ -16,7 +16,7 @@ class AjustesModel {
     //METODO PARA OBTENER LA LISTA DE LOS AJUSTES
     public function getCabAjustes() {
         $pdo = Database::connect();
-        $sql = "select * from INV_TAB_AJUSTES_PRODUCTOS order by ID_AJUSTE_PROD";
+        $sql = 'select * from INV_TAB_AJUSTES_PRODUCTOS order by "ID_AJUSTE_PROD"';
         $resultado = $pdo->query($sql);
         $listadoCabAjustes = array();
         foreach ($resultado as $res) {
@@ -30,7 +30,7 @@ class AjustesModel {
     // METODO PARA OBTENER UN AJUSTE ESPECIFICO POR MEDIO DEL PARAMETRO CODIGO DE AJUSTE
     public function getCabAjuste($ID_AJUSTE_PROD) {
         $pdo = Database::connect();
-        $sql = "select * from INV_TAB_AJUSTES_PRODUCTOS where ID_AJUSTE_PROD=?";
+        $sql = 'select * from INV_TAB_AJUSTES_PRODUCTOS where "ID_AJUSTE_PROD"=?';
         $consulta = $pdo->prepare($sql);
         $consulta->execute(array($ID_AJUSTE_PROD));
         $res = $consulta->fetch(PDO::FETCH_ASSOC);
@@ -39,6 +39,8 @@ class AjustesModel {
         return $Cab_ajuste;
     }
     
+    
+    ////REALIZAR ESTA SONSULTA /////////////
     //Método para obtener la información requerida en reportes de Movimeintos de Detalles de Ajustes de Productos
     public function getDetAjusProducto($ID_PROD,$FECHA_IN,$FECHA_FIN) {
         //Obtención de informacion de la Base de Datos mediante consulta sql
@@ -65,6 +67,8 @@ class AjustesModel {
         return $listadoDetalles;
     }
     
+    ////REALIZAR ESTA CONSULTA
+    
     //Método para obtener la información requerida en reportes de Movimeintos de Detalles de Facturas de Venta de Productos
     public function getDetFacVenta($ID_PROD,$FECHA_IN,$FECHA_FIN) {
         //Obtención de informacion de la Base de Datos mediante consulta sql
@@ -89,7 +93,7 @@ class AjustesModel {
         // Retornamos el Usuario encontrado
         return $listadoDetalles;
     }
-    
+    // REALIZAR ESTA CONSULTA
     //Método para obtener la información requerida en reportes de Movimientos de Detalles de Facturas de Compra de Productos
     public function getDetFacCompra($ID_PROD,$FECHA_IN,$FECHA_FIN) {
         //Obtención de informacion de la Base de Datos mediante consulta sql
@@ -119,7 +123,7 @@ class AjustesModel {
     public function insertarCabAjuste($ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD) {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "insert into INV_TAB_AJUSTES_PRODUCTOS(ID_AJUSTE_PROD,MOTIVO_AJUSTE_PROD) values(?,?)";
+        $sql = 'insert into INV_TAB_AJUSTES_PRODUCTOS("ID_AJUSTE_PROD","MOTIVO_AJUSTE_PROD") values(?,?)';
         $consulta = $pdo->prepare($sql);
         try {
             $consulta->execute(array($ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD));
@@ -135,7 +139,7 @@ class AjustesModel {
     public function eliminarCabAjuste($ID_AJUSTE_PROD) {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "delete from INV_TAB_AJUSTES_PRODUCTOS where ID_AJUSTE_PROD=?";
+        $sql = 'delete from INV_TAB_AJUSTES_PRODUCTOS where "ID_AJUSTE_PROD"=?';
         $consulta = $pdo->prepare($sql);
         $consulta->execute(array($ID_AJUSTE_PROD));
         Database::disconnect();
@@ -144,7 +148,7 @@ class AjustesModel {
     // METODO PARA ACTUALIZAR UN AJUSTE (CABECERA)
     public function actualizarCabAjuste($ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD) {
         $pdo = Database::connect();
-        $sql = "update INV_TAB_AJUSTES_PRODUCTOS set MOTIVO_AJUSTE_PROD=?, FECHA_AJUSTE_PROD=CURRENT_TIMESTAMP  where ID_AJUSTE_PROD=?";
+        $sql = 'update INV_TAB_AJUSTES_PRODUCTOS set "MOTIVO_AJUSTE_PROD"=?, "FECHA_AJUSTE_PROD"=CURRENT_TIMESTAMP  where "ID_AJUSTE_PROD"=?';
         $consulta = $pdo->prepare($sql);
         try {
             $consulta->execute(array($MOTIVO_AJUSTE_PROD, $ID_AJUSTE_PROD));
@@ -175,7 +179,7 @@ class AjustesModel {
     // METODO PARA GENERAR AUTOMATICAMENTE EL CODIGO DE AJUSTE (CABECERA) -- AJUS-0001
     public function generarCodigoAjuste() {
         $pdo = Database::connect();
-        $sql = "select max(ID_AJUSTE_PROD) as cod from INV_TAB_AJUSTES_PRODUCTOS";
+        $sql = 'select max("ID_AJUSTE_PROD") as cod from INV_TAB_AJUSTES_PRODUCTOS';
         $consulta = $pdo->prepare($sql);
         $consulta->execute();
         $res = $consulta->fetch(PDO::FETCH_ASSOC);
@@ -207,7 +211,7 @@ class AjustesModel {
     // METODO PARA GENERAR AUTOMATICAMENTE EL CODIGO DE DETALLE DE AJUSTE DESDE LA BASE DE DATOS -- DAJU-0001
     public function generarCodigoDetalleAjusteBD() {
         $pdo = Database::connect();
-        $sql = "select max(ID_DETALLE_AJUSTE_PROD) as cod from 	inv_tab_detalle_ajuste_prod";
+        $sql = 'select max("ID_DETALLE_AJUSTE_PROD") as cod from inv_tab_detalle_ajuste_prod';
         $consulta = $pdo->prepare($sql);
         $consulta->execute();
         $res = $consulta->fetch(PDO::FETCH_ASSOC);
@@ -282,7 +286,7 @@ class AjustesModel {
         array_push($listaAjusteDet, $ajusteDet);
         return $listaAjusteDet;
     }
-
+         //CONSULTA A REALIZAR
     // METODO PARA OBTENER DETALLES DE UN AJUSTE
     public function getDetallesAjuste($ID_AJUSTE_PROD) {
         $pdo = Database::connect();
@@ -318,7 +322,7 @@ class AjustesModel {
         }
         return $listaAjusteDet;
     }
-
+     //CONSULTA A REALIZAR
     // METODO PARA OBTENER UN DETALLE DE AJUSTE
     public function getDetalle($ID_DETALLE_AJUSTE_PROD) {
         $pdo = Database::connect();
@@ -338,13 +342,13 @@ class AjustesModel {
     public function insertarAjusteDetalles($listaAjusteDet, $ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD) {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "insert into INV_TAB_AJUSTES_PRODUCTOS(ID_AJUSTE_PROD,MOTIVO_AJUSTE_PROD) values(?,?)";
+        $sql = 'insert into INV_TAB_AJUSTES_PRODUCTOS("ID_AJUSTE_PROD","MOTIVO_AJUSTE_PROD") values(?,?)';
         $consulta = $pdo->prepare($sql);
         try {
             $consulta->execute(array($ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD));
             //guardamos los detalles:
             foreach ($listaAjusteDet as $det) {
-                $sql = "insert into inv_tab_detalle_ajuste_prod(ID_DETALLE_AJUSTE_PROD, ID_PROD, ID_AJUSTE_PROD, ID_USU, CAMBIO_STOCK_PROD, TIPOMOV_DETAJUSTE_PROD) values(?,?,?,?,?,?)";
+                $sql = 'insert into inv_tab_detalle_ajuste_prod("ID_DETALLE_AJUSTE_PROD", "ID_PROD", "ID_AJUSTE_PROD", "ID_USU", "CAMBIO_STOCK_PROD", "TIPOMOV_DETAJUSTE_PROD") values(?,?,?,?,?,?)';
                 $consulta = $pdo->prepare($sql);
                 //en cada detalle asignamos el numero de ajuste padre:
                 if ($det->getTIPOMOV_DETAJUSTE_PROD() == "I") {
@@ -369,14 +373,14 @@ class AjustesModel {
     // METODO PARA GUARDAR LOS CAMBIOS DEL AJUSTE
     public function actualizarAjusteDetalles($listaAjusteDet, $listaDetPorEliminar, $ID_AJUSTE_PROD, $MOTIVO_AJUSTE_PROD) {
         $pdo = Database::connect();
-        $sql = "update INV_TAB_AJUSTES_PRODUCTOS SET MOTIVO_AJUSTE_PROD=? WHERE ID_AJUSTE_PROD=?";
+        $sql = 'update INV_TAB_AJUSTES_PRODUCTOS SET "MOTIVO_AJUSTE_PROD"=? WHERE "ID_AJUSTE_PROD"=?';
         $consulta = $pdo->prepare($sql);
         try {
             $consulta->execute(array($MOTIVO_AJUSTE_PROD, $ID_AJUSTE_PROD));
             //guardamos los detalles:
             foreach ($listaAjusteDet as $det) {
                 if (is_null($this->getDetalle($det->getID_DETALLE_AJUSTE_PROD())->getID_DETALLE_AJUSTE_PROD())) {
-                    $sql = "insert into inv_tab_detalle_ajuste_prod(ID_DETALLE_AJUSTE_PROD, ID_PROD, ID_AJUSTE_PROD, ID_USU, CAMBIO_STOCK_PROD, TIPOMOV_DETAJUSTE_PROD) values(?,?,?,?,?,?)";
+                    $sql = 'insert into inv_tab_detalle_ajuste_prod("ID_DETALLE_AJUSTE_PROD", "ID_PROD", "ID_AJUSTE_PROD", "ID_USU", "CAMBIO_STOCK_PROD", "TIPOMOV_DETAJUSTE_PROD") values(?,?,?,?,?,?)';
                     $consulta = $pdo->prepare($sql);
                     //en cada detalle asignamos el numero de ajuste padre:
                     if ($det->getTIPOMOV_DETAJUSTE_PROD() == "I") {
@@ -396,7 +400,7 @@ class AjustesModel {
             // Eliminacion de detalles en la edición
             foreach ($listaDetPorEliminar as $elim) {
                 if (!is_null($this->getDetalle($elim)->getID_DETALLE_AJUSTE_PROD())) {
-                    $sql = "delete from inv_tab_detalle_ajuste_prod where ID_DETALLE_AJUSTE_PROD=?";
+                    $sql = 'delete from inv_tab_detalle_ajuste_prod where "ID_DETALLE_AJUSTE_PROD"=?';
                     $consulta = $pdo->prepare($sql);
                     $consulta->execute(array($elim));
                 }
@@ -407,7 +411,7 @@ class AjustesModel {
         }
         Database::disconnect();
     }
-
+         //REALIZAR ESTA CONSULTA
     public function getDetAjustes($ID_AJUSTE_PROD) {
         $pdo = Database::connect();
         $sql = "select D.ID_DETALLE_AJUSTE_PROD, P.NOMBRE_PROD,	D.CAMBIO_STOCK_PROD, D.TIPOMOV_DETAJUSTE_PROD, "

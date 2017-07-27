@@ -8,7 +8,7 @@ class UsuariosModel {
     public function getUsuarios() {
         // Obtención de informacion de la Base de Datos mediante consulta sql
         $pdo = Database::connect();
-        $sql = "select * from inv_tab_usuarios order by ID_USU";
+        $sql = 'select * from inv_tab_usuarios order by "ID_USU"';
         $resultado = $pdo->query($sql);
 
         //transformamos los registros en objetos de tipo Usuario y guardamos en array
@@ -28,7 +28,7 @@ class UsuariosModel {
     public function getUsuariosBodegueros() {
         // Obtención de informacion de la Base de Datos mediante consulta sql
         $pdo = Database::connect();
-        $sql = "select * from inv_tab_usuarios where ID_TIPO_USU='TUSU-0002' order by ID_USU";
+        $sql = 'select * from inv_tab_usuarios where ID_TIPO_USU="TUSU-0002" order by ID_USU';
         $resultado = $pdo->query($sql);
 
         //transformamos los registros en objetos de tipo Usuario y guardamos en array
@@ -49,7 +49,7 @@ class UsuariosModel {
     public function getUsuario($ID_USU) { 
         //Obtención de informacion de la Base de Datos mediante consulta sql
         $pdo = Database::connect();
-        $sql = "select * from inv_tab_usuarios where ID_USU=?";
+        $sql = 'select * from inv_tab_usuarios where "ID_USU"=?';
         $consulta = $pdo->prepare($sql);
         $consulta->execute(array($ID_USU)); 
 
@@ -64,7 +64,7 @@ class UsuariosModel {
     
     public function getUsuarioInicioSesion($E_MAIL_USU){
         $pdo = Database::connect();
-        $sql = "select * from inv_tab_usuarios where E_MAIL_USU=?";
+        $sql = 'select * from inv_tab_usuarios where "E_MAIL_USU"=?';
         $consulta = $pdo->prepare($sql);
         $consulta->execute(array($E_MAIL_USU)); 
 
@@ -82,8 +82,7 @@ class UsuariosModel {
         // Conexión a Base de Datos y creación de consulta sql
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "insert into inv_tab_usuarios(ID_USU, ID_TIPO_USU, CEDULA_RUC_PASS_USU, NOMBRES_USU, APELLIDOS_USU,"
-                . "FECH_NAC_USU, CIUDAD_NAC_USU, DIRECCION_USU, FONO_USU, E_MAIL_USU, ESTADO_USU, CLAVE_USU) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        $sql = 'insert into inv_tab_usuarios("ID_USU", "ID_TIPO_USU", "CEDULA_RUC_PASS_USU", "NOMBRES_USU", "APELLIDOS_USU", "FECH_NAC_USU", "CIUDAD_NAC_USU", "DIRECCION_USU", "FONO_USU", "E_MAIL_USU", "ESTADO_USU", "CLAVE_USU") values(?,?,?,?,?,?,?,?,?,?,?,?)';
         $consulta = $pdo->prepare($sql);
 
         //Ejecutamos la consulta y pasamos los parametros
@@ -102,7 +101,7 @@ class UsuariosModel {
         // Conexión a BD y ejecución de consulta sql
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "delete from inv_tab_usuarios where ID_USU=?";
+        $sql = 'delete from inv_tab_usuarios where "ID_USU"=?';
         $consulta = $pdo->prepare($sql);
         $consulta->execute(array($ID_USU));
         Database::disconnect();
@@ -112,8 +111,7 @@ class UsuariosModel {
     public function actualizarUsuario($ID_USU, $ID_TIPO_USU, $CEDULA_RUC_PASS_USU, $NOMBRES_USU, $APELLIDOS_USU, $FECH_NAC_USU, $CIUDAD_NAC_USU, $DIRECCION_USU, $FONO_USU, $E_MAIL_USU, $ESTADO_USU, $CLAVE_USU) {
         // Conexión a BD y creación de consulta sql
         $pdo = Database::connect();
-        $sql = "update inv_tab_usuarios set ID_TIPO_USU=?, CEDULA_RUC_PASS_USU=?, NOMBRES_USU=?, APELLIDOS_USU=?, FECH_NAC_USU=?, CIUDAD_NAC_USU=?,"
-                . "DIRECCION_USU=?, FONO_USU=?, E_MAIL_USU=?, ESTADO_USU=?, CLAVE_USU=? where ID_USU=?";
+        $sql = 'update inv_tab_usuarios set "ID_TIPO_USU"=?, "CEDULA_RUC_PASS_USU"=?, "NOMBRES_USU"=?, "APELLIDOS_USU"=?, "FECH_NAC_USU"=?, "CIUDAD_NAC_USU"=?,"DIRECCION_USU"=?, "FONO_USU"=?, "E_MAIL_USU"=?, "ESTADO_USU"=?, "CLAVE_USU"=? where "ID_USU"=?';
         $consulta = $pdo->prepare($sql);
 
         //Ejecutamos la consulta y pasamos los parametros
@@ -143,7 +141,7 @@ class UsuariosModel {
     
      public function obtenerTipoUsuario($ID_TIPO_USU){
        $pdo = Database::connect();
-        $sql = "select 	NOMBRE_TIPO_USU as nombre from inv_tab_tipo_usuario where ID_TIPO_USU='$ID_TIPO_USU'";
+        $sql = 'select 	"NOMBRE_TIPO_USU" as nombre from inv_tab_tipo_usuario where "ID_TIPO_USU"=$ID_TIPO_USU';
         $consulta = $pdo->prepare($sql);
         $consulta->execute();
         $res = $consulta->fetch(PDO::FETCH_ASSOC);
@@ -154,7 +152,7 @@ class UsuariosModel {
     // METODO PARA GENERAR AUTOMATICAMENTE EL CODIGO DE UN USUARIO -- USUA-0001
      public function generarUsuario() {
         $pdo = Database::connect();
-        $sql = "select max(ID_USU) as cod from INV_TAB_USUARIOS";
+        $sql = 'select max("ID_USU") as cod from INV_TAB_USUARIOS';
         $consulta = $pdo->prepare($sql);
         $consulta->execute();
         $res = $consulta->fetch(PDO::FETCH_ASSOC);

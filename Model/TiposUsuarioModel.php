@@ -7,7 +7,7 @@ class TiposUsuarioModel {
     public function getTiposUsuario() {
         // Obtención de informacion de la Base de Datos mediante consulta sql
         $pdo = Database::connect();
-        $sql = "select * from inv_tab_tipo_usuario order by ID_TIPO_USU";
+        $sql = 'select * from inv_tab_tipo_usuario order by "ID_TIPO_USU"';
         $resultado = $pdo->query($sql);
 
         //transformamos los registros en objetos de tipo TipoUsuario y guardamos en array
@@ -28,7 +28,7 @@ class TiposUsuarioModel {
     public function getTipoUsuario($ID_TIPO_USU) {
         //Obtención de informacion de la Base de Datos mediante consulta sql
         $pdo = Database::connect();
-        $sql = "select * from inv_tab_tipo_usuario where ID_TIPO_USU=?";
+        $sql = 'select * from inv_tab_tipo_usuario where "ID_TIPO_USU"=?';
         $consulta = $pdo->prepare($sql);
         $consulta->execute(array($ID_TIPO_USU));   
 
@@ -46,7 +46,7 @@ class TiposUsuarioModel {
         // Conexión a Base de Datos y creación de consulta sql
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "insert into inv_tab_tipo_usuario(ID_TIPO_USU, NOMBRE_TIPO_USU) values(?,?)";
+        $sql = 'insert into inv_tab_tipo_usuario("ID_TIPO_USU", "NOMBRE_TIPO_USU") values(?,?)';
         $consulta = $pdo->prepare($sql);
 
         //Ejecutamos la consulta y pasamos los parametros
@@ -64,7 +64,7 @@ class TiposUsuarioModel {
         // Conexión a BD y ejecución de consulta sql
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "delete from inv_tab_tipo_usuario where ID_TIPO_USU=?";
+        $sql = 'delete from inv_tab_tipo_usuario where "ID_TIPO_USU"=?';
         $consulta = $pdo->prepare($sql);
         $consulta->execute(array($ID_TIPO_USU));
         Database::disconnect();
@@ -74,7 +74,7 @@ class TiposUsuarioModel {
     public function actualizarTipoUsuario($ID_TIPO_USU, $NOMBRE_TIPO_USU) {
         // Conexión a BD y creación de consulta sql
         $pdo = Database::connect();
-        $sql = "update inv_tab_tipo_usuario set NOMBRE_TIPO_USU=?, Where ID_TIPO_USU=?";
+        $sql = 'update inv_tab_tipo_usuario set "NOMBRE_TIPO_USU"=?, Where "ID_TIPO_USU"=?';
         $consulta = $pdo->prepare($sql);
 
         //Ejecutamos la consulta y pasamos los parametros
@@ -90,7 +90,7 @@ class TiposUsuarioModel {
     // METODO PARA GENERAR AUTOMATICAMENTE EL CODIGO DE TIPO USUARIO -- TUSU-0001
     public function generarCodigoTipoUsuario() {
         $pdo = Database::connect();
-        $sql = "select max(ID_TIPO_USU) as cod from INV_TAB_TIPO_USUARIO";
+        $sql = 'select max("ID_TIPO_USU") as cod from INV_TAB_TIPO_USUARIO';
         $consulta = $pdo->prepare($sql);
         $consulta->execute();
         $res = $consulta->fetch(PDO::FETCH_ASSOC);

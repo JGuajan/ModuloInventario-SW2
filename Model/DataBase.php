@@ -10,8 +10,9 @@ class DataBase {
     //Propiedades estaticas con la informacion de la conexion (DSN):
     private static $dbName = 'inventario';
     private static $dbHost = 'localhost';
-    private static $dbUsername = 'root';
-    private static $dbUserPassword = '';
+    private static $port = '5432';
+    private static $dbUsername = 'postgres';
+    private static $dbUserPassword = 'root';
     //Propiedad para control de la conexion:
     private static $conexion = null;
 
@@ -31,7 +32,7 @@ class DataBase {
         // La palabra reservada self nos ayuda a acceder a las propiedades estaticas de conexion
         if (null == self::$conexion) {
             try {
-                self::$conexion = new PDO("mysql:host=" . self::$dbHost . ";" . "dbname=" . self::$dbName, self::$dbUsername, self::$dbUserPassword);
+                self::$conexion = new PDO("pgsql:host=" . self::$dbHost . ";"."port=".self::$port .";". "dbname=" . self::$dbName, self::$dbUsername, self::$dbUserPassword);
             } catch (PDOException $e) {
                 die($e->getMessage());
             }
