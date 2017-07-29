@@ -182,7 +182,7 @@ and open the template in the editor.
                     <div class="col-md-12">
                         <div class="panel panel-info">
                             <div class="panel-heading"><h4>Lista de Usuarios</h4></div>
-                            <div class="panel-title">
+                            <div class="panel-body">
                                 <div class="col-lg-12">
                                     <div class="table-striped">
                                         <!--<script src="../../Bootstrap/DataTables/main.js"></script>-->

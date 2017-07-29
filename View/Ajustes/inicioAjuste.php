@@ -164,7 +164,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     <div class="col-md-12">
                         <div class="panel panel-info">
                             <div class="panel-heading"><h4>Lista de Ajustes</h4></div>
-                            <div class="panel-title">
+                            <div class="panel-body">
                                 <div class="col-lg-12">
                                     <div class="table-responsive">
                                         <script src="../../Bootstrap/DataTables/ajustes.js"></script>
