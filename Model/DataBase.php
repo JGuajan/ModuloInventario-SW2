@@ -25,7 +25,7 @@ class DataBase {
     }
 
     /**
-     * Metodo estatico que crea una conexion a la base de datos.
+     * Metodo estatico que crea una conexion a la base de datos.    ///
      */
     public static function connect() {
         // Una sola conexion para toda la aplicacion (singleton):
