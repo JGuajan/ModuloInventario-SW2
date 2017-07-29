@@ -427,10 +427,10 @@ switch ($opcion1) {
                         unset($_SESSION['listaAjusteDet']);
                         $listadoAjustes = $ajustesModel->getCabAjustes();
                         $_SESSION['listadoAjustes'] = serialize($listadoAjustes);
-                        header('Location: ../View/Ajustes/inicioAjuste.php');
                     } catch (Exception $e) {
                         $_SESSION['ErrorBaseDatos'] = $e->getMessage();
                     }
+                    header('Location: ../View/Ajustes/inicioAjuste.php');
                 } else {
                     $_SESSION['ErrorDetalleAjuste'] = "Debe registrar por lo menos un detalle de Ajuste antes de guardar";
                     header('Location: ../View/Ajustes/nuevoAjuste.php');

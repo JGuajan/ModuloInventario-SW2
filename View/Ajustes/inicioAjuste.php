@@ -159,6 +159,13 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         </ul>
                     </div>
                 </div>
+
+                <?php
+                if (isset($_SESSION['ErrorBaseDatos'])) {
+                    echo "<div class='alert alert-danger'>" . $_SESSION['ErrorBaseDatos'] . "</div>";
+                }
+                ?>
+
                 <br>
                 <div class="row">
                     <div class="col-md-12">
@@ -196,9 +203,9 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                     <input type="hidden" value="<?php echo $aju->getFECHA_AJUSTE_PROD(); ?>" id="FECHA_AJUSTE_PROD<?php echo $aju->getID_AJUSTE_PROD(); ?>" >
 
                                                     <td align="center"><a onclick="return confirImprimir
-                                        ('<?php echo $aju->getID_AJUSTE_PROD(); ?>',
-                                                '<?php echo $aju->getMOTIVO_AJUSTE_PROD(); ?>',
-                                                '<?php echo $aju->getFECHA_AJUSTE_PROD(); ?>');" 
+                                    ('<?php echo $aju->getID_AJUSTE_PROD(); ?>',
+                                            '<?php echo $aju->getMOTIVO_AJUSTE_PROD(); ?>',
+                                            '<?php echo $aju->getFECHA_AJUSTE_PROD(); ?>');" 
                                                                           href='../../Controller/controller.php?opcion1=ajuste&opcion2=imprimir_ajuste&ID_AJUSTE_PROD=<?php echo $aju->getID_AJUSTE_PROD(); ?>&MOTIVO_AJUSTE_PROD=<?php echo $aju->getMOTIVO_AJUSTE_PROD(); ?>'>
                                                             <span class='glyphicon glyphicon-print'>Imprimir</span></a></td>
                                                     <td align="center"> 

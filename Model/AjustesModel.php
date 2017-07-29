@@ -276,7 +276,7 @@ class AjustesModel {
         } else {
             $id_detalle_ajuste = $this->generarCodigoDetalleAjusteBD();
         }
-        $ajusteDet = new AjusteDet($id_detalle_ajuste,$ID_PROD,$producto->getNOMBRE_PROD(),$producto->getPVP_PROD(),"NULL",$ID_USU,$cantidad,$tipoMovimiento);
+        $ajusteDet = new AjusteDet($id_detalle_ajuste,$ID_PROD,$producto->getNOMBRE_PROD(),$producto->getPVP_PROD(),null,$ID_USU,$cantidad,$tipoMovimiento);
 
         if (!isset($listaAjusteDet)) {
             $listaAjusteDet = array();
