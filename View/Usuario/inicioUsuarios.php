@@ -426,7 +426,7 @@ and open the template in the editor.
                                     <!-- Footer de la ventana -->
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                        <button type="submit" id="boton" class="btn btn-success">Guardar Usuario</button>
+                                        <input type="submit" id="boton" class="btn btn-success" value="Guardar">
                                     </div>
                                 </div>
                             </div>
