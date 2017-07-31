@@ -1,8 +1,8 @@
 <?php
 
-require_once '../model/UsuariosModel.php';
-require_once '../model/AjustesModel.php';
-require_once '../Model/ProductosModel.php';
+require_once '/../model/UsuariosModel.php';
+require_once '/../model/AjustesModel.php';
+require_once '/../Model/ProductosModel.php';
 
 session_start();
 $usuariosModel = new UsuariosModel();
