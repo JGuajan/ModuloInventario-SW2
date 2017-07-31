@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__.'../model/UsuariosModel.php';
-require_once __DIR__.'../model/AjustesModel.php';
-require_once __DIR__.'../Model/ProductosModel.php';
+require_once '/app/model/UsuariosModel.php';
+require_once '/app//model/AjustesModel.php';
+require_once 'app/Model/ProductosModel.php';
 
 session_start();
 $usuariosModel = new UsuariosModel();
