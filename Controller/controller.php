@@ -1,8 +1,10 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/UsuariosModel.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/AjustesModel.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/ProductosModel.php';
+require_once '../Model/UsuariosModel.php';
+require_once '../Model/AjustesModel.php';
+require_once '../Model/ProductosModel.php';
+
+//require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/ProductosModel.php';
 
 session_start();
 $usuariosModel = new UsuariosModel();

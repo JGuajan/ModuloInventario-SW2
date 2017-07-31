@@ -262,10 +262,11 @@ class AjustesModel {
     // METODO PARA OBTENER DETALLES DE UN AJUSTE
     public function getDetallesAjuste($ID_AJUSTE_PROD) {
         $pdo = Database::connect();
-        $sql = "select D.ID_DETALLE_AJUSTE_PROD, P.ID_PROD, P.NOMBRE_PROD, P.PVP_PROD, "
-                . "D.ID_AJUSTE_PROD, U.ID_USU, D.CAMBIO_STOCK_PROD, D.TIPOMOV_DETAJUSTE_PROD "
-                . "from INV_TAB_DETALLE_AJUSTE_PROD D, INV_TAB_PRODUCTOS P, INV_TAB_USUARIOS U "
-                . "where D.ID_AJUSTE_PROD='$ID_AJUSTE_PROD' AND P.ID_PROD=D.ID_PROD AND U.ID_USU=D.ID_USU";
+        $sql = 'select D."ID_DETALLE_AJUSTE_PROD", P."ID_PROD", P."NOMBRE_PROD", P."PVP_PROD", '
+                . 'D."ID_AJUSTE_PROD", U."ID_USU", D."CAMBIO_STOCK_PROD", D."TIPOMOV_DETAJUSTE_PROD" '
+                . 'from INV_TAB_DETALLE_AJUSTE_PROD as D, INV_TAB_PRODUCTOS as P, INV_TAB_USUARIOS as U '
+                . 'where D."ID_AJUSTE_PROD"='.$ID_AJUSTE_PROD.' AND P."ID_PROD"=D."ID_PROD" AND U."ID_USU"=D."ID_USU"';
+       
         $resultado = $pdo->query($sql);
         $listadoDetAjustes = array();
         foreach ($resultado as $res) {
@@ -386,10 +387,11 @@ class AjustesModel {
          //REALIZAR ESTA CONSULTA
     public function getDetAjustes($ID_AJUSTE_PROD) {
         $pdo = Database::connect();
-        $sql = 'select D."ID_DETALLE_AJUSTE_PROD", P."ID_PROD", P."NOMBRE_PROD", P."PVP_PROD", '
-                . 'D."ID_AJUSTE_PROD", U."ID_USU", D."CAMBIO_STOCK_PROD", D."TIPOMOV_DETAJUSTE_PROD" '
-                . 'from INV_TAB_DETALLE_AJUSTE_PROD as D, INV_TAB_PRODUCTOS as P, INV_TAB_USUARIOS as U '
-                . 'where D."ID_AJUSTE_PROD"="'.$ID_AJUSTE_PROD.'" AND P."ID_PROD"=D."ID_PROD" AND U."ID_USU"=D."ID_USU"';
+        $sql = 'select D."ID_DETALLE_AJUSTE_PROD", P."NOMBRE_PROD", D."CAMBIO_STOCK_PROD", D."TIPOMOV_DETAJUSTE_PROD" '
+                . 'P."COSTO_PROD", P."GRABA_IVA_PROD", D."ID_AJUSTE_PROD "'
+                . 'from INV_TAB_DETALLE_AJUSTE_PROD as D, INV_TAB_PRODUCTOS as P '
+                . 'where D."ID_AJUSTE_PROD"="'.$ID_AJUSTE_PROD.'" AND P."ID_PROD"=D."ID_PROD"';
+        
         $resultado = $pdo->query($sql);
         $listadoDetAjustes = array();
         foreach ($resultado as $res) {
