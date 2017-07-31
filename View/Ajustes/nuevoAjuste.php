@@ -46,7 +46,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     /// Invocamos a nuestro script PHP
                     $.ajax({
                         data: ID_PROD,
-                        url: '../../controller/controller.php?opcion1=ajuste&opcion2=recargarDatosProducto&ID_PROD=' + ID_PROD,
+                        url: <?php $_SERVER['DOCUMENT_ROOT'] ?> .'/Controller/controller.php?opcion1=ajuste&opcion2=recargarDatosProducto&ID_PROD=' + ID_PROD,
                         type: 'post',
                         success: function (response) {
                             $("#TblProd").html(response);
