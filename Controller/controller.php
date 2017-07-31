@@ -205,63 +205,60 @@ switch ($opcion1) {
                 break;
 
             case "listar_detalles_fact_venta":
-                $ID_PROD = $_REQUEST['ID_PROD'];
-                $FECHA_IN = $_REQUEST['FECHA_IN'];
-                $FECHA_FIN = $_REQUEST['FECHA_FIN'];
-                $listadoDetalles = $ajustesModel->getDetFacVenta($ID_PROD, $FECHA_IN, $FECHA_FIN);
-                $tipoMov = null;
+                $listadoDetalles = $ajustesModel->getDetFacVenta();
                 echo "<thead>
                 <tr>
+                <th>CÓDIGO CABECERA</th>
+                <th>PRODUCTO</th>
                 <th>CANTIDAD</th>
-                <th>CÓDIGO FACTURA</th>
-                <th>CÓDIGO DETALLE</th>
-                <th>DESCRIPCIÓN</th>
                 <th>VALOR UNIT.</th>
                 <th>VALOR TOT.</th>
+                <th>DESCUENTO</th>
+                <th>CÓDIGO DETALLE</th>
                 </thead>";
-                foreach ($listadoDetalles as $rep) {
-
-                    echo "<tbody>
-                <tr class = 'info'>
-                <td>" . $rep->getCANTIDAD_DET_FAC_VENTA() . "</td>
-                <td>" . $rep->getID_CAB_FAC_VENTA() . "</td>
-                <td>" . $rep->getID_DET_FAC_VENTA() . "</td>
-                <td>" . $rep->getDESCRIPCION_PROD() . "</td>
-                <td>" . $rep->getPVPUNIT_DET_FAC_VENTA() . "</td>
-                <td>" . $rep->getPVPTOT_DET_FAC_VENTA() . "</td>
-                </tr>
-                </tbody>";
+                echo "<tbody>";
+                for ($i = 0; $i < count($listadoDetalles); $i++) {
+                    echo "<tr>";
+                    echo "<td>" . $listadoDetalles[$i]["IDCABECERA"] . "</td>";
+                    echo "<td>" . $listadoDetalles[$i]["IDPRODUCTO"] . "</td>";
+                    echo "<td>" . $listadoDetalles[$i]["CANTIDAD"] . "</td>";
+                    echo "<td>" . $listadoDetalles[$i]["VALOR_UNITARIO"] . "</td>";
+                    echo "<td>" . $listadoDetalles[$i]["VALOR_TOTAL"] . "</td>";
+                    echo "<td>" . $listadoDetalles[$i]["DESCUENTO"] . "</td>";
+                    echo "<td>" . $listadoDetalles[$i]["IDDETALLE"] . "</td>";
+                    echo "</tr>";
                 }
+                echo "</tbody>";
                 break;
 
             case "listar_detalles_fact_compra":
-                $ID_PROD = $_REQUEST['ID_PROD'];
-                $FECHA_IN = $_REQUEST['FECHA_IN'];
-                $FECHA_FIN = $_REQUEST['FECHA_FIN'];
-                $listadoDetalles = $ajustesModel->getDetFacCompra($ID_PROD, $FECHA_IN, $FECHA_FIN);
-                $tipoMov = null;
+                $listadoDetalles = $ajustesModel->getDetFacCompra();
                 echo "<thead>
                 <tr>
-                <th>CANTIDAD</th>
-                <th>COÓDIGO FACTURA</th>
                 <th>CÓDIGO DETALLE</th>
-                <th>DESCRIPCIÓN</th>
-                <th>VALOR UNIT.</th>
-                <th>VALOR TOT.</th>
+                <th>CÓDIGO FACTURA</th>
+                <th>PRODUCTO</th>
+                <th>CANTIDAD</th>
+                <th>DESCUENTO</th>
+                <th>CANT. DESCUENTO</th>
                 </thead>";
-                foreach ($listadoDetalles as $rep) {
-
-                    echo "<tbody>
-                <tr class = 'info'>
-                <td>" . $rep->getCANTIDAD_DET_FAC_COMPRA() . "</td>
-                <td>" . $rep->getID_CAB_FAC_COMPRA() . "</td>
-                <td>" . $rep->getID_DET_FAC_COMPRA() . "</td>
-                <td>" . $rep->getDESCRIPCION_PROD() . "</td>
-                <td>" . $rep->getPVPUNIT_DET_FAC_COMPRA() . "</td>
-                <td>" . $rep->getPVPTOT_DET_FAC_COMPRA() . "</td>
-                </tr>
-                </tbody>";
+                echo "<tbody>";
+                for ($i = 0; $i < count($listadoDetalles); $i++) {
+                    if ($listadoDetalles[$i]["descuento"] == true) {
+                        $descuento = "Si";
+                    } else {
+                        $descuento = "No";
+                    }
+                    echo "<tr>";
+                    echo "<td>" . $listadoDetalles[$i]["iddetalle"] . "</td>";
+                    echo "<td>" . $listadoDetalles[$i]["idfactura"] . "</td>";
+                    echo "<td>" . $listadoDetalles[$i]["idproducto"] . "</td>";
+                    echo "<td>" . $listadoDetalles[$i]["cantidadproducto"] . "</td>";
+                    echo "<td>" . $descuento . "</td>";
+                    echo "<td>" . $listadoDetalles[$i]["cantdescuento"] . "</td>";
+                    echo "</tr>";
                 }
+                echo "</tbody>";
                 break;
 
             case "obtener_titulo":

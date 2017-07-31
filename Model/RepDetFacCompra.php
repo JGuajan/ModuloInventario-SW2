@@ -3,70 +3,72 @@
 // Clase Reporte de Detalles de Factura de Compra de Producto
 
 class RepDetFacCompra {
-    private $CANTIDAD_DET_FAC_COMPRA;
-    private $ID_CAB_FAC_COMPRA;
-    private $ID_DET_FAC_COMPRA;
-    private $DESCRIPCION_PROD;
-    private $PVPUNIT_DET_FAC_COMPRA;
-    private $PVPTOT_DET_FAC_COMPRA;
+    private $iddetalle;
+    private $idproducto;
+    private $idfactura;
+    private $cantidadproducto;
+    private $descuento;
+    private $cantdescuento;
     
     // Constructor de la Clase Reporte de Detalles de Factura de Compra de Producto
-    public function __construct($CANTIDAD_DET_FAC_COMPRA, $ID_CAB_FAC_COMPRA, $ID_DET_FAC_COMPRA, $DESCRIPCION_PROD, $PVPUNIT_DET_FAC_COMPRA, $PVPTOT_DET_FAC_COMPRA) {
-        $this->CANTIDAD_DET_FAC_COMPRA = $CANTIDAD_DET_FAC_COMPRA;
-        $this->ID_CAB_FAC_COMPRA = $ID_CAB_FAC_COMPRA;
-        $this->ID_DET_FAC_COMPRA = $ID_DET_FAC_COMPRA;
-        $this->DESCRIPCION_PROD = $DESCRIPCION_PROD;
-        $this->PVPUNIT_DET_FAC_COMPRA = $PVPUNIT_DET_FAC_COMPRA;
-        $this->PVPTOT_DET_FAC_COMPRA = $PVPTOT_DET_FAC_COMPRA;
+    public function __construct($iddetalle, $idproducto, $idfactura, $cantidadproducto, $descuento, $cantdescuento) {
+        $this->iddetalle = $iddetalle;
+        $this->idproducto = $idproducto;
+        $this->idfactura = $idfactura;
+        $this->cantidadproducto = $cantidadproducto;
+        $this->descuento = $descuento;
+        $this->cantdescuento = $cantdescuento;
     }
 
-    //Métodos para la obtención (get) y modificación (set) de los atributos de Reporte de Factura de Venta de Producto
-    public function getCANTIDAD_DET_FAC_COMPRA() {
-        return $this->CANTIDAD_DET_FAC_COMPRA;
-    }
+        //Métodos para la obtención (get) y modificación (set) de los atributos de Reporte de Factura de Venta de Producto
+        public function getIddetalle() {
+            return $this->iddetalle;
+        }
 
-    public function getID_CAB_FAC_COMPRA() {
-        return $this->ID_CAB_FAC_COMPRA;
-    }
+        public function getIdproducto() {
+            return $this->idproducto;
+        }
 
-    public function getID_DET_FAC_COMPRA() {
-        return $this->ID_DET_FAC_COMPRA;
-    }
+        public function getIdfactura() {
+            return $this->idfactura;
+        }
 
-    public function getDESCRIPCION_PROD() {
-        return $this->DESCRIPCION_PROD;
-    }
+        public function getCantidadproducto() {
+            return $this->cantidadproducto;
+        }
 
-    public function getPVPUNIT_DET_FAC_COMPRA() {
-        return $this->PVPUNIT_DET_FAC_COMPRA;
-    }
+        public function getDescuento() {
+            return $this->descuento;
+        }
 
-    public function getPVPTOT_DET_FAC_COMPRA() {
-        return $this->PVPTOT_DET_FAC_COMPRA;
-    }
+        public function getCantdescuento() {
+            return $this->cantdescuento;
+        }
 
-    public function setCANTIDAD_DET_FAC_COMPRA($CANTIDAD_DET_FAC_COMPRA) {
-        $this->CANTIDAD_DET_FAC_COMPRA = $CANTIDAD_DET_FAC_COMPRA;
-    }
+        public function setIddetalle($iddetalle) {
+            $this->iddetalle = $iddetalle;
+        }
 
-    public function setID_CAB_FAC_COMPRA($ID_CAB_FAC_COMPRA) {
-        $this->ID_CAB_FAC_COMPRA = $ID_CAB_FAC_COMPRA;
-    }
+        public function setIdproducto($idproducto) {
+            $this->idproducto = $idproducto;
+        }
 
-    public function setID_DET_FAC_COMPRA($ID_DET_FAC_COMPRA) {
-        $this->ID_DET_FAC_COMPRA = $ID_DET_FAC_COMPRA;
-    }
+        public function setIdfactura($idfactura) {
+            $this->idfactura = $idfactura;
+        }
 
-    public function setDESCRIPCION_PROD($DESCRIPCION_PROD) {
-        $this->DESCRIPCION_PROD = $DESCRIPCION_PROD;
-    }
+        public function setCantidadproducto($cantidadproducto) {
+            $this->cantidadproducto = $cantidadproducto;
+        }
 
-    public function setPVPUNIT_DET_FAC_COMPRA($PVPUNIT_DET_FAC_COMPRA) {
-        $this->PVPUNIT_DET_FAC_COMPRA = $PVPUNIT_DET_FAC_COMPRA;
-    }
+        public function setDescuento($descuento) {
+            $this->descuento = $descuento;
+        }
 
-    public function setPVPTOT_DET_FAC_COMPRA($PVPTOT_DET_FAC_COMPRA) {
-        $this->PVPTOT_DET_FAC_COMPRA = $PVPTOT_DET_FAC_COMPRA;
-    } 
+        public function setCantdescuento($cantdescuento) {
+            $this->cantdescuento = $cantdescuento;
+        }
+
+
 
 }

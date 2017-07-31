@@ -299,12 +299,12 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                             <table class = "table table-striped table-bordered table-condensed table-hover" data-toggle = "table" data-pagination = "true" id="TblDetFacCompra">
                                 <thead>
                                     <tr>
-                                        <th>CANTIDAD</th>
-                                        <th>CÓDIGO FACTURA</th>
                                         <th>CÓDIGO DETALLE</th>
-                                        <th>DESCRIPCIÓN</th>
-                                        <th>VAL.UNIT</th>
-                                        <th>VAL.TOT</th>
+                                        <th>CÓDIGO FACTURA</th>
+                                        <th>PRODUCTO</th>
+                                        <th>CANTIDAD</th>
+                                        <th>DESCUENTO</th>
+                                        <th>CANT. DESCUENTO</th>
                                     </tr>
                                 </thead>
                             </table>

@@ -71,52 +71,24 @@ class AjustesModel {
     
     //Método para obtener la información requerida en reportes de Movimeintos de Detalles de Facturas de Venta de Productos
     public function getDetFacVenta($ID_PROD,$FECHA_IN,$FECHA_FIN) {
-        //Obtención de informacion de la Base de Datos mediante consulta sql
-        $pdo = Database::connect();
-        $sql = "SELECT D.CANTIDAD_DET_FAC_VENTA as 'CANTIDAD', D.ID_CAB_FAC_VENTA as 'CODIGO_FACTURA',
-                D.ID_DET_FAC_VENTA as 'CODIGO_DETALLE', P.DESCRIPCION_PROD as 'DESCRIPCIÓN',
-                D.PVPUNIT_DET_FAC_VENTA as 'VALOR_UNIT.', D.PVPTOT_DET_FAC_VENTA as 'VALOR_TOT.'
-                FROM com_tab_detalle_venta_prod D INNER JOIN com_tab_ventas_producto C ON D.ID_CAB_FAC_VENTA=C.ID_CAB_FAC_VENTA
-                INNER JOIN inv_tab_productos P ON P.ID_PROD=D.ID_PROD
-                WHERE D.ID_PROD='".$ID_PROD."' AND C.FECHA_CAB_FAC_VENTA BETWEEN '".$FECHA_IN."' AND '".$FECHA_FIN."'";
-        
-        $resultado = $pdo->query($sql);
-        
-        $listadoDetalles = array();
-        foreach ($resultado as $res) {
-            $repdetfacventa = new RepDetFacVenta($res['CANTIDAD'],$res['CODIGO_FACTURA'], $res['CODIGO_DETALLE'], $res['DESCRIPCIÓN'], $res['VALOR_UNIT.'], $res['VALOR_TOT.']);
-            array_push($listadoDetalles, $repdetfacventa);
-        }
-        
-        Database::disconnect();
+        $modventas_URL = "http://modulofacturacion.herokuapp.com/detalles";
+        $modventas_json = file_get_contents($modventas_URL);
+        $modventas_array = json_decode($modventas_json, true);
 
         // Retornamos el Usuario encontrado
-        return $listadoDetalles;
+        return $modventas_array["datos"];
     }
-    // REALIZAR ESTA CONSULTA
+    
     //Método para obtener la información requerida en reportes de Movimientos de Detalles de Facturas de Compra de Productos
     public function getDetFacCompra($ID_PROD,$FECHA_IN,$FECHA_FIN) {
         //Obtención de informacion de la Base de Datos mediante consulta sql
-        $pdo = Database::connect();
-        $sql = "SELECT D.CANTIDAD_DET_FAC_COMPRA as 'CANTIDAD', D.ID_CAB_FAC_COMPRA as 'CODIGO_FACTURA',
-                D.ID_DET_FAC_COMPRA as 'CODIGO_DETALLE', P.DESCRIPCION_PROD as 'DESCRIPCIÓN',
-                D.PVPUNIT_DET_FAC_COMPRA as 'VALOR_UNIT.', D.PVPTOT_DET_FAC_COMPRA as 'VALOR_TOT.'
-                FROM com_tab_detalle_compra_prod D INNER JOIN com_tab_compras_producto C ON D.ID_CAB_FAC_COMPRA=C.ID_CAB_FAC_COMPRA
-                INNER JOIN inv_tab_productos P ON P.ID_PROD=D.ID_PROD
-                WHERE D.ID_PROD='".$ID_PROD."' AND C.FECHA_CAB_FAC_COMPRA BETWEEN '".$FECHA_IN."' AND '".$FECHA_FIN."'";
-        
-        $resultado = $pdo->query($sql);
-        
-        $listadoDetalles = array();
-        foreach ($resultado as $res) {
-            $repdetfaccompra = new RepDetFacCompra($res['CANTIDAD'],$res['CODIGO_FACTURA'], $res['CODIGO_DETALLE'], $res['DESCRIPCIÓN'], $res['VALOR_UNIT.'], $res['VALOR_TOT.']);
-            array_push($listadoDetalles, $repdetfaccompra);
-        }
-        
-        Database::disconnect();
+
+        $modcompras_URL = "https://swmodcompra.herokuapp.com/detallefacturacion";
+        $modcompras_json = file_get_contents($modcompras_URL);
+        $mod_compras_array = json_decode($modcompras_json, true);
 
         // Retornamos el Usuario encontrado
-        return $listadoDetalles;
+        return $mod_compras_array;
     }
 
     // METODO PARA INSERTAR UN AJUSTE (CABECERA)
