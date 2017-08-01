@@ -133,7 +133,7 @@ switch ($opcion1) {
             case "guardar_usuario":
                 //obtenemos los parametros del formulario
                 $ID_USU = $_REQUEST['mod_id'];
-                $ID_TIPO_USU = $_REQUEST['mod_tipo_usu'];
+                $ID_TIPO_USU = $_REQUEST['mod_id_tipo_usu'];
                 $CEDULA_RUC_PASS_USU = $_REQUEST['mod_cedula'];
                 $NOMBRES_USU = $_REQUEST['mod_nombre'];
                 $APELLIDOS_USU = $_REQUEST['mod_apellido'];
