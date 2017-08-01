@@ -70,7 +70,7 @@ class AjustesModel {
     ////REALIZAR ESTA CONSULTA
     
     //Método para obtener la información requerida en reportes de Movimeintos de Detalles de Facturas de Venta de Productos
-    public function getDetFacVenta($ID_PROD,$FECHA_IN,$FECHA_FIN) {
+    public function getDetFacVenta() {
         $modventas_URL = "http://modulofacturacion.herokuapp.com/detalles";
         $modventas_json = file_get_contents($modventas_URL);
         $modventas_array = json_decode($modventas_json, true);
@@ -80,7 +80,7 @@ class AjustesModel {
     }
     
     //Método para obtener la información requerida en reportes de Movimientos de Detalles de Facturas de Compra de Productos
-    public function getDetFacCompra($ID_PROD,$FECHA_IN,$FECHA_FIN) {
+    public function getDetFacCompra() {
         //Obtención de informacion de la Base de Datos mediante consulta sql
 
         $modcompras_URL = "https://swmodcompra.herokuapp.com/detallefacturacion";
