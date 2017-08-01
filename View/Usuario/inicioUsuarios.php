@@ -203,13 +203,13 @@ and open the template in the editor.
                                                     <th>ACCIONES</th>
                                                     <th>ID USUARIO</th>
                                                     <th>TIPO USUARIO</th>
-                                                    <th>CEDULA - RUC</th>
+                                                    <th>CÉDULA - RUC</th>
                                                     <th>NOMBRES</th>
                                                     <th>APELLIDOS</th>
                                                     <th>FECHA NACIMIENTO</th>
                                                     <th>CIUDAD NACIMIENTO</th>
-                                                    <th>DIRECCION</th>
-                                                    <th>TELEFONO</th>
+                                                    <th>DIRECCIÓN</th>
+                                                    <th>TELÉFONO</th>
                                                     <th>E-MAIL</th>
                                                     <th>ESTADO</th>
                                                 </tr>
@@ -474,14 +474,22 @@ and open the template in the editor.
                                                     <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Tipo Usuario </label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <select class="form-control" id="ID_TIPO_USU" name="ID_TIPO_USU">
+                                                    <select class="form-control" id="mod_id_tipo_usu" name="ID_TIPO_USU">
                                                         <option value="NULL" selected>(Sin Especificar)</option>
                                                         <?php
                                                         $listado = $tiposUsuarioModel->getTiposUsuario();
-                                                        foreach ($listado as $tipoUsuario) {
+                                                        if ($usuarioSesion->getID_TIPO_USU() == "TUSU-0001") {
+                                                            foreach ($listado as $tipoUsuario) {
+                                                                ?>
+                                                                <option  value="<?php echo $tipoUsuario->getID_TIPO_USU(); ?>"><?php echo $tipoUsuario->getNOMBRE_TIPO_USU(); ?></option>
+                                                                <?php
+                                                            }
+                                                        } else {
                                                             ?>
-                                                            <option  value="<?php echo $tipoUsuario->getID_TIPO_USU(); ?>"><?php echo $tipoUsuario->getNOMBRE_TIPO_USU(); ?></option>
-                                                        <?php } ?>
+                                                            <option  value="TUSU-0002"><?php echo "BODEGUERO" ?></option>
+                                                            <?php
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -494,13 +502,6 @@ and open the template in the editor.
                                                     <div class="col-md-3 col-md-offset-1">
                                                         <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Identificación </label>
                                                     </div>
-                                                    <!--                                                    <div class="col-md-7">
-                                                                                                            <select>
-                                                                                                                <option value="1">CEDULA</option>
-                                                                                                                <option value="2">RUC</option>
-                                                                                                                <option value="3">PASAPORTE</option>
-                                                                                                            </select>
-                                                                                                        </div>-->
                                                     <div class="col-md-7">
                                                         <input  type="text" readonly="readonly" id="mod_cedula" maxlength="13" minlength="10" class="form-control" name="mod_cedula" required />
                                                     </div>
@@ -589,6 +590,7 @@ and open the template in the editor.
                                                 <input onkeypress="return SoloLetras(event);"type="hidden" id="mod_nombre" name="mod_nombre" />
                                                 <input onkeypress="return SoloLetras(event);"type="hidden" id="mod_apellido" name="mod_apellido" />
                                                 <input type="hidden" id="mod_fecha" name="mod_fecha">
+                                                <input type="hidden" id="mod_id_tipo_usu" name="mod_id_tipo_usu">
                                                 <input onkeypress="return SoloLetras(event);"type="hidden" id="mod_ciudad" name="mod_ciudad" />
                                                 <input onkeypress="return SoloLetras(event)"type="hidden" id="mod_direccion" name="mod_direccion" />
                                                 <input onkeypress="return SoloNumeros(event);" type="hidden" id="mod_telefono" name="mod_telefono" />
