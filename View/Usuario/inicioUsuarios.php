@@ -38,10 +38,10 @@ and open the template in the editor.
             <script src="../../Bootstrap/js/validaciones.js"></script>
             <link href="../../Bootstrap/css/bootstrap.css" rel="stylesheet" />
             <link rel="../../stylesheet" href="Bootstrap/css/bootstrap-theme.css">
-            
+
             <script src = "../../SweetAlert/sweetalert.min.js" type="text/javascript"></script>
             <link href="../../SweetAlert/sweetalert.css" rel="stylesheet" type="text/css">
-            
+
             <style type="text/css">
                 div{
                     font-family: Calibri Light;
@@ -177,6 +177,12 @@ and open the template in the editor.
                     </div>
                 </div>
                 <br>
+
+                <?php
+                if (isset($_SESSION['ErrorBaseDatos'])) {
+                    echo "<div class='alert alert-danger'>" . $_SESSION['ErrorBaseDatos'] . "</div>";
+                }
+                ?>
 
                 <div class="row">
                     <div class="col-md-12">
@@ -329,7 +335,7 @@ and open the template in the editor.
                                                     <select id="ID_TIPO" name="ID_TIPO">
                                                         <option value="1">CEDULA</option>
                                                         <option value="2">RUC</option>
-<!--                                                        <option value="3">PASAPORTE</option>-->
+                                                        <!--                                                        <option value="3">PASAPORTE</option>-->
                                                     </select>
                                                 </div>
                                                 <div class="col-md-7">
@@ -497,13 +503,13 @@ and open the template in the editor.
                                                     <div class="col-md-3 col-md-offset-1">
                                                         <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Identificación </label>
                                                     </div>
-<!--                                                    <div class="col-md-7">
-                                                        <select>
-                                                            <option value="1">CEDULA</option>
-                                                            <option value="2">RUC</option>
-                                                            <option value="3">PASAPORTE</option>
-                                                        </select>
-                                                    </div>-->
+                                                    <!--                                                    <div class="col-md-7">
+                                                                                                            <select>
+                                                                                                                <option value="1">CEDULA</option>
+                                                                                                                <option value="2">RUC</option>
+                                                                                                                <option value="3">PASAPORTE</option>
+                                                                                                            </select>
+                                                                                                        </div>-->
                                                     <div class="col-md-7">
                                                         <input  type="text" readonly="readonly" id="mod_cedula" maxlength="13" minlength="10" class="form-control" name="mod_cedula" required />
                                                     </div>
