@@ -184,13 +184,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                 <div class="row text-center">
                     <h3>SISTEMA DE MÓDULO DE INVENTARIO</h3>
                 </div>
-                <?php
-                $modventas_URL = "http://modulofacturacion.herokuapp.com/detalles";
-                $modventas_json = file_get_contents($modventas_URL);
-                $modventas_array = json_decode($modventas_json, true);
-                var_dump($modventas_array);
-                ?>
-
+                
                 <!--MENU CON BOTONES-->
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
