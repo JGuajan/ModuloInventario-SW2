@@ -21,6 +21,11 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
             <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">				
 
             <!--Importación de Bootstrap al proyecto-->
+
+            <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+            <script src="../../Bootstrap/js/tableToExcel.js"></script>
+            <script src="../../Bootstrap/js/app.js"></script>
+
             <script src="../../Bootstrap/js/jquery-2.1.4.js"></script>
             <script src="../../Bootstrap/js/bootstrap.js"></script>
             <script src="../../Bootstrap/js/getDatos.js"></script>
@@ -145,6 +150,11 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         <ul class="nav nav-pills">
                             <li role="presentation"><a href="../../Controller/controller.php?opcion1=producto&opcion2=listar_productos"><h4>MOSTRAR TODOS</h4></a></li>
                         </ul>
+
+                        <button id="btnExcelProductos" type="submit" class="btn btn-info" onclick=" tableToExcel('example', 'Reporte');">
+                            <span class="glyphicon glyphicon-export" ></span> EXPORTAR A EXCEL
+                        </button>
+
                     </div>
                 </div>
                 <br>
@@ -155,37 +165,37 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                             <div class="panel-title">
                                 <div class="col-lg-12">
                                     <div class="table-striped">
-                                         <script src="../../Bootstrap/DataTables/main.js"></script>
-                                         <script src="../../Bootstrap/DataTables/jquery-1.12.4.js"></script>
-                                         <script src="../../Bootstrap/DataTables/jquery.dataTables.min.js"></script>
-                                         <link rel="stylesheet" href="../../Bootstrap/DataTables/jquery.dataTables.min.css">
+                                        <script src="../../Bootstrap/DataTables/main.js"></script>
+                                        <script src="../../Bootstrap/DataTables/jquery-1.12.4.js"></script>
+                                        <script src="../../Bootstrap/DataTables/jquery.dataTables.min.js"></script>
+                                        <link rel="stylesheet" href="../../Bootstrap/DataTables/jquery.dataTables.min.css">
                                         <!-- Tabla en la que se listaras los productos de la Base de Datos -->
                                         <table class="table table-responsive table-bordered table-striped table-striped" id="example" cellspacing="0" width="100%">
                                             <thead>
-                                            <tr>
-                                                <th>ID PRODUCTO</th>
-                                                <th>NOMBRE PRODUCTO</th>
-                                                <th>DESCRIPCION DEL PRODUCTO</th>
-                                                <th>GRABA IVA</th>
-                                                <th>COSTO PRODUCTO</th>
-                                                <th>PVP PRODUCTO</th>
-                                                <th>ESTADO PRODUCTO</th>
-                                                <th>STOCK</th>
-                                            </tr>
+                                                <tr>
+                                                    <th>ID PRODUCTO</th>
+                                                    <th>NOMBRE PRODUCTO</th>
+                                                    <th>DESCRIPCION DEL PRODUCTO</th>
+                                                    <th>GRABA IVA</th>
+                                                    <th>COSTO PRODUCTO</th>
+                                                    <th>PVP PRODUCTO</th>
+                                                    <th>ESTADO PRODUCTO</th>
+                                                    <th>STOCK</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            <?php
-                                            // Verificamos si existe la variable de sesión que contiene la lista de Productos
-                                            if (isset($_SESSION['listadoProductos'])) {
-                                                // Deserializamos y mostraremos los atributos de los usuarios usando un ciclo for
-                                                $listado = unserialize($_SESSION['listadoProductos']);
-                                                foreach ($listado as $pro) {
-                                                    $estado = $productoModel->obtenerEstadoProducto($pro->getID_PROD());
-                                                    $iva = $productoModel->grabaIva($pro->getID_PROD());
-                                                    ?>
+                                                <?php
+                                                // Verificamos si existe la variable de sesión que contiene la lista de Productos
+                                                if (isset($_SESSION['listadoProductos'])) {
+                                                    // Deserializamos y mostraremos los atributos de los usuarios usando un ciclo for
+                                                    $listado = unserialize($_SESSION['listadoProductos']);
+                                                    foreach ($listado as $pro) {
+                                                        $estado = $productoModel->obtenerEstadoProducto($pro->getID_PROD());
+                                                        $iva = $productoModel->grabaIva($pro->getID_PROD());
+                                                        ?>
 
-                                                    <tr>
-                                                        <!--<td align="center"><a onclick="return confirEliminar();" href='../../Controller/controller.php?opcion1=producto&opcion2=eliminar_producto&ID_PROD=<?php echo $pro->getID_PROD(); ?>'><span class='glyphicon glyphicon-remove'>Eliminar</span></a></td>-->                                    
+                                                        <tr>
+                                                            <!--<td align="center"><a onclick="return confirEliminar();" href='../../Controller/controller.php?opcion1=producto&opcion2=eliminar_producto&ID_PROD=<?php echo $pro->getID_PROD(); ?>'><span class='glyphicon glyphicon-remove'>Eliminar</span></a></td>-->                                    
                                                     <input type="hidden" value="<?php echo $pro->getID_PROD(); ?>" id="ID_PROD<?php echo $pro->getID_PROD(); ?>">
                                                     <input type="hidden" value="<?php echo $pro->getNOMBRE_PROD(); ?>" id="NOMBRE_PROD<?php echo $pro->getID_PROD(); ?>">
                                                     <input type="hidden" value="<?php echo $pro->getDESCRIPCION_PROD(); ?>" id="DESCRIPCION<?php echo $pro->getID_PROD(); ?>">
@@ -204,11 +214,11 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                     <th><?php echo $pro->getSTOCK_PROD(); ?></th>
 
                                                     </tr>
-                                                <?php
+                                                    <?php
                                                 }
                                             }
                                             ?>
-                                        </tbody>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>

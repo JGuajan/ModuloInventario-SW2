@@ -30,6 +30,10 @@ and open the template in the editor.
             <title>Reporte de Bodegueros</title>
             <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">				
 
+            <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+            <script src="../../Bootstrap/js/tableToExcel.js"></script>
+            <script src="../../Bootstrap/js/app.js"></script>
+
             <script src="../../Bootstrap/js/jquery-2.1.4.js"></script>
             <script src="../../Bootstrap/js/bootstrap.js"></script>
             <script src="../../Bootstrap/js/getDatos.js"></script>
@@ -154,10 +158,18 @@ and open the template in the editor.
                         <ul class="nav nav-pills">
                             <li role="presentation"><a href="../../Controller/controller.php?opcion1=usuario&opcion2=listarBodegueros"><h4>MOSTRAR TODOS</h4></a></li>
                         </ul>
+
+                        <ul>
+
+                            <button id="btnExcelBodegueros" type="submit" class="btn btn-info" onclick=" tableToExcel('example', 'Reporte');">
+                                <span class="glyphicon glyphicon-export" ></span> EXPORTAR A EXCEL
+                            </button>
+
+                        </ul>
                     </div>
                 </div>
                 <br>
-                
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-info">
