@@ -580,7 +580,7 @@ and open the template in the editor.
                                                         <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Clave </label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        <input type="password" class="form-control" id="mod_clave" name="mod_clave" maxlength="70" minlength="70" required />
+                                                        <input type="password" class="form-control" id="mod_clave" name="mod_clave" minlength="8" required />
                                                     </div>
                                                 </div>  
                                                 <?php
