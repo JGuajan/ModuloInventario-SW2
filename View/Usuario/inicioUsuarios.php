@@ -474,7 +474,7 @@ and open the template in the editor.
                                                     <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Tipo Usuario </label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <select class="form-control" id="mod_id_tipo_usu" name="ID_TIPO_USU">
+                                                    <select class="form-control" id="mod_id_tipo_usu" name="mod_id_tipo_usu">
                                                         <option value="NULL" selected>(Sin Especificar)</option>
                                                         <?php
                                                         $listado = $tiposUsuarioModel->getTiposUsuario();
