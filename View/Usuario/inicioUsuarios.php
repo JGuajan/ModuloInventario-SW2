@@ -180,7 +180,7 @@ and open the template in the editor.
 
                 <?php
                 if (isset($_SESSION['ErrorBaseDatos'])) {
-                    echo "<div class='alert alert-danger'>" . $_SESSION['ErrorBaseDatos'] . "</div>";
+                    echo "<div class='alert alert-danger'>Usuario Duplicado. La Cédula, RUC o Pasaporte ya existe en la Base de Datos</div>";
                 }
                 ?>
 
