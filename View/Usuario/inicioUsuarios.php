@@ -474,23 +474,14 @@ and open the template in the editor.
                                                     <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Tipo Usuario </label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <select class="form-control" id="mod_tipo_usu" name="mod_tipo_usu">
+                                                    <select class="form-control" id="ID_TIPO_USU" name="ID_TIPO_USU">
+                                                        <option value="NULL" selected>(Sin Especificar)</option>
                                                         <?php
                                                         $listado = $tiposUsuarioModel->getTiposUsuario();
-
-                                                        // Verificamos si es Bodeguero para que solo pueda asignar rol de Bodeguero
-                                                        if ($usuarioSesion->getID_TIPO_USU() == "TUSU-0001") {
-                                                            foreach ($listado as $tipoUsuario) {
-                                                                echo "<option  value=" . $tipoUsuario->getID_TIPO_USU() . ">" . $tipoUsuario->getNOMBRE_TIPO_USU() . "</option>";
-                                                            }
-                                                        } else {
-                                                            foreach ($listado as $tipoUsuario) {
-                                                                if ($tipoUsuario->getID_TIPO_USU() != "TUSU-0001") {
-                                                                    echo "<option  value=" . $tipoUsuario->getID_TIPO_USU() . ">" . $tipoUsuario->getNOMBRE_TIPO_USU() . "</option>";
-                                                                }
-                                                            }
-                                                        }
-                                                        ?>
+                                                        foreach ($listado as $tipoUsuario) {
+                                                            ?>
+                                                            <option  value="<?php echo $tipoUsuario->getID_TIPO_USU(); ?>"><?php echo $tipoUsuario->getNOMBRE_TIPO_USU(); ?></option>
+                                                        <?php } ?>
                                                     </select>
                                                 </div>
                                             </div>
