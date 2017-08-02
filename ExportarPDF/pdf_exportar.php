@@ -3,6 +3,7 @@ session_start();
 
 include_once '../Model/AjusteDet.php';
 include_once '../Model/AjustesModel.php';
+include_once '../Model/VistaAjusteDet.php';
 
 require ('FPDF/PDF_HTML.php');
 
