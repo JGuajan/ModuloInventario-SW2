@@ -523,12 +523,18 @@ switch ($opcion1) {
             case "listar_productos":
                 // Obtenemos el array que contiene el listado de Usuarios
                 $listadoProductos = $productoModel->getProductos();
+                $aux=$_REQUEST['aux'];
 
                 // Guardamos los datos en una variable de sesion serializada
                 $_SESSION['listadoProductos'] = serialize($listadoProductos);
 
                 // Redireccionamos a la pagina principal para visualizar
-                header('Location: ../View/Producto/inicioProductos.php');
+                if(aux=="producto"){
+                    header('Location: ../View/Producto/inicioProductos.php');
+                }else{
+                    header('Location: ../View/Repostes/ReporteProductos.php');
+                }
+                
                 break;
 
             case "insertar_producto":

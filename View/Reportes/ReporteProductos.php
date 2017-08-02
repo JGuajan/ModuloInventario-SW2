@@ -148,7 +148,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     <div class="col-md-12" style="padding-top: 5px">
                         <!--La class nav nav-pills nos permite hacer menús-->
                         <ul class="nav nav-pills">
-                            <li role="presentation"><a href="../../Controller/controller.php?opcion1=producto&opcion2=listar_productos"><h4>MOSTRAR TODOS</h4></a></li>
+                            <li role="presentation"><a href="../../Controller/controller.php?opcion1=producto&opcion2=listar_productos&aux=reporte"><h4>MOSTRAR TODOS</h4></a></li>
                         </ul>
 
                         <button id="btnExcelProductos" type="submit" class="btn btn-info" onclick=" tableToExcel('example', 'Reporte');">
@@ -162,7 +162,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     <div class="col-md-12">
                         <div class="panel panel-info">
                             <div class="panel-heading"><h4><center> <h2>Reporte de Productos</h2></center></h4></div>
-                            <div class="panel-title">
+                            <div class="panel-body">
                                 <div class="col-lg-12">
                                     <div class="table-striped">
                                         <script src="../../Bootstrap/DataTables/main.js"></script>
