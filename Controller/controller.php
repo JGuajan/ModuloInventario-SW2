@@ -413,7 +413,6 @@ switch ($opcion1) {
                     $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet);
                     header('Location: ../View/Ajustes/editarAjuste.php');
                 }
-                header('Location: ../View/Producto/editarProductos.php');
                 break;
 
             case "insertar_ajuste_detalles":
