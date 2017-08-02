@@ -1,8 +1,12 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/UsuariosModel.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/AjustesModel.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/ProductosModel.php';
+//require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/UsuariosModel.php';
+//require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/AjustesModel.php';
+//require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/ProductosModel.php';
+//
+require_once '../Model/UsuariosModel.php';
+require_once '../Model/AjustesModel.php';
+require_once '../Model/ProductosModel.php';
 
 session_start();
 $usuariosModel = new UsuariosModel();
@@ -35,7 +39,8 @@ switch ($opcion1) {
             // Verificamos si la contraseña del usuario es correcta
             if ($usuario->getCLAVE_USU() == $CLAVE_USU) {
                 $_SESSION['NOMBRE_USUARIO'] = $usuario->getNOMBRES_USU();
-                $_SESSION['TIPO_USUARIO'] = $usuariosModel->obtenerTipoUsuario($usuario->getID_TIPO_USU());
+                $_SESSION['TIPO_USUARIO'] = 'Hola';
+//                $_SESSION['TIPO_USUARIO'] = $usuariosModel->obtenerTipoUsuario($usuario->getID_TIPO_USU());
                 $_SESSION['USUARIO_ACTIVO'] = serialize($usuario);
                 header('Location: ../View/Usuario/inicioUsuarios.php');
             } else {
