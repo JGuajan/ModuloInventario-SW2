@@ -162,10 +162,10 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                 <img src="../../View/Imagenes/banner6.jpg" width="100%" alt="Imagen 1">
                             </div>
                             <div class="item active">
-                                <img src="../../View/Imagenes/banner11.jpg" width="100%" alt="Imagen 2">
+                                <img src="../../View/Imagenes/banner3.jpg" width="100%" alt="Imagen 2">
                             </div>
                             <div class="item">
-                                <img src="../../View/Imagenes/banner10.jpg" width="100%" alt="Imagen 3">
+                                <img src="../../View/Imagenes/banner1.jpg" width="100%" alt="Imagen 3">
                             </div>
                         </div>
                         <!--Controls--> 
