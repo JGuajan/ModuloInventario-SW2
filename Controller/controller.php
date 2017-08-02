@@ -532,7 +532,7 @@ switch ($opcion1) {
                 if(aux=="producto"){
                     header('Location: ../View/Producto/inicioProductos.php');
                 }else{
-                    header('Location: ../View/Repostes/ReporteProductos.php');
+                    header('Location: ../View/Reportes/ReporteProductos.php');
                 }
                 
                 break;
