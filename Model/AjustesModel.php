@@ -265,7 +265,7 @@ class AjustesModel {
         $sql = 'select D."ID_DETALLE_AJUSTE_PROD", P."ID_PROD", P."NOMBRE_PROD", P."PVP_PROD", '
                 . 'D."ID_AJUSTE_PROD", U."ID_USU", D."CAMBIO_STOCK_PROD", D."TIPOMOV_DETAJUSTE_PROD" '
                 . 'from INV_TAB_DETALLE_AJUSTE_PROD as D, INV_TAB_PRODUCTOS as P, INV_TAB_USUARIOS as U '
-                . 'where D."ID_AJUSTE_PROD"=\''.$ID_AJUSTE_PROD.'\' AND P."ID_PROD"=D."ID_PROD" AND U."ID_USU"=D."ID_USU"';
+                . 'where D."ID_AJUSTE_PROD"=\''.$ID_AJUSTE_PROD.'\' AND P."ID_PROD"=D."ID_PROD" AND U."ID_USU"=D."ID_USU" order by "ID_DETALLE_AJUSTE_PROD"';
         
         $resultado = $pdo->query($sql);
         $listadoDetAjustes = array();
