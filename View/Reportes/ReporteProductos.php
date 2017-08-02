@@ -83,7 +83,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         <!--Contenedor de las imagenes--> 
                         <div class="carousel-inner" role="listbox">
                             <div class="item">
-                                <img src="../../View/Imagenes/banner12.jpg" width="100%" alt="Imagen 1">
+                                <img src="../../View/Imagenes/banner1.jpg" width="100%" alt="Imagen 1">
                             </div>
                             <div class="item active">
                                 <img src="../../View/Imagenes/banner6.jpg" width="100%" alt="Imagen 2">
