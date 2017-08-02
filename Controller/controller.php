@@ -413,7 +413,7 @@ switch ($opcion1) {
                     $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet);
                     header('Location: ../View/Ajustes/editarAjuste.php');
                 }
-
+                header('Location: ../View/Producto/editarProductos.php');
                 break;
 
             case "insertar_ajuste_detalles":
@@ -527,18 +527,18 @@ switch ($opcion1) {
             case "listar_productos":
                 // Obtenemos el array que contiene el listado de Usuarios
                 $listadoProductos = $productoModel->getProductos();
-                $aux=$_REQUEST['aux'];
+                $aux = $_REQUEST['aux'];
 
                 // Guardamos los datos en una variable de sesion serializada
                 $_SESSION['listadoProductos'] = serialize($listadoProductos);
 
                 // Redireccionamos a la pagina principal para visualizar
-                if(aux=="producto"){
+                if (aux == "producto") {
                     header('Location: ../View/Producto/inicioProductos.php');
-                }else{
+                } else {
                     header('Location: ../View/Reportes/ReporteProductos.php');
                 }
-                
+
                 break;
 
             case "insertar_producto":
