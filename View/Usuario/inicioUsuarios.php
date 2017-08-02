@@ -475,7 +475,7 @@ and open the template in the editor.
                                                 </div>
                                                 <div class="col-md-7">
                                                     <select class="form-control" id="mod_tipo_usu" name="mod_tipo_usu">
-                                                        <option value="NULL" selected>(Sin Especificar)</option>
+                                                        <option value="NULL">(Sin Especificar)</option>
                                                         <?php
                                                         $listado = $tiposUsuarioModel->getTiposUsuario();
                                                         if ($usuarioSesion->getID_TIPO_USU() == "TUSU-0001") {
