@@ -134,9 +134,9 @@ class AjustesModel {
     public function actualizarImpAjuste($ID_AJUSTE_PROD) {
         $pdo = Database::connect();
                 if($this->getCabAjuste($ID_AJUSTE_PROD)->getFECHA_IMP_AJUSTE_PROD()!=null){
-                    $sql = "update INV_TAB_AJUSTES_PRODUCTOS set ESTADO_IMP_AJUSTE_PROD='S' where ID_AJUSTE_PROD=?";
+                    $sql = 'update INV_TAB_AJUSTES_PRODUCTOS set "ESTADO_IMP_AJUSTE_PROD"=\'S\' where "ID_AJUSTE_PROD"=?';
                 }else{
-                    $sql = "update INV_TAB_AJUSTES_PRODUCTOS set FECHA_IMP_AJUSTE_PROD=CURRENT_TIMESTAMP,ESTADO_IMP_AJUSTE_PROD='S' where ID_AJUSTE_PROD=?"; 
+                    $sql = 'update INV_TAB_AJUSTES_PRODUCTOS set "FECHA_IMP_AJUSTE_PROD"=CURRENT_TIMESTAMP,"ESTADO_IMP_AJUSTE_PROD"=\'S\' where "ID_AJUSTE_PROD"=?'; 
                 }
         $consulta = $pdo->prepare($sql);
         try {
