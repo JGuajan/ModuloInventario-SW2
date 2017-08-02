@@ -141,7 +141,7 @@ class UsuariosModel {
     
      public function obtenerTipoUsuario($ID_TIPO_USU){
        $pdo = Database::connect();
-        $sql = 'select 	"NOMBRE_TIPO_USU" as nombre from inv_tab_tipo_usuario where "ID_TIPO_USU"=$ID_TIPO_USU';
+        $sql = 'select "NOMBRE_TIPO_USU" as nombre from inv_tab_tipo_usuario where "ID_TIPO_USU"='.$ID_TIPO_USU;
         $consulta = $pdo->prepare($sql);
         $consulta->execute();
         $res = $consulta->fetch(PDO::FETCH_ASSOC);
