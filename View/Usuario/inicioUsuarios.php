@@ -257,7 +257,7 @@ and open the template in the editor.
 
 
                                                     <input type="hidden" value="<?php echo $usu->getID_USU(); ?>" id="ID_USU<?php echo $usu->getID_USU(); ?>">
-                                                    <input type="hidden" value="<?php echo $usu->getID_TIPO_USU(); ?> " id="ID_TIPO_USU<?php echo $usu->getID_TIPO_USU(); ?>" >
+                                                    <input type="hidden" value="<?php echo $usu->getID_TIPO_USU(); ?> " id="TIPO_USU<?php echo $usu->getID_TIPO_USU(); ?>" >
                                                     <input type="hidden" value="<?php echo $usu->getCEDULA_RUC_PASS_USU(); ?>" id="CEDULA_USU<?php echo $usu->getID_USU(); ?>">
                                                     <input type="hidden" value="<?php echo $usu->getNOMBRES_USU(); ?>" id="NOMBRES_USU<?php echo $usu->getID_USU(); ?>">
                                                     <input type="hidden" value="<?php echo $usu->getAPELLIDOS_USU(); ?>" id="APELLIDOS_USU<?php echo $usu->getID_USU(); ?>">
