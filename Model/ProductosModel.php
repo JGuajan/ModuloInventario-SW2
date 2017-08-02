@@ -119,27 +119,27 @@ public function generarCodigoProducto() {
         $consulta = $pdo->prepare($sql);
         $consulta->execute();
         $res = $consulta->fetch(PDO::FETCH_ASSOC);
-        $nuevoCod = '';
-        if ($res['cod'] == NULL) {
-            $nuevoCod = 'PROD-0001';
-        } else {  
-            $rest=  ((substr($res['cod'], -4))+1).''; // Separacion de la parte numerica AJUS-0023  --> 23
-            // Ciclo que completa el codigo segun lo retornado para completar los 9 caracteres 
-            // AJUS-00 --> 67, AJUS-0 --> 786
-            if($rest >1 && $rest <=9){
-                $nuevoCod = 'PROD-000'.$rest;
-            }else{
-                if($rest >=10 && $rest <=99){
-                    $nuevoCod = 'PROD-00'.$rest;
-                }else{
-                    if($rest >=100 && $rest <=999){
-                    $nuevoCod = 'PROD-0'.$rest;
-                    }else{
-                       $nuevoCod = 'PROD-'.$rest; 
-                    }                    
-                } 
-            }
-        }
+        $nuevoCod = $res['cod']+1;
+//        if ($res['cod'] == NULL) {
+//            $nuevoCod = 'PROD-0001';
+//        } else {  
+//            $rest=  ((substr($res['cod'], -4))+1).''; // Separacion de la parte numerica AJUS-0023  --> 23
+//            // Ciclo que completa el codigo segun lo retornado para completar los 9 caracteres 
+//            // AJUS-00 --> 67, AJUS-0 --> 786
+//            if($rest >1 && $rest <=9){
+//                $nuevoCod = 'PROD-000'.$rest;
+//            }else{
+//                if($rest >=10 && $rest <=99){
+//                    $nuevoCod = 'PROD-00'.$rest;
+//                }else{
+//                    if($rest >=100 && $rest <=999){
+//                    $nuevoCod = 'PROD-0'.$rest;
+//                    }else{
+//                       $nuevoCod = 'PROD-'.$rest; 
+//                    }                    
+//                } 
+//            }
+//        }
         Database::disconnect();
         return $nuevoCod; // RETORNO DEL NUEVO CODIGO DE AJUSTE
     }

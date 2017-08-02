@@ -1,12 +1,12 @@
 <?php
 
-//require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/UsuariosModel.php';
-//require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/AjustesModel.php';
-//require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/ProductosModel.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/UsuariosModel.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/AjustesModel.php';
+require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/ProductosModel.php';
 //
-require_once '../Model/UsuariosModel.php';
-require_once '../Model/AjustesModel.php';
-require_once '../Model/ProductosModel.php';
+//require_once '../Model/UsuariosModel.php';
+//require_once '../Model/AjustesModel.php';
+//require_once '../Model/ProductosModel.php';
 
 session_start();
 $usuariosModel = new UsuariosModel();
@@ -394,8 +394,8 @@ switch ($opcion1) {
                 $ID_DETALLE_AJUSTE_PROD = $_REQUEST['ID_DETALLE_AJUSTE_PROD'];
                 $aux = $_REQUEST['aux'];
 
-                $listaAjusteDet = unserialize($_SESSION['listaAjusteDet']);
-                $listaAjusteDet = $ajustesModel->eliminarDetalle($listaAjusteDet, $ID_DETALLE_AJUSTE_PROD);
+                $listaAjusteDetalle = unserialize($_SESSION['listaAjusteDet']);
+                $listaAjusteDet = $ajustesModel->eliminarDetalle($listaAjusteDetalle, $ID_DETALLE_AJUSTE_PROD);
 
                 if ($aux == "nuevo") {
                     $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet);
