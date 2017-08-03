@@ -281,7 +281,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-md-3 col-md-offset-1">
-                                                    <label class="control-label"> &nbsp;&nbsp;&nbsp;&nbsp;Descripcion</label>
+                                                    <label class="control-label"> &nbsp;&nbsp;&nbsp;&nbsp;Descripción</label>
                                                 </div>
                                                 <div class="col-md-7">
                                                     <input type="text" name="DESCRIPCION_PROD" id="DESCRIPCION_PROD" class="form-control" placeholder="Ingrese la descripcion" required pattern="|^[a-zA-Z0-9]+(\s*[a-zA-Z0-9]*)*[a-zA-Z0-9]+$|" />
