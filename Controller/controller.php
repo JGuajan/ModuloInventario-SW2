@@ -399,7 +399,7 @@ switch ($opcion1) {
 
                 if ($aux == "nuevo") {
                     $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet);
-                    header('Location: ../View/Ajustes/nuevoAjuste.php');
+                    header('Location: ../View/Ajustes/nuevoAjuste.php#detalles_ajuste');
                 } else if($aux=="edicion") {
                     if (!isset($_SESSION['listaDetPorEliminar'])) {
                         $listaDetPorEliminar = array();
@@ -411,7 +411,7 @@ switch ($opcion1) {
                         $_SESSION['listaDetPorEliminar'] = serialize($listaDetPorEliminar);
                     }
                     $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet);
-                    header('Location: ../View/Ajustes/editarAjuste.php');
+                    header('Location: ../View/Ajustes/editarAjuste.php#detalles_ajuste');
                 }
                 break;
 
