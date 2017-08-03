@@ -44,13 +44,13 @@ class AjustesModel {
     public function getDetAjusProducto($ID_PROD, $FECHA_IN, $FECHA_FIN) {
         //Obtención de informacion de la Base de Datos mediante consulta sql
         $pdo = Database::connect();
-        $sql = "select D.ID_AJUSTE_PROD as 'CODIGO_AJUSTE', D.ID_DETALLE_AJUSTE_PROD as 'CODIGO_DETALLE',
-               CONCAT(U.NOMBRES_USU,' ',U.APELLIDOS_USU) as 'USUARIO', D.CAMBIO_STOCK_PROD as 'CANTIDAD',
-               D.TIPOMOV_DETAJUSTE_PROD as 'TIPO_MOVIMIENTO'
+        $sql = 'select D."ID_AJUSTE_PROD" as "CODIGO_AJUSTE", D."ID_DETALLE_AJUSTE_PROD" as "CODIGO_DETALLE",
+               CONCAT(U."NOMBRES_USU",'."' '".',U."APELLIDOS_USU") as "USUARIO", D."CAMBIO_STOCK_PROD" as "CANTIDAD",
+               D."TIPOMOV_DETAJUSTE_PROD" as "TIPO_MOVIMIENTO"
                FROM inv_tab_detalle_ajuste_prod D INNER JOIN inv_tab_usuarios U
-               ON D.ID_USU=U.ID_USU INNER JOIN inv_tab_ajustes_productos A
-               ON A.ID_AJUSTE_PROD=D.ID_AJUSTE_PROD
-               WHERE D.ID_PROD='" . $ID_PROD . "' and A.FECHA_AJUSTE_PROD BETWEEN '" . $FECHA_IN . "' AND '" . $FECHA_FIN . "'";
+               ON D."ID_USU"=U."ID_USU" INNER JOIN inv_tab_ajustes_productos A
+               ON A."ID_AJUSTE_PROD"=D."ID_AJUSTE_PROD"
+               WHERE D."ID_PROD"='. $ID_PROD . ' and A."FECHA_AJUSTE_PROD" BETWEEN '."'". $FECHA_IN . "'"." AND '" . $FECHA_FIN . "'";
 
         $resultado = $pdo->query($sql);
 
