@@ -333,7 +333,7 @@ and open the template in the editor.
                                                 </div>
                                                 <div class="col-md-7">
                                                     <select id="ID_TIPO" name="ID_TIPO">
-                                                        <option value="1">CEDULA</option>
+                                                        <option value="1">CÉDULA</option>
                                                         <option value="2">RUC</option>
                                                         <!--                                                        <option value="3">PASAPORTE</option>-->
                                                     </select>

@@ -13,13 +13,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/Model/ProductosModel.php</file>
-            <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/Model/Usuario.php</file>
+            <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/View/Reportes/ReporteProductos.php</file>
             <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/Controller/controller.php</file>
             <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/Model/CabeceraAjuste.php</file>
-            <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/View/Producto/inicioProductos.php</file>
             <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/Model/DataBase.php</file>
             <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/Model/UsuariosModel.php</file>
             <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/View/Usuario/inicioUsuarios.php</file>
+            <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/composer.lock</file>
+            <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/View/Reportes/ReportesMovimientosProducto.php</file>
             <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/Model/AjustesModel.php</file>
             <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/View/login.php</file>
             <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/index.html</file>
@@ -27,7 +28,6 @@
             <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/Model/TipoUsuario.php</file>
             <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/Model/RepDetFacVenta.php</file>
             <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/composer.json</file>
-            <file>file:/C:/xampp/htdocs/ModuloInventario-SW2/Model/Producto.php</file>
         </group>
     </open-files>
 </project-private>
