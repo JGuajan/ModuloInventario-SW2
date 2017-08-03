@@ -4,6 +4,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/UsuariosModel.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/AjustesModel.php';
 require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/ProductosModel.php';
 
+//require_once '../Model/UsuariosModel.php';
+//require_once '../Model/AjustesModel.php';
+//require_once '../Model/ProductosModel.php';
+
 
 session_start();
 $usuariosModel = new UsuariosModel();
@@ -203,33 +207,6 @@ switch ($opcion1) {
                 </tr>
                 </tbody>";
                 }
-                break;
-
-            case "listar_detalles_fact_venta":
-                $listadoDetalles = $ajustesModel->getDetFacVenta();
-                echo "<thead>
-                <tr>
-                <th>CÓDIGO CABECERA</th>
-                <th>PRODUCTO</th>
-                <th>CANTIDAD</th>
-                <th>VALOR UNIT.</th>
-                <th>VALOR TOT.</th>
-                <th>DESCUENTO</th>
-                <th>CÓDIGO DETALLE</th>
-                </thead>";
-                echo "<tbody>";
-                for ($i = 0; $i < count($listadoDetalles); $i++) {
-                    echo "<tr>";
-                    echo "<td>" . $listadoDetalles[$i]["IDCABECERA"] . "</td>";
-                    echo "<td>" . $listadoDetalles[$i]["IDPRODUCTO"] . "</td>";
-                    echo "<td>" . $listadoDetalles[$i]["CANTIDAD"] . "</td>";
-                    echo "<td>" . $listadoDetalles[$i]["VALOR_UNITARIO"] . "</td>";
-                    echo "<td>" . $listadoDetalles[$i]["VALOR_TOTAL"] . "</td>";
-                    echo "<td>" . $listadoDetalles[$i]["DESCUENTO"] . "</td>";
-                    echo "<td>" . $listadoDetalles[$i]["IDDETALLE"] . "</td>";
-                    echo "</tr>";
-                }
-                echo "</tbody>";
                 break;
 
             case "listar_detalles_fact_compra":

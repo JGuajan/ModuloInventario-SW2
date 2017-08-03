@@ -19,8 +19,10 @@ class DataBase {
 //    private static $dbUsername = 'postgres';
 //    private static $dbUserPassword = '';
 //    private static $dbName = 'inventario';
-//    //Propiedad para control de la conexion:
-//    private static $conexion = null;
+    
+    
+    //Propiedad para control de la conexion:
+    private static $conexion = null;
 
     /**
      * No se permite instanciar esta clase, se utilizan sus elementos
