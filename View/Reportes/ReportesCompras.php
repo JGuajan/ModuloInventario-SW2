@@ -201,8 +201,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownReportes">
                                         <li><a href="../../View/Reportes/ReportesMovimientosProducto.php">Reportes de Movimientos</a></li>
                                         <li><a href="../../View/Reportes/ReporteBodegueros.php">Reportes de Bodegueros</a></li>
-                                        <li><a href="../Reportes/ReporteProductos.php">Reportes de Productos</a></li>
-                                        <li><a href="../../Controller/controller.php?opcion1=ajuste&opcion2=listar_detalles_fact_venta">Reportes de Productos</a></li>
+                                        <li><a href="../../View/Reportes/ReporteProductos.php">Reportes de Productos</a></li>
                                     </ul>
                                 </div>
                             </div>
