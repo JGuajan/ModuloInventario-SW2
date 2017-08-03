@@ -303,7 +303,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                             foreach ($listado as $ajusteDet) {
                                                 $prod = $productosModel->getProducto($ajusteDet->getID_PROD());
                                                 echo "<tr class='success'>";
-                                                echo "<td><a href='../../controller/controller.php?opcion1=ajuste&opcion2=eliminar_detalle&ID_DETALLE_AJUSTE_PROD=" . $ajusteDet->getID_DETALLE_AJUSTE_PROD() . "&aux=edicion'>Eliminar</a></td>";
+                                                echo "<td><a href='../../Controller/controller.php?opcion1=ajuste&opcion2=eliminar_detalle&ID_DETALLE_AJUSTE_PROD=" . $ajusteDet->getID_DETALLE_AJUSTE_PROD() . "&aux=edicion'>Eliminar</a></td>";
                                                 echo "<td>" . $ajusteDet->getID_DETALLE_AJUSTE_PROD() . "</td>";
                                                 echo "<td>" . $ajusteDet->getNOMBRE_PROD() . "</td>";
                                                 echo "<td>" . $ajusteDet->getCAMBIO_STOCK_PROD() . "</td>";

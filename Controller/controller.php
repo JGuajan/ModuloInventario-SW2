@@ -400,7 +400,7 @@ switch ($opcion1) {
                 if ($aux == "nuevo") {
                     $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet);
                     header('Location: ../View/Ajustes/nuevoAjuste.php');
-                } else {
+                } else if($aux=="edicion") {
                     if (!isset($_SESSION['listaDetPorEliminar'])) {
                         $listaDetPorEliminar = array();
                         array_push($listaDetPorEliminar, $ID_DETALLE_AJUSTE_PROD);
