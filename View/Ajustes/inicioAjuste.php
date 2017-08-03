@@ -67,7 +67,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $NOM; ?> </a></li>
                                     <li><a href=""><span class="glyphicon glyphicon-edit"></span> <?php echo $TIPO; ?> </a></li>
-                                    <li><a href="../../Controller/controller.php?opcion1=cerrar_sesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion </a></li>
+                                    <li><a href="../../Controller/controller.php?opcion1=cerrar_sesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -182,7 +182,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                             <thead>
                                                 <tr> 
                                                     <th colspan="2">ACCIONES</th>
-                                                    <th>CODIGO AJUSTE</th>
+                                                    <th>CÓDIGO AJUSTE</th>
                                                     <th>MOTIVO AJUSTE</th>
                                                     <th>FECHA AJUSTE</th>
                                                     <th>FECHA IMPRESIÓN</th>
@@ -321,7 +321,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="col-md-3 col-md-offset-1">
-                                                    <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Codigo</label>
+                                                    <label class="control-label"><span class="glyphicon glyphicon-asterisk"></span> Código</label>
                                                 </div>
                                                 <div class="col-md-7">
                                                     <input type="hidden" id="mod_id" name="mod_id" value="">

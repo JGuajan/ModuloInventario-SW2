@@ -71,7 +71,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $NOM; ?> </a></li>
                                     <li><a href=""><span class="glyphicon glyphicon-edit"></span> <?php echo $TIPO; ?> </a></li>
-                                    <li><a href="../../Controller/controller.php?opcion1=cerrar_sesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion </a></li>
+                                    <li><a href="../../Controller/controller.php?opcion1=cerrar_sesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -180,7 +180,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                 <th colspan="1">ACCIONES</th>
                                                 <th>ID PRODUCTO</th>
                                                 <th>NOMBRE PRODUCTO</th>
-                                                <th>DESCRIPCION DEL PRODUCTO</th>
+                                                <th>DESCRIPCIÓN DEL PRODUCTO</th>
                                                 <th>GRABA IVA</th>
                                                 <th>COSTO PRODUCTO</th>
                                                 <th>PVP PRODUCTO</th>
@@ -284,7 +284,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                     <label class="control-label"> &nbsp;&nbsp;&nbsp;&nbsp;Descripción</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <input type="text" name="DESCRIPCION_PROD" id="DESCRIPCION_PROD" class="form-control" placeholder="Ingrese la descripcion" required pattern="|^[a-zA-Z0-9]+(\s*[a-zA-Z0-9]*)*[a-zA-Z0-9]+$|" />
+                                                    <input type="text" name="DESCRIPCION_PROD" id="DESCRIPCION_PROD" class="form-control" placeholder="Ingrese la descripción" required pattern="|^[a-zA-Z0-9]+(\s*[a-zA-Z0-9]*)*[a-zA-Z0-9]+$|" />
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -390,10 +390,10 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-md-3 col-md-offset-1">
-                                                    <label class="control-label"> &nbsp;&nbsp;&nbsp;&nbsp;Descripcion</label>
+                                                    <label class="control-label"> &nbsp;&nbsp;&nbsp;&nbsp;Descripción</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <input type="text" class="form-control"  name="mod_descripcion" id="mod_descripcion" required pattern="|^[a-zA-Z0-9]+(\s*[a-zA-Z0-9]*)*[a-zA-Z0-9]+$|"/>
+                                                    <input type="text" class="form-control"  name="mod_descripción" id="mod_descripcion" required pattern="|^[a-zA-Z0-9]+(\s*[a-zA-Z0-9]*)*[a-zA-Z0-9]+$|"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">

@@ -81,7 +81,7 @@ and open the template in the editor.
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $NOM; ?> </a></li>
                                     <li><a href=""><span class="glyphicon glyphicon-edit"></span> <?php echo $TIPO; ?> </a></li>
-                                    <li><a href="../../Controller/controller.php?opcion1=cerrar_sesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion </a></li>
+                                    <li><a href="../../Controller/controller.php?opcion1=cerrar_sesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -339,7 +339,7 @@ and open the template in the editor.
                                                     </select>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <input type="text" maxlength="13" minlength="10" class="form-control" name="CEDULA_RUC_PASS_USU"  placeholder="Ingrese su N° de Cedula - Ruc - Pasaporte" onchange="ValId(this.form.CEDULA_RUC_PASS_USU.value, this.form.boton)" required />
+                                                    <input type="text" maxlength="13" minlength="10" class="form-control" name="CEDULA_RUC_PASS_USU"  placeholder="Ingrese su N° de Cédula - Ruc - Pasaporte" onchange="ValId(this.form.CEDULA_RUC_PASS_USU.value, this.form.boton)" required />
                                                 </div>
                                             </div>
 

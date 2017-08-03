@@ -63,7 +63,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href=""><span class="glyphicon glyphicon-user"></span> <?php echo $NOM; ?> </a></li>
                                     <li><a href=""><span class="glyphicon glyphicon-edit"></span> <?php echo $TIPO; ?> </a></li>
-                                    <li><a href="../login.php"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion </a></li>
+                                    <li><a href="../login.php"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión </a></li>
                                 </ul>
                             </div>
                         </div>
