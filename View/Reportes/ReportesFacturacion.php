@@ -32,20 +32,6 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     font-family: Calibri Light;
                 }
             </style>
-            <script language="javascript">
-                function ObtenerDatosProducto(ID_PROD) {
-                    var ID_PROD = ID_PROD;
-                    /// Invocamos a nuestro script PHP
-                    $.ajax({
-                        data: ID_PROD,
-                        url: '../../controller/controller.php?opcion1=ajuste&opcion2=recargarDatosProducto&ID_PROD=' + ID_PROD,
-                        type: 'post',
-                        success: function (response) {
-                            $("#TblProd").html(response);
-                        }
-                    });
-                }
-            </script>
         </head>
         <body>
             <div class="container-fluid">
@@ -89,7 +75,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                 <img src="../../View/Imagenes/banner6.jpg" width="100%" alt="Imagen 1">
                             </div>
                             <div class="item active">
-                                <img src="../../View/Imagenes/banner3.jpg" width="100%" alt="Imagen 2">
+                                <img src="../../View/Imagenes/banner3.png" width="100%" alt="Imagen 2">
                             </div>
                             <div class="item">
                                 <img src="../../View/Imagenes/banner1.jpg" width="100%" alt="Imagen 3">
@@ -145,12 +131,14 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                 <label>DETALLES DE VENTAS DE PRODUCTOS:</label>                                               
                 <table class="table table-striped table-bordered table-condensed table-hover" data-toggle="table" data-pagination="true" id="TblDetAjuProd">
                     <thead>
-                        <tr> 
-                            <th>CÓDIGO AJUSTE</th>
+                        <tr>
                             <th>CÓDIGO DETALLE</th>
-                            <th>USUARIO</th>
+                            <th>CÓDIGO FACTURA</th>
+                            <th>CÓDIGO PRODUCTO</th>
                             <th>CANTIDAD</th>
-                            <th>TIPO MOVIMIENTO</th>
+                            <th>VALOR UNIT.</th>
+                            <th>VALOR TOT.</th>
+                            <th>DESCUENTO</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -158,13 +146,13 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         $listadoDetalles = $ajustesModel->getDetFacVenta();
                         for ($i = 0; $i < count($listadoDetalles); $i++) {
                             echo "<tr>";
+                            echo "<td>" . $listadoDetalles[$i]["IDDETALLE"] . "</td>";
                             echo "<td>" . $listadoDetalles[$i]["IDCABECERA"] . "</td>";
                             echo "<td>" . $listadoDetalles[$i]["IDPRODUCTO"] . "</td>";
                             echo "<td>" . $listadoDetalles[$i]["CANTIDAD"] . "</td>";
                             echo "<td>" . $listadoDetalles[$i]["VALOR_UNITARIO"] . "</td>";
                             echo "<td>" . $listadoDetalles[$i]["VALOR_TOTAL"] . "</td>";
                             echo "<td>" . $listadoDetalles[$i]["DESCUENTO"] . "</td>";
-                            echo "<td>" . $listadoDetalles[$i]["IDDETALLE"] . "</td>";
                             echo "</tr>";
                         }
                         ?>
@@ -177,6 +165,6 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
     </html>
     <?php
 } else {
-    header('Location: ../View/Principal/iniciop.php');
+    header('Location: ../View/login.php');
 }
 ?>

@@ -177,10 +177,11 @@ switch ($opcion1) {
 
             case "listar_detalles_ajustes":
                 $ID_PROD = $_REQUEST['ID_PROD'];
-                $FECHA_IN = $_REQUEST['FECHA_IN'];
-                $FECHA_FIN = $_REQUEST['FECHA_FIN'];
-                $listadoDetalles = $ajustesModel->getDetAjusProducto($ID_PROD, $FECHA_IN, $FECHA_FIN);
+                //$FECHA_IN = $_REQUEST['FECHA_IN'];
+                //$FECHA_FIN = $_REQUEST['FECHA_FIN'];
+                $listadoDetalles = $ajustesModel->getDetAjusProducto($ID_PROD);//, $FECHA_IN, $FECHA_FIN);
                 $tipoMov = null;
+                echo "<table>";
                 echo "<thead>
                 <tr>
                 <th>CÓDIGO AJUSTE</th>
@@ -207,36 +208,7 @@ switch ($opcion1) {
                 </tr>
                 </tbody>";
                 }
-                break;
-
-            case "listar_detalles_fact_compra":
-                $listadoDetalles = $ajustesModel->getDetFacCompra();
-                echo "<thead>
-                <tr>
-                <th>CÓDIGO DETALLE</th>
-                <th>CÓDIGO FACTURA</th>
-                <th>PRODUCTO</th>
-                <th>CANTIDAD</th>
-                <th>DESCUENTO</th>
-                <th>CANT. DESCUENTO</th>
-                </thead>";
-                echo "<tbody>";
-                for ($i = 0; $i < count($listadoDetalles); $i++) {
-                    if ($listadoDetalles[$i]["descuento"] == true) {
-                        $descuento = "Si";
-                    } else {
-                        $descuento = "No";
-                    }
-                    echo "<tr>";
-                    echo "<td>" . $listadoDetalles[$i]["iddetalle"] . "</td>";
-                    echo "<td>" . $listadoDetalles[$i]["idfactura"] . "</td>";
-                    echo "<td>" . $listadoDetalles[$i]["idproducto"] . "</td>";
-                    echo "<td>" . $listadoDetalles[$i]["cantidadproducto"] . "</td>";
-                    echo "<td>" . $descuento . "</td>";
-                    echo "<td>" . $listadoDetalles[$i]["cantdescuento"] . "</td>";
-                    echo "</tr>";
-                }
-                echo "</tbody>";
+                header('Location: ../View/Reportes/ReportesMovimientosProducto.php');
                 break;
 
             case "obtener_titulo":

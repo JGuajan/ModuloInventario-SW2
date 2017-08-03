@@ -32,93 +32,6 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     font-family: Calibri Light;
                 }
             </style>
-            <script language="javascript">
-                function ObtenerDatosProducto(ID_PROD) {
-                    var ID_PROD = ID_PROD;
-                    /// Invocamos a nuestro script PHP
-                    $.ajax({
-                        data: ID_PROD,
-                        url: '../../controller/controller.php?opcion1=ajuste&opcion2=recargarDatosProducto&ID_PROD=' + ID_PROD,
-                        type: 'post',
-                        success: function (response) {
-                            $("#TblProd").html(response);
-                        }
-                    });
-                }
-            </script>
-            <script language="javascript">
-                function obtenerTituloReporteProducto(ID_PROD) {
-                    var ID_PROD = ID_PROD;
-                    /// Invocamos a nuestro script PHP
-                    $.ajax({
-                        data: ID_PROD,
-                        url: '../../controller/controller.php?opcion1=ajuste&opcion2=obtener_titulo&ID_PROD=' + ID_PROD,
-                        type: 'post',
-                        success: function (response) {
-                            $("#Titulo").html(response);
-                        }
-                    });
-                }
-            </script>
-            <script language="javascript">
-                function obtenerTablaDetallesAjustesProd(ID_PROD, FECHA_IN, FECHA_FIN) {
-                    var ID_PROD = ID_PROD;
-                    var FECHA_IN = FECHA_IN;
-                    var FECHA_FIN = FECHA_FIN;
-                    /// Invocamos a nuestro script PHP
-                    $.ajax({
-                        data: ID_PROD,
-                        url: '../../controller/controller.php?opcion1=ajuste&opcion2=listar_detalles_ajustes&ID_PROD=' + ID_PROD
-                                + '&FECHA_IN=' + FECHA_IN + '&FECHA_FIN=' + FECHA_FIN,
-                        type: 'post',
-                        success: function (response) {
-                            $("#TblDetAjuProd").html(response);
-                        }
-
-                    });
-                }
-            </script>
-            <script language="javascript">
-                function obtenerTablaDetallesFacVentas(ID_PROD, FECHA_IN, FECHA_FIN) {
-                    var ID_PROD = ID_PROD;
-                    var FECHA_IN = FECHA_IN;
-                    var FECHA_FIN = FECHA_FIN;
-                    /// Invocamos a nuestro script PHP
-                    $.ajax({
-                        data: ID_PROD,
-                        url: '../../controller/controller.php?opcion1=ajuste&opcion2=listar_detalles_fact_venta&ID_PROD=' + ID_PROD
-                                + '&FECHA_IN=' + FECHA_IN + '&FECHA_FIN=' + FECHA_FIN,
-                        type: 'post',
-                        success: function (response) {
-                            $("#TblDetFacVenta").html(response);
-                        }
-
-                    });
-                }
-            </script>
-            <script language="javascript">
-                function obtenerTablaDetallesFacCompras(ID_PROD, FECHA_IN, FECHA_FIN) {
-                    var ID_PROD = ID_PROD;
-                    var FECHA_IN = FECHA_IN;
-                    var FECHA_FIN = FECHA_FIN;
-                    /// Invocamos a nuestro script PHP
-                    $.ajax({
-                        data: ID_PROD,
-                        url: '../../controller/controller.php?opcion1=ajuste&opcion2=listar_detalles_fact_compra&ID_PROD=' + ID_PROD
-                                + '&FECHA_IN=' + FECHA_IN + '&FECHA_FIN=' + FECHA_FIN,
-                        type: 'post',
-                        success: function (response) {
-                            $("#TblDetFacCompra").html(response);
-                        }
-
-                    });
-                }
-            </script>
-            <script language="javascript">
-                function console_log($data) {
-                    console.log($data);
-                }
-            </script>
         </head>
         <body>
             <div class="container-fluid">
@@ -162,7 +75,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                 <img src="../../View/Imagenes/banner6.jpg" width="100%" alt="Imagen 1">
                             </div>
                             <div class="item active">
-                                <img src="../../View/Imagenes/banner3.jpg" width="100%" alt="Imagen 2">
+                                <img src="../../View/Imagenes/banner3.png" width="100%" alt="Imagen 2">
                             </div>
                             <div class="item">
                                 <img src="../../View/Imagenes/banner1.jpg" width="100%" alt="Imagen 3">
@@ -184,7 +97,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                 <div class="row text-center">
                     <h3>SISTEMA DE MÓDULO DE INVENTARIO</h3>
                 </div>
-                
+
                 <!--MENU CON BOTONES-->
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
@@ -209,120 +122,52 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     </div>
                 </div>
 
-
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1><span class="glyphicon glyphicon-file"></span>REPORTE DE MOVIMIENTOS DE PRODUCTO</h1></div>
+                        <h1><span class="glyphicon glyphicon-file"></span>CONSUMO DEL WEB SERVICE DE FACTURACIÓN</h1></div>
                 </div>
-
-                <!--Reporte de Movimientos del producto-->
-                <div class="panel panel-default">
-                    <div class="panel-heading">SELECCIONE EL PRODUCTO</div>
-                    <div class="panel-body">
-
-                        <!--Formulario para llenar Tablas de reporte del producto-->
-                        <form action="../../Controller/controller.php">
-                            <center>
-                                <input type="hidden" name="opcion1" value="ajuste">
-                                <div class="form-inline">
-                                    <div class="form-group">
-
-                                        <label>PRODUCTO:</label>
-                                        <select name="ID_PROD" id="CboIDProducto" class="form-control" onchange="ObtenerDatosProducto($('#CboIDProducto').val());
-                                                return false;" required>
-
-                                            <option value="" disabled selected>Seleccione un Producto</option>
-                                            <?php
-                                            $listaProductos = $productosModel->getProductos();
-                                            foreach ($listaProductos as $prod) {
-                                                echo "<option value='" . $prod->getID_PROD() . "'>" . $prod->getNOMBRE_PROD() . "</option>";
-                                            }
-                                            ?>
-                                        </select>
-                                        <br><br>                            
-                                        <label>FILTRAR INFORMACIÓN DESDE:</label><br>
-                                        <input type="date" name="FECHA_IN" id="FechaIn" value="2017/06/30" min="2017/06/30" max="<?php echo date("Y-m-d"); ?>" required>
-                                        <label>HASTA:</label>                                
-                                        <input type="date" name="FECHA_FIN" id="FechaFin" value="<?php echo date("Y-m-d"); ?>" min="2017/06/30" max="<?php echo date("Y-m-d"); ?>" required>
-                                        </center><br><br>
-                                        <table class="table table-striped table-bordered table-condensed table-hover" data-toggle="table" data-pagination="true" id="TblProd">
-                                            <thead>
-                                                <tr> 
-                                                    <th>PRODUCTO</th>
-                                                    <th>PRECIO</th>
-                                                    <th>GRAVA IVA</th>
-                                                    <th>STOCK</th>
-                                            </thead>
-                                        </table>
-                                        <center><br>
-                                            <button type="submit" class="btn btn-info" onclick="obtenerTablaDetallesAjustesProd($('#CboIDProducto').val(), $('#FechaIn').val(), $('#FechaFin').val());
-                                                    obtenerTablaDetallesFacVentas($('#CboIDProducto').val(), $('#FechaIn').val(), $('#FechaFin').val());
-                                                    obtenerTablaDetallesFacCompras($('#CboIDProducto').val(), $('#FechaIn').val(), $('#FechaFin').val());
-                                                    obtenerTituloReporteProducto($('#CboIDProducto').val());
-                                                    return false;">
-                                                <span class="glyphicon glyphicon-search"></span> CONSULTAR
-                                            </button>
-                                    </div>
-                                </div>   
-                            </center>
-                            <hr size="100">
-                            <center><h3 id="Titulo"><span class="glyphicon glyphicon-list-alt"></span> REPORTES</h3></center>        
-                            <br>
-                            <label>DETALLES DE AJUSTES DEL PRODUCTO:</label>                                               
-                            <table class="table table-striped table-bordered table-condensed table-hover" data-toggle="table" data-pagination="true" id="TblDetAjuProd">
-                                <thead>
-                                    <tr> 
-                                        <th>CÓDIGO AJUSTE</th>
-                                        <th>CÓDIGO DETALLE</th>
-                                        <th>USUARIO</th>
-                                        <th>CANTIDAD</th>
-                                        <th>TIPO MOVIMIENTO</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                            <br><br>
-                            <label>DETALLES DE FACTURAS DE VENTA DEL PRODUCTO:</label>
-                            <table class = "table table-striped table-bordered table-condensed table-hover" data-toggle = "table" data-pagination = "true" id="TblDetFacVenta">
-                                <thead>
-                                    <tr>
-                                        <th>CANTIDAD</th>
-                                        <th>CÓDIGO FACTURA</th>
-                                        <th>CÓDIGO DETALLE</th>
-                                        <th>DESCRIPCIÓN</th>
-                                        <th>VAL.UNIT</th>
-                                        <th>VAL.TOT</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                            <br><br>
-                            <label>DETALLES DE FACTURAS DE COMPRA DEL PRODUCTO:</label>
-                            <table class = "table table-striped table-bordered table-condensed table-hover" data-toggle = "table" data-pagination = "true" id="TblDetFacCompra">
-                                <thead>
-                                    <tr>
-                                        <th>CÓDIGO DETALLE</th>
-                                        <th>CÓDIGO FACTURA</th>
-                                        <th>PRODUCTO</th>
-                                        <th>CANTIDAD</th>
-                                        <th>DESCUENTO</th>
-                                        <th>CANT. DESCUENTO</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                            <br>
-                            <!--Tabla de detalles del ajuste-->
-
-                        </form>
-                        <!--Fin de las Tablas de reporte del prodcuto-->
-
-                    </div>
-                </div>
-                <!--Fin Reporte de Movimientos del producto-->
+                <hr size="100">     
+                <br>
+                <label>DETALLES DE VENTAS DE PRODUCTOS:</label>                                               
+                <table class="table table-striped table-bordered table-condensed table-hover" data-toggle="table" data-pagination="true" id="TblDetAjuProd">
+                    <thead>
+                        <tr>
+                            <th>CÓDIGO DETALLE</th>
+                            <th>CÓDIGO FACTURA</th>
+                            <th>PRODUCTO</th>
+                            <th>CANTIDAD</th>
+                            <th>DESCUENTO</th>
+                            <th>CANT. DESCUENTO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $listadoDetalles = $ajustesModel->getDetFacCompra();
+                        for ($i = 0; $i < count($listadoDetalles); $i++) {
+                            if ($listadoDetalles[$i]["descuento"] == true) {
+                                $descuento = "Si";
+                            } else {
+                                $descuento = "No";
+                            }
+                            echo "<tr>";
+                            echo "<td>" . $listadoDetalles[$i]["iddetalle"] . "</td>";
+                            echo "<td>" . $listadoDetalles[$i]["idfactura"] . "</td>";
+                            echo "<td>" . $listadoDetalles[$i]["idproducto"] . "</td>";
+                            echo "<td>" . $listadoDetalles[$i]["cantidadproducto"] . "</td>";
+                            echo "<td>" . $descuento . "</td>";
+                            echo "<td>" . $listadoDetalles[$i]["cantdescuento"] . "</td>";
+                            echo "</tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <br>
+                <!--Tabla de detalles del ajuste-->
             </div>
-        </div>
-    </body>
+        </body>
     </html>
     <?php
 } else {
-    header('Location: ../View/Principal/iniciop.php');
+    header('Location: ../View/login.php');
 }
 ?>
