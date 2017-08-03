@@ -207,8 +207,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                     <div class="form-group">
                                         <ul class="nav nav-pills">
                                             <li><label>PRODUCTO:</label>
-                                                <select name="ID_PROD" id="CboIDProducto" class="form-control" onchange="ObtenerDatosProducto($('#CboIDProducto').val());
-                                                        return false;">
+                                                <select name="ID_PROD" id="CboIDProducto" class="form-control">
                                                     <option value="" disabled selected>Seleccione un Producto</option>
                                                     <?php
                                                     $listaProductos = $productosModel->getProductos();
@@ -217,6 +216,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                     }
                                                     ?>
                                                 </select></li>
+                                            <?php echo "<a href='../../controller/controller.php?opcion1=ajuste&opcion2=recargarDatosProductoBusquedaInteligente&ID_PROD=" . $prod->getID_PROD() . "'>Ver información del producto</a>" ?>
                                             <li><a href="#listaProd" data-toggle="modal">Búsqueda inteligente</a></li>
                                         </ul>
                                     </div>
