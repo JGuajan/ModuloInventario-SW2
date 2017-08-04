@@ -469,6 +469,44 @@ switch ($opcion1) {
     // P R O D U C T O S
     case "producto":
         switch ($opcion2) {
+        case "actualizarStock":
+                $listadoDetalles = $ajustesModel->getDetFacCompra();
+                for ($i = 0; $i < count($listadoDetalles); $i++) {
+                    if ($listadoDetalles[$i]["descuento"] == true) {
+                        $descuento = "Si";
+                    } else {
+                        $descuento = "No";
+                    }
+                    $ajustesModel->putCompra($listadoDetalles[$i]["idproducto"],$listadoDetalles[$i]["cantidadproducto"]);  
+                }
+                
+                $listadoDetalles2 = $ajustesModel->getDetFacVenta();
+                for ($i = 0; $i < count($listadoDetalles2); $i++) {
+                   
+                    $ajustesModel->putFactura($listadoDetalles2[$i]["IDPRODUCTO"],$listadoDetalles2[$i]["CANTIDAD"]);  
+                }
+ 
+                break;
+                
+                case "actualizarStock2":
+                $listadoDetalles = $ajustesModel->getDetFacCompra();
+                for ($i = 0; $i < count($listadoDetalles); $i++) {
+                    if ($listadoDetalles[$i]["descuento"] == true) {
+                        $descuento = "Si";
+                    } else {
+                        $descuento = "No";
+                    }
+                    $ajustesModel->putCompra($listadoDetalles[$i]["idproducto"],$listadoDetalles[$i]["cantidadproducto"]);  
+                }
+                
+                $listadoDetalles2 = $ajustesModel->getDetFacVenta();
+                for ($i = 0; $i < count($listadoDetalles2); $i++) {
+                   
+                    $ajustesModel->putFactura($listadoDetalles2[$i]["IDPRODUCTO"],$listadoDetalles2[$i]["CANTIDAD"]);  
+                }
+ 
+                break;
+
             case "listar_productos":
                 // Obtenemos el array que contiene el listado de Usuarios
                 $listadoProductos = $productoModel->getProductos();

@@ -404,5 +404,49 @@ class AjustesModel {
         Database::disconnect();
         return $listadoDetAjustes;
     }
+    public function putCompra($ID_PROD, $CANTIDAD) {
+        $pdo = Database::connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = 'insert into compra("ID_PROD","CANTIDAD") values(?,?)';
+        $consulta = $pdo->prepare($sql);
+       try {
+            $consulta->execute(array($ID_PROD, $CANTIDAD));
+        } catch (PDOException $e) {
+            Database::disconnect();
+            throw new Exception($e->getMessage());
+        }
+        Database::disconnect();
+    }
+    
+    public function putFactura($ID_PROD, $CANTIDAD) {
+        $pdo = Database::connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = 'insert into factura("ID_PROD","CANTIDAD") values(?,?)';
+        $consulta = $pdo->prepare($sql);
+       try {
+            $consulta->execute(array($ID_PROD, $CANTIDAD));
+        } catch (PDOException $e) {
+            Database::disconnect();
+            throw new Exception($e->getMessage());
+        }
+        Database::disconnect();
+    }
+    
+    public function insertarProducto($ID_PROD, $NOMBRE_PROD, $DESCRIPCION_PROD, $GRABA_IVA_PROD, $COSTO_PROD, $PVP_PROD, $ESTADO_PROD) {
+        // Conexión a Base de Datos y creación de consulta sql
+        $pdo = Database::connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = 'insert into inv_tab_productos("ID_PROD", "NOMBRE_PROD", "DESCRIPCION_PROD", "GRABA_IVA_PROD", "COSTO_PROD","PVP_PROD", "ESTADO_PROD") values(?,?,?,?,?,?,?)';
+        $consulta = $pdo->prepare($sql);
 
+        //Ejecutamos la consulta y pasamos los parametros
+        try {
+            $consulta->execute(array($ID_PROD, $NOMBRE_PROD, $DESCRIPCION_PROD, $GRABA_IVA_PROD, $COSTO_PROD, 
+                                      $PVP_PROD, $ESTADO_PROD));
+        } catch (PDOException $e) {
+            Database::disconnect();
+            throw new Exception($e->getMessage());
+        }
+        Database::disconnect();
+    }
 }
