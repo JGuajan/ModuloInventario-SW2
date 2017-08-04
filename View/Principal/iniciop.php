@@ -116,25 +116,26 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                         <label class="control-label">Reportes <span class="caret"></span></label>
                                     </button>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownReportes">
-                                        <li><a href="../Reportes/ReportesMovimientosProducto.php">Reportes de Movimientos</a></li>
-                                        <li><a href="../Reportes/ReporteBodegueros.php">Reportes de Bodegueros</a></li>
-                                        <li><a href="../Reportes/ReporteProductos.php">Reportes de Productos</a></li>
-                                        <li><a href="../Reportes/ReportesFacturacion.php">Web Service de Ventas</a></li>
-                                        <li><a href="../Reportes/ReportesCompras.php">Web Service de Compras</a></li>
+                                        <li><a href="../../View/Reportes/ReportesMovimientosProducto.php">Reportes de Movimientos</a></li>
+                                        <li><a href="../../View/Reportes/ReporteBodegueros.php">Reportes de Bodegueros</a></li>
+                                        <li><a href="../../View/Reportes/ReporteProductos.php">Reportes de Productos</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <br><br><br>
                 <div class="row">
-                    <img src="../Imagenes/bienvenidos.png" align="center" />
+                    <center>
+                        <img src="../Imagenes/bienvenidos.png" />
+                    </center>
                 </div>
             </div>
         </body>
     </html>
     <?php
 } else {
-    header('Location: ../login.php');
+    header('Location: ../View/Principal/iniciop.php');
 }
 ?>
