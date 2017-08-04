@@ -41,7 +41,7 @@ class AjustesModel {
 
     ////REALIZAR ESTA SONSULTA /////////////
     //Método para obtener la información requerida en reportes de Movimeintos de Detalles de Ajustes de Productos
-    public function getDetAjusProducto($ID_PROD){//, $FECHA_IN, $FECHA_FIN) {
+    public function getDetAjusProducto($ID_PROD, $FECHA_IN, $FECHA_FIN) {
         //Obtención de informacion de la Base de Datos mediante consulta sql
         $pdo = Database::connect();
         $sql = 'select D."ID_AJUSTE_PROD" as "CODIGO_AJUSTE", D."ID_DETALLE_AJUSTE_PROD" as "CODIGO_DETALLE",
@@ -50,7 +50,7 @@ class AjustesModel {
                FROM inv_tab_detalle_ajuste_prod D INNER JOIN inv_tab_usuarios U
                ON D."ID_USU"=U."ID_USU" INNER JOIN inv_tab_ajustes_productos A
                ON A."ID_AJUSTE_PROD"=D."ID_AJUSTE_PROD"
-               WHERE D."ID_PROD"='. $ID_PROD; //. ' and A."FECHA_AJUSTE_PROD" BETWEEN '."'". $FECHA_IN . "'"." AND '" . $FECHA_FIN . "'";
+               WHERE D."ID_PROD"='. $ID_PROD. ' and A."FECHA_AJUSTE_PROD" BETWEEN '."'". $FECHA_IN . "'"." AND '" . $FECHA_FIN . "'";
 
         $resultado = $pdo->query($sql);
 
@@ -69,7 +69,7 @@ class AjustesModel {
     ////REALIZAR ESTA CONSULTA
     //Método para obtener la información requerida en reportes de Movimeintos de Detalles de Facturas de Venta de Productos
     public function getDetFacVenta() {
-        $modventas_URL = "http://modulofacturacion.herokuapp.com/detalles";
+        $modventas_URL = "http://modulofactura.herokuapp.com/detalles";
         $modventas_json = file_get_contents($modventas_URL);
         $modventas_array = json_decode($modventas_json, true);
 

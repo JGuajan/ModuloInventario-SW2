@@ -32,34 +32,6 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     font-family: Calibri Light;
                 }
             </style>
-            <script language="javascript">
-                function ObtenerDatosProducto(ID_PROD) {
-                    var ID_PROD = ID_PROD;
-                    /// Invocamos a nuestro script PHP
-                    $.ajax({
-                        data: ID_PROD,
-                        url: '../../controller/controller.php?opcion1=ajuste&opcion2=recargarDatosProducto&ID_PROD=' + ID_PROD,
-                        type: 'post',
-                        success: function (response) {
-                            $("#TblProd").html(response);
-                        }
-                    });
-                }
-            </script>
-            <script language="javascript">
-                function obtenerTituloReporteProducto(ID_PROD) {
-                    var ID_PROD = ID_PROD;
-                    /// Invocamos a nuestro script PHP
-                    $.ajax({
-                        data: ID_PROD,
-                        url: '../../controller/controller.php?opcion1=ajuste&opcion2=obtener_titulo&ID_PROD=' + ID_PROD,
-                        type: 'post',
-                        success: function (response) {
-                            $("#Titulo").html(response);
-                        }
-                    });
-                }
-            </script>
         </head>
         <body>
             <div class="container-fluid">
@@ -163,10 +135,10 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         <div class="panel-body">
                             <div class="form-inline">
                                 <div class="form-group">
-                                    <form action="../../Controller/controller.php?opcion1=ajuste&opcion2=listar_detalles_ajustes&ID_PROD=4" method="POST">
+                                    <form action="../../Controller/controller.php?opcion1=ajuste&opcion2=listar_detalles_ajustes" method="POST">
                                         <center>
                                             <label>PRODUCTO:</label>
-                                            <select name="ID_PROD" class="form-control" required>
+                                            <select name="ID_PROD" id="ID_PROD" class="form-control" required>
                                                 <option value="" disabled selected>Seleccione un Producto</option>
                                                 <?php
                                                 $listaProductos = $productosModel->getProductos();
@@ -203,26 +175,28 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                     </tr>
                                 </thead>
                                 <?php
-                                $listadoDetalles = $ajustesModel->getDetAjusProducto($ID_PROD); //, $FECHA_IN, $FECHA_FIN);
-                                foreach ($listadoDetalles as $rep) {
-                                    if ($rep->getTIPOMOV_DETAJUSTE_PROD() == "I") {
-                                        $tipoMov = "INGRESO";
-                                    } else {
-                                        $tipoMov = "SALIDA";
-                                    }
-                                    ?>
-                                    <tbody>
-                                        <?php
-                                        echo "<tr class = 'info'>
+                                if (isset($_SESSION['listadoDetallesAjustes'])) {
+                                    $listadoDetallesAjustes = unserialize($_SESSION['listadoDetallesAjustes']);
+                                    foreach ($listadoDetallesAjustes as $rep) {
+                                        if ($rep->getTIPOMOV_DETAJUSTE_PROD() == "I") {
+                                            $tipoMov = "INGRESO";
+                                        } else {
+                                            $tipoMov = "SALIDA";
+                                        }
+                                        ?>
+                                        <tbody>
+                                            <?php
+                                            echo "<tr class = 'info'>
                                         <td>" . $rep->getID_AJUSTE_PROD() . "</td>
                                         <td>" . $rep->getID_DETALLE_AJUSTE_PROD() . "</td>
                                         <td>" . $rep->getNOMAPE_USU() . "</td>
                                         <td>" . $rep->getCAMBIO_STOCK_PROD() . "</td>
                                         <td>" . $tipoMov . "</td>
                                         </tr>";
+                                        }
+                                        echo '</tbody>';
                                     }
                                     ?>
-                                </tbody>
                             </table>
                             <br>
                         </div>

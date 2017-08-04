@@ -174,40 +174,12 @@ switch ($opcion1) {
     // A J U S T E S
     case "ajuste":
         switch ($opcion2) {
-
             case "listar_detalles_ajustes":
                 $ID_PROD = $_REQUEST['ID_PROD'];
-                //$FECHA_IN = $_REQUEST['FECHA_IN'];
-                //$FECHA_FIN = $_REQUEST['FECHA_FIN'];
-                $listadoDetalles = $ajustesModel->getDetAjusProducto($ID_PROD);//, $FECHA_IN, $FECHA_FIN);
-                $tipoMov = null;
-                echo "<table>";
-                echo "<thead>
-                <tr>
-                <th>CÓDIGO AJUSTE</th>
-                <th>CÓDIGO DETALLE</th>
-                <th>USUARIO</th>
-                <th>CANTIDAD</th>
-                <th>TIPO MOVIMIENTO</th>
-                </thead>";
-                foreach ($listadoDetalles as $rep) {
-
-                    if ($rep->getTIPOMOV_DETAJUSTE_PROD() == "I") {
-                        $tipoMov = "INGRESO";
-                    } else {
-                        $tipoMov = "SALIDA";
-                    }
-
-                    echo "<tbody>
-                <tr class = 'info'>
-                <td>" . $rep->getID_AJUSTE_PROD() . "</td>
-                <td>" . $rep->getID_DETALLE_AJUSTE_PROD() . "</td>
-                <td>" . $rep->getNOMAPE_USU() . "</td>
-                <td>" . $rep->getCAMBIO_STOCK_PROD() . "</td>
-                <td>" . $tipoMov . "</td>
-                </tr>
-                </tbody>";
-                }
+                $FECHA_IN = $_REQUEST['FECHA_IN'];
+                $FECHA_FIN = $_REQUEST['FECHA_FIN'];
+                $listadoDetallesAjustes = $ajustesModel->getDetAjusProducto($ID_PROD, $FECHA_IN, $FECHA_FIN);
+                $_SESSION['listadoDetallesAjustes'] = serialize($listadoDetallesAjustes);
                 header('Location: ../View/Reportes/ReportesMovimientosProducto.php');
                 break;
 

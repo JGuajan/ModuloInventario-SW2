@@ -138,7 +138,6 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                             <th>CANTIDAD</th>
                             <th>VALOR UNIT.</th>
                             <th>VALOR TOT.</th>
-                            <th>DESCUENTO</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -146,13 +145,12 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         $listadoDetalles = $ajustesModel->getDetFacVenta();
                         for ($i = 0; $i < count($listadoDetalles); $i++) {
                             echo "<tr>";
-                            echo "<td>" . $listadoDetalles[$i]["IDDETALLE"] . "</td>";
-                            echo "<td>" . $listadoDetalles[$i]["IDCABECERA"] . "</td>";
-                            echo "<td>" . $listadoDetalles[$i]["IDPRODUCTO"] . "</td>";
-                            echo "<td>" . $listadoDetalles[$i]["CANTIDAD"] . "</td>";
-                            echo "<td>" . $listadoDetalles[$i]["VALOR_UNITARIO"] . "</td>";
-                            echo "<td>" . $listadoDetalles[$i]["VALOR_TOTAL"] . "</td>";
-                            echo "<td>" . $listadoDetalles[$i]["DESCUENTO"] . "</td>";
+                            echo "<td>" . $listadoDetalles[$i]["iddetalle"] . "</td>";
+                            echo "<td>" . $listadoDetalles[$i]["idcabecera"] . "</td>";
+                            echo "<td>" . $listadoDetalles[$i]["idproducto"] . "</td>";
+                            echo "<td>" . $listadoDetalles[$i]["cantidad"] . "</td>";
+                            echo "<td>" . $listadoDetalles[$i]["valor_unitario"] . "</td>";
+                            echo "<td>" . $listadoDetalles[$i]["valor_total"] . "</td>";
                             echo "</tr>";
                         }
                         ?>
