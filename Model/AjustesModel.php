@@ -9,6 +9,8 @@ include_once 'VistaAjusteDet.php';
 include_once 'RepDetAjuProd.php';
 include_once 'RepDetFacVenta.php';
 include_once 'RepDetFacCompra.php';
+include_once 'compra.php';
+include_once 'factura.php';
 
 class AjustesModel {
 
@@ -422,12 +424,39 @@ class AjustesModel {
         return $listadoDetAjustes;
     }
 
+    public function getCompras() {
+        $pdo = Database::connect();
+        $sql = 'select * from compra"';
+        $resultado = $pdo->query($sql);
+        $listadoCompras = array();
+        foreach ($resultado as $res) {
+            $compra = new compra($res['ID_PROD'], $res['CANTIDAD'], $res['ESTADO']);
+            array_push($listadoCompras, $compra);
+        }
+        Database::disconnect();
+        return $listadoCompras;
+    }
+
+    public function getFacturas() {
+        $pdo = Database::connect();
+        $sql = 'select * from factura"';
+        $resultado = $pdo->query($sql);
+        $listadoFacturas = array();
+        foreach ($resultado as $res) {
+            $factura = new factura($res['ID_PROD'], $res['CANTIDAD'], $res['ESTADO']);
+            array_push($listadoFacturas, $factura);
+        }
+        Database::disconnect();
+        return $listadoFacturas;
+    }
+
     public function putCompra($ID_PROD, $CANTIDAD) {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = 'insert into compra("ID_PROD","CANTIDAD") values(?,?)';
         $consulta = $pdo->prepare($sql);
         try {
+            ini_set('max_execution_time', 300);
             $consulta->execute(array($ID_PROD, $CANTIDAD));
         } catch (PDOException $e) {
             Database::disconnect();
@@ -442,6 +471,7 @@ class AjustesModel {
         $sql = 'insert into factura("ID_PROD","CANTIDAD") values(?,?)';
         $consulta = $pdo->prepare($sql);
         try {
+            ini_set('max_execution_time', 300);
             $consulta->execute(array($ID_PROD, $CANTIDAD));
         } catch (PDOException $e) {
             Database::disconnect();
@@ -450,21 +480,23 @@ class AjustesModel {
         Database::disconnect();
     }
 
-    public function insertarProducto($ID_PROD, $NOMBRE_PROD, $DESCRIPCION_PROD, $GRABA_IVA_PROD, $COSTO_PROD, $PVP_PROD, $ESTADO_PROD) {
-        // Conexión a Base de Datos y creación de consulta sql
+    public function eliminarCompras() {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = 'insert into inv_tab_productos("ID_PROD", "NOMBRE_PROD", "DESCRIPCION_PROD", "GRABA_IVA_PROD", "COSTO_PROD","PVP_PROD", "ESTADO_PROD") values(?,?,?,?,?,?,?)';
+        $sql = 'delete from compra';
         $consulta = $pdo->prepare($sql);
+        ini_set('max_execution_time', 300);
+        $consulta->execute(array());
+        Database::disconnect();
+    }
 
-        //Ejecutamos la consulta y pasamos los parametros
-        try {
-            $consulta->execute(array($ID_PROD, $NOMBRE_PROD, $DESCRIPCION_PROD, $GRABA_IVA_PROD, $COSTO_PROD,
-                $PVP_PROD, $ESTADO_PROD));
-        } catch (PDOException $e) {
-            Database::disconnect();
-            throw new Exception($e->getMessage());
-        }
+    public function eliminarFacturas() {
+        $pdo = Database::connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = 'delete from factura';
+        $consulta = $pdo->prepare($sql);
+        ini_set('max_execution_time', 300);
+        $consulta->execute(array());
         Database::disconnect();
     }
 

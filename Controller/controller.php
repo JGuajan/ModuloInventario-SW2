@@ -1,8 +1,8 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/UsuariosModel.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/AjustesModel.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .'/Model/ProductosModel.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Model/UsuariosModel.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Model/AjustesModel.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Model/ProductosModel.php';
 
 //require_once '../Model/UsuariosModel.php';
 //require_once '../Model/AjustesModel.php';
@@ -318,7 +318,7 @@ switch ($opcion1) {
                 if ($aux == "nuevo") {
                     $_SESSION['listaAjusteDet'] = serialize($listaAjusteDet);
                     header('Location: ../View/Ajustes/nuevoAjuste.php#detalles_ajuste');
-                } else if($aux=="edicion") {
+                } else if ($aux == "edicion") {
                     if (!isset($_SESSION['listaDetPorEliminar'])) {
                         $listaDetPorEliminar = array();
                         array_push($listaDetPorEliminar, $ID_DETALLE_AJUSTE_PROD);
@@ -441,26 +441,23 @@ switch ($opcion1) {
     // P R O D U C T O S
     case "producto":
         switch ($opcion2) {
-        case "actualizarStock":
+            case "actualizarStock":
+                $ajustesModel->eliminarCompras();
+                $ajustesModel->eliminarFacturas();
+
                 $listadoDetalles = $ajustesModel->getDetFacCompra();
                 for ($i = 0; $i < count($listadoDetalles); $i++) {
-                    if ($listadoDetalles[$i]["descuento"] == true) {
-                        $descuento = "Si";
-                    } else {
-                        $descuento = "No";
-                    }
-                    $ajustesModel->putCompra($listadoDetalles[$i]["idproducto"],$listadoDetalles[$i]["cantidadproducto"]);  
+                    $ajustesModel->putCompra($listadoDetalles[$i]["idproducto"], $listadoDetalles[$i]["cantidadproducto"]);
                 }
-                
+
                 $listadoDetalles2 = $ajustesModel->getDetFacVenta();
                 for ($i = 0; $i < count($listadoDetalles2); $i++) {
-                   
-                    $ajustesModel->putFactura($listadoDetalles2[$i]["IDPRODUCTO"],$listadoDetalles2[$i]["CANTIDAD"]);  
+                    $ajustesModel->putFactura($listadoDetalles2[$i]["idproducto"], $listadoDetalles2[$i]["cantidad"]);
                 }
- 
+
                 break;
-                
-                case "actualizarStock2":
+
+            case "actualizarStock2":
                 $listadoDetalles = $ajustesModel->getDetFacCompra();
                 for ($i = 0; $i < count($listadoDetalles); $i++) {
                     if ($listadoDetalles[$i]["descuento"] == true) {
@@ -468,15 +465,15 @@ switch ($opcion1) {
                     } else {
                         $descuento = "No";
                     }
-                    $ajustesModel->putCompra($listadoDetalles[$i]["idproducto"],$listadoDetalles[$i]["cantidadproducto"]);  
+                    $ajustesModel->putCompra($listadoDetalles[$i]["idproducto"], $listadoDetalles[$i]["cantidadproducto"]);
                 }
-                
+
                 $listadoDetalles2 = $ajustesModel->getDetFacVenta();
                 for ($i = 0; $i < count($listadoDetalles2); $i++) {
-                   
-                    $ajustesModel->putFactura($listadoDetalles2[$i]["IDPRODUCTO"],$listadoDetalles2[$i]["CANTIDAD"]);  
+
+                    $ajustesModel->putFactura($listadoDetalles2[$i]["IDPRODUCTO"], $listadoDetalles2[$i]["CANTIDAD"]);
                 }
- 
+
                 break;
 
             case "listar_productos":
