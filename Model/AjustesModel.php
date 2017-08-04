@@ -254,7 +254,29 @@ class AjustesModel {
         }
 
         //adicionamos el nuevo detalle al array en memoria:
-        array_push($listaAjusteDet, $ajusteDet);
+        if (in_array($ajusteDet, $listaAjusteDet)) {
+            $cont = 0;
+            foreach ($listaAjusteDet as $ad) {
+                if ($ad->getID_PROD() == $ID_PROD) {
+                    if ($tipoMovimiento == $ad->getTIPOMOV_DETAJUSTE_PROD()) {
+                        if($tipoMovimiento=="I"){
+                            $c = $ad->getCAMBIO_STOCK_PROD() + $cantidad;
+                        }else{
+                            $c = $ad->getCAMBIO_STOCK_PROD() - $cantidad;
+                        }
+                        $ajusteDet = new AjusteDet($ad->getID_DETALLE_AJUSTE_PROD(), $ad->getID_PROD(),
+                                $ad->getNOMBRE_PROD(), $ad->getPVP_PROD(), $ad->getID_AJUSTE_PROD(), $ad->getID_USU(),
+                                $c, $tipoMovimiento);
+                    }
+                    $listaAjusteDet[$cont]=$ajusteDet;
+                    break;
+                }
+                $cont++;
+            }
+        } else {
+            array_push($listaAjusteDet, $ajusteDet);
+        }
+
         return $listaAjusteDet;
     }
 
