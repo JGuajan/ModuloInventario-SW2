@@ -126,7 +126,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1><span class="glyphicon glyphicon-file"></span>CONSUMO DEL WEB SERVICE DE FACTURACIÓN</h1></div>
+                        <h1><span class="glyphicon glyphicon-file"></span>CONSUMO DEL WEB SERVICE DE COMPRAS</h1></div>
                 </div>
                 <hr size="100">     
                 <br>
