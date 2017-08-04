@@ -303,42 +303,39 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                 </table>
                             </form>
                             <!--Fin de la Tabla de detalles del ajuste-->
-
-                            <!--Cabecera ajuste-->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">INFORMACIÓN DEL AJUSTE</div>
-                                <div class="panel-body">
-                                    <form action="../../Controller/controller.php">
-                                        <input type="hidden" name="opcion1" value="ajuste">
-                                        <input type="hidden" name="opcion2" value="insertar_ajuste_detalles"> 
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Código </span>
-                                            <input type="text" class="form-control" disabled value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
-                                            <input type="hidden" class="form-control" name="ID_AJUSTE_PROD" value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
-                                        </div><br>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Motivo </span>
-                                            <input type="text" class="form-control" name="MOTIVO_AJUSTE_PROD" size="150" maxlength="150" placeholder="Ingrese el motivo del ajuste" required pattern="|^[a-zA-Z0-9]+(\s*[a-zA-Z0-9]*)*[a-zA-Z0-9]+$|" >
-                                        </div><br>
-                                        <?php
-                                        if (isset($_SESSION['ErrorDetalleAjuste'])) {
-                                            echo "<div class='alert alert-danger'>" . $_SESSION['ErrorDetalleAjuste'] . "</div>";
-                                        }
-                                        ?>
-                                        <div class="form-group">
-                                            <input type="submit" value="GUARDAR AJUSTE" id="btnGuardar" class="btn btn-success"> 
-                                            <a href="../../Controller/controller.php?opcion1=ajuste&opcion2=cancelar_ajuste" id="btnGuardar" class="btn btn-danger">CANCELAR</a>
-                                        </div> 
-                                    </form>
-                                </div>
-                            </div>
-                            <!--Fin Cabecera ajuste-->
-
                         </div>
                     </div>
                     <!--Fin Detalle ajuste-->
 
-
+                    <!--Cabecera ajuste-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">INFORMACIÓN DEL AJUSTE</div>
+                        <div class="panel-body">
+                            <form action="../../Controller/controller.php">
+                                <input type="hidden" name="opcion1" value="ajuste">
+                                <input type="hidden" name="opcion2" value="insertar_ajuste_detalles"> 
+                                <div class="input-group">
+                                    <span class="input-group-addon">Código </span>
+                                    <input type="text" class="form-control" disabled value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
+                                    <input type="hidden" class="form-control" name="ID_AJUSTE_PROD" value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
+                                </div><br>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Motivo </span>
+                                    <input type="text" class="form-control" name="MOTIVO_AJUSTE_PROD" size="150" maxlength="150" placeholder="Ingrese el motivo del ajuste" required pattern="|^[a-zA-Z0-9]+(\s*[a-zA-Z0-9]*)*[a-zA-Z0-9]+$|" >
+                                </div><br>
+                                <?php
+                                if (isset($_SESSION['ErrorDetalleAjuste'])) {
+                                    echo "<div class='alert alert-danger'>" . $_SESSION['ErrorDetalleAjuste'] . "</div>";
+                                }
+                                ?>
+                                <div class="form-group">
+                                    <input type="submit" value="GUARDAR AJUSTE" id="btnGuardar" class="btn btn-success"> 
+                                    <a href="../../Controller/controller.php?opcion1=ajuste&opcion2=cancelar_ajuste" id="btnGuardar" class="btn btn-danger">CANCELAR</a>
+                                </div> 
+                            </form>
+                        </div>
+                    </div>
+                    <!--Fin Cabecera ajuste-->
 
 
                     <!--Ventana emergente para Busqueda inteligente de productos-->
