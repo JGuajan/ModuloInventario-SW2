@@ -127,10 +127,16 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <img src="../Imagenes/bienvenidos.png" align="center" />
+                    </div>
+                </div>
+            </div>
         </body>
     </html>
     <?php
 } else {
-    header('Location: ../View/Principal/iniciop.php');
+    header('Location: ../login.php');
 }
 ?>

@@ -45,12 +45,12 @@ class AjustesModel {
         //Obtención de informacion de la Base de Datos mediante consulta sql
         $pdo = Database::connect();
         $sql = 'select D."ID_AJUSTE_PROD" as "CODIGO_AJUSTE", D."ID_DETALLE_AJUSTE_PROD" as "CODIGO_DETALLE",
-               CONCAT(U."NOMBRES_USU",'."' '".',U."APELLIDOS_USU") as "USUARIO", D."CAMBIO_STOCK_PROD" as "CANTIDAD",
+               CONCAT(U."NOMBRES_USU",' . "' '" . ',U."APELLIDOS_USU") as "USUARIO", D."CAMBIO_STOCK_PROD" as "CANTIDAD",
                D."TIPOMOV_DETAJUSTE_PROD" as "TIPO_MOVIMIENTO"
                FROM inv_tab_detalle_ajuste_prod D INNER JOIN inv_tab_usuarios U
                ON D."ID_USU"=U."ID_USU" INNER JOIN inv_tab_ajustes_productos A
                ON A."ID_AJUSTE_PROD"=D."ID_AJUSTE_PROD"
-               WHERE D."ID_PROD"='. $ID_PROD. ' and A."FECHA_AJUSTE_PROD" BETWEEN '."'". $FECHA_IN . "'"." AND '" . $FECHA_FIN . "'";
+               WHERE D."ID_PROD"=' . $ID_PROD . ' and A."FECHA_AJUSTE_PROD" BETWEEN ' . "'" . $FECHA_IN . "'" . " AND '" . $FECHA_FIN . "'";
 
         $resultado = $pdo->query($sql);
 
@@ -259,11 +259,7 @@ class AjustesModel {
         foreach ($listaAjusteDet as $ad) {
             if ($ad->getID_PROD() == $ID_PROD) {
                 if ($tipoMovimiento == $ad->getTIPOMOV_DETAJUSTE_PROD()) {
-                    if ($tipoMovimiento == "I") {
-                        $c = $ad->getCAMBIO_STOCK_PROD() + $cantidad;
-                    } else {
-                        $c = $ad->getCAMBIO_STOCK_PROD() - $cantidad;
-                    }
+                    $c = $ad->getCAMBIO_STOCK_PROD() + $cantidad;
                     $ajusteDet = new AjusteDet($ad->getID_DETALLE_AJUSTE_PROD(), $ad->getID_PROD(), $ad->getNOMBRE_PROD(), $ad->getPVP_PROD(), $ad->getID_AJUSTE_PROD(), $ad->getID_USU(), $c, $tipoMovimiento);
                     $listaAjusteDet[$cont] = $ajusteDet;
                     $aux = true;
@@ -372,7 +368,7 @@ class AjustesModel {
         $consulta = $pdo->prepare($sql);
         try {
             $consulta->execute(array($MOTIVO_AJUSTE_PROD, $ID_AJUSTE_PROD));
-                       
+
             // Eliminacion de detalles en la edición
             foreach ($listaDetPorEliminar as $elim) {
                 if (empty($this->getDetalle($elim)->getID_DETALLE_AJUSTE_PROD())) {
@@ -381,7 +377,7 @@ class AjustesModel {
                     $consulta->execute(array($elim));
                 }
             }
-            
+
             //guardamos los nuevos detalles:
             foreach ($listaAjusteDet as $det) {
                 if (is_null($this->getDetalle($det->getID_DETALLE_AJUSTE_PROD())->getID_DETALLE_AJUSTE_PROD())) {
@@ -425,12 +421,13 @@ class AjustesModel {
         Database::disconnect();
         return $listadoDetAjustes;
     }
+
     public function putCompra($ID_PROD, $CANTIDAD) {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = 'insert into compra("ID_PROD","CANTIDAD") values(?,?)';
         $consulta = $pdo->prepare($sql);
-       try {
+        try {
             $consulta->execute(array($ID_PROD, $CANTIDAD));
         } catch (PDOException $e) {
             Database::disconnect();
@@ -438,13 +435,13 @@ class AjustesModel {
         }
         Database::disconnect();
     }
-    
+
     public function putFactura($ID_PROD, $CANTIDAD) {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = 'insert into factura("ID_PROD","CANTIDAD") values(?,?)';
         $consulta = $pdo->prepare($sql);
-       try {
+        try {
             $consulta->execute(array($ID_PROD, $CANTIDAD));
         } catch (PDOException $e) {
             Database::disconnect();
@@ -452,7 +449,7 @@ class AjustesModel {
         }
         Database::disconnect();
     }
-    
+
     public function insertarProducto($ID_PROD, $NOMBRE_PROD, $DESCRIPCION_PROD, $GRABA_IVA_PROD, $COSTO_PROD, $PVP_PROD, $ESTADO_PROD) {
         // Conexión a Base de Datos y creación de consulta sql
         $pdo = Database::connect();
@@ -462,12 +459,13 @@ class AjustesModel {
 
         //Ejecutamos la consulta y pasamos los parametros
         try {
-            $consulta->execute(array($ID_PROD, $NOMBRE_PROD, $DESCRIPCION_PROD, $GRABA_IVA_PROD, $COSTO_PROD, 
-                                      $PVP_PROD, $ESTADO_PROD));
+            $consulta->execute(array($ID_PROD, $NOMBRE_PROD, $DESCRIPCION_PROD, $GRABA_IVA_PROD, $COSTO_PROD,
+                $PVP_PROD, $ESTADO_PROD));
         } catch (PDOException $e) {
             Database::disconnect();
             throw new Exception($e->getMessage());
         }
         Database::disconnect();
     }
+
 }

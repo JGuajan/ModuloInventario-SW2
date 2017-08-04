@@ -42,7 +42,7 @@ switch ($opcion1) {
                 $_SESSION['NOMBRE_USUARIO'] = $usuario->getNOMBRES_USU();
                 $_SESSION['TIPO_USUARIO'] = $usuariosModel->obtenerTipoUsuario($usuario->getID_TIPO_USU());
                 $_SESSION['USUARIO_ACTIVO'] = serialize($usuario);
-                header('Location: ../View/Usuario/inicioUsuarios.php');
+                header('Location: ../View/Principal/iniciop.php');
             } else {
                 $_SESSION['ErrorInicioSesion'] = "Contraseña incorrecta";
                 $_SESSION['E_MAIL_USU'] = $usuario->getE_MAIL_USU();
