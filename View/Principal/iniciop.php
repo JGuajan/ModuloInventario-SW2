@@ -127,11 +127,8 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         </div>
                     </div>
                 </div>
-                <br><br><br>
                 <div class="row">
-                    <center>
-                        <img src="../Imagenes/bienvenidos.png" />
-                    </center>
+                    <img src="../Imagenes/bienvenidos.png" align="center" />
                 </div>
             </div>
         </body>
