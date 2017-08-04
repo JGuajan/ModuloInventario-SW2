@@ -46,7 +46,7 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                     /// Invocamos a nuestro script PHP
                     $.ajax({
                         data: ID_PROD,
-                        url: <?php $_SERVER['DOCUMENT_ROOT'] ?> .'/Controller/controller.php?opcion1=ajuste&opcion2=recargarDatosProducto&ID_PROD=' + ID_PROD,
+                        url: <?php $_SERVER['DOCUMENT_ROOT'] ?>.'/Controller/controller.php?opcion1=ajuste&opcion2=recargarDatosProducto&ID_PROD=' + ID_PROD,
                                 type: 'post',
                         success: function (response) {
                             $("#TblProd").html(response);
@@ -60,15 +60,15 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                 {
                     alert(msjError);
                 }
-                           </script>
-                               <script LANGUAGE="JavaScript">
+            </script>
+            <script LANGUAGE="JavaScript">
                 function r(id)
 
                 {
-                alert (id);
-                <?php $a="id" ?>
+                    alert(id);
+    <?php $a = "id" ?>
                 }
-        </script>
+            </script>
 
         </head>
         <body>
@@ -169,37 +169,6 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         </div>
                     </div>
 
-                    <!--Cabecera ajuste-->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">INFORMACIÓN DEL AJUSTE</div>
-                        <div class="panel-body">
-                            <form action="../../Controller/controller.php">
-                                <input type="hidden" name="opcion1" value="ajuste">
-                                <input type="hidden" name="opcion2" value="insertar_ajuste_detalles"> 
-                                <div class="input-group">
-                                    <span class="input-group-addon">Código </span>
-                                    <input type="text" class="form-control" disabled value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
-                                    <input type="hidden" class="form-control" name="ID_AJUSTE_PROD" value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
-                                </div><br>
-                                <div class="input-group">
-                                    <span class="input-group-addon">Motivo </span>
-                                    <input type="text" class="form-control" name="MOTIVO_AJUSTE_PROD" size="150" maxlength="150" placeholder="Ingrese el motivo del ajuste" required pattern="|^[a-zA-Z0-9]+(\s*[a-zA-Z0-9]*)*[a-zA-Z0-9]+$|" >
-                                </div><br>
-                                <?php
-                                if (isset($_SESSION['ErrorDetalleAjuste'])) {
-                                    echo "<div class='alert alert-danger'>" . $_SESSION['ErrorDetalleAjuste'] . "</div>";
-                                }
-                                ?>
-                                <div class="form-group">
-                                    <input type="submit" value="GUARDAR AJUSTE" id="btnGuardar" class="btn btn-success"> 
-                                    <a href="../../Controller/controller.php?opcion1=ajuste&opcion2=cancelar_ajuste" id="btnGuardar" class="btn btn-danger">CANCELAR</a>
-                                </div> 
-                            </form>
-                        </div>
-                    </div>
-                    <!--Fin Cabecera ajuste-->
-
-
                     <!--Detalle ajuste-->
                     <div class="panel panel-default" id="detalles_ajuste">
                         <div class="panel-heading">DETALLES DEL AJUSTE</div>
@@ -220,17 +189,17 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                                     <?php
                                                     $listaProductos = $productosModel->getProductos();
                                                     foreach ($listaProductos as $prod) {
-                                                        echo "<option value='" . $prod->getID_PROD() . "'>" ."Producto: " .$prod->getNOMBRE_PROD()." Stock: ". $prod->getSTOCK_PROD() . "</option>";
+                                                        echo "<option value='" . $prod->getID_PROD() . "'>" . "Producto: " . $prod->getNOMBRE_PROD() . " Stock: " . $prod->getSTOCK_PROD() . "</option>";
                                                     }
                                                     ?>
                                                 </select></li>
-                                           <!--echo "<a href='../../controller/controller.php?opcion1=ajuste&opcion2=recargarDatosProductoBusquedaInteligente&ID_PROD=" . $a . "'>Ver información del producto</a>" ?>-->
+                                            <!--echo "<a href='../../controller/controller.php?opcion1=ajuste&opcion2=recargarDatosProductoBusquedaInteligente&ID_PROD=" . $a . "'>Ver información del producto</a>" ?>-->
                                             <!--<li><a href="#listaProd" data-toggle="modal">Búsqueda inteligente</a></li>-->
                                         </ul>
                                     </div>
                                 </div>
                                 <br><br>
-<!--                                <table class="table table-striped table-bordered table-condensed table-hover" id="TblProd">
+    <!--                                <table class="table table-striped table-bordered table-condensed table-hover" id="TblProd">
                                     <thead>    
                                         <tr> 
                                             <th>PRODUCTO</th>
@@ -240,22 +209,22 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                         </tr> 
                                     </thead>
                                     <tbody>
-                                        <?php
-                                        if (isset($_SESSION['producto'])) {
-                                            $producto = unserialize($_SESSION['producto']);
-                                            echo "<tr class='success'>";
-                                            echo "<input type='hidden' name='ID_PROD' value='" . $producto->getID_PROD() . "'>";
-                                            echo "<td>" . $producto->getNOMBRE_PROD() . "</td>";
-                                            echo "<td>" . $producto->getPVP_PROD() . "</td>";
-                                            if ($producto->getGRAVA_IVA_PROD() == "S")
-                                                echo "<td>SI</td>";
-                                            else
-                                                echo "<td>NO</td>";
+                                <?php
+                                if (isset($_SESSION['producto'])) {
+                                    $producto = unserialize($_SESSION['producto']);
+                                    echo "<tr class='success'>";
+                                    echo "<input type='hidden' name='ID_PROD' value='" . $producto->getID_PROD() . "'>";
+                                    echo "<td>" . $producto->getNOMBRE_PROD() . "</td>";
+                                    echo "<td>" . $producto->getPVP_PROD() . "</td>";
+                                    if ($producto->getGRAVA_IVA_PROD() == "S")
+                                        echo "<td>SI</td>";
+                                    else
+                                        echo "<td>NO</td>";
 
-                                            echo "<td>" . $producto->getSTOCK_PROD() . "</td>";
-                                            echo "</tr>";
-                                        }
-                                        ?>
+                                    echo "<td>" . $producto->getSTOCK_PROD() . "</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
                                     </tbody>
                                 </table>-->
 
@@ -335,10 +304,36 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                             </form>
                             <!--Fin de la Tabla de detalles del ajuste-->
 
-                            <!--                    <div class="col-sm-3 col-sm-offset-9">
-                                                    <input type="submit" value="GUARDAR AJUSTE" id="btnGuardar" class="btn btn-success"> 
-                                                    <input type="submit" value="CANCELAR" id="btnGuardar" class="btn btn-danger"> 
-                                                </div>         -->
+                            <!--Cabecera ajuste-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">INFORMACIÓN DEL AJUSTE</div>
+                                <div class="panel-body">
+                                    <form action="../../Controller/controller.php">
+                                        <input type="hidden" name="opcion1" value="ajuste">
+                                        <input type="hidden" name="opcion2" value="insertar_ajuste_detalles"> 
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Código </span>
+                                            <input type="text" class="form-control" disabled value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
+                                            <input type="hidden" class="form-control" name="ID_AJUSTE_PROD" value="<?php echo $ajustesModel->generarCodigoAjuste(); ?>">
+                                        </div><br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Motivo </span>
+                                            <input type="text" class="form-control" name="MOTIVO_AJUSTE_PROD" size="150" maxlength="150" placeholder="Ingrese el motivo del ajuste" required pattern="|^[a-zA-Z0-9]+(\s*[a-zA-Z0-9]*)*[a-zA-Z0-9]+$|" >
+                                        </div><br>
+                                        <?php
+                                        if (isset($_SESSION['ErrorDetalleAjuste'])) {
+                                            echo "<div class='alert alert-danger'>" . $_SESSION['ErrorDetalleAjuste'] . "</div>";
+                                        }
+                                        ?>
+                                        <div class="form-group">
+                                            <input type="submit" value="GUARDAR AJUSTE" id="btnGuardar" class="btn btn-success"> 
+                                            <a href="../../Controller/controller.php?opcion1=ajuste&opcion2=cancelar_ajuste" id="btnGuardar" class="btn btn-danger">CANCELAR</a>
+                                        </div> 
+                                    </form>
+                                </div>
+                            </div>
+                            <!--Fin Cabecera ajuste-->
+
                         </div>
                     </div>
                     <!--Fin Detalle ajuste-->
