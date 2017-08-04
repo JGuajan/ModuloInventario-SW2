@@ -8,17 +8,17 @@
 class DataBase {
 
 //    Propiedades estaticas con la informacion de la conexion (DSN):
-    private static $dbName = 'dfr7i9r7ebdtpm';
-    private static $dbHost = 'ec2-107-21-109-15.compute-1.amazonaws.com';
-    private static $port = '5432';
-    private static $dbUsername = 'acecaaiahgfvol';
-    private static $dbUserPassword = 'f45deba1fa58e5bee297ba25915c38589eea1bade5653b8c0701c3f632d0eba6';
-    
-//    private static $dbHost = 'localhost';
+//    private static $dbName = 'dfr7i9r7ebdtpm';
+//    private static $dbHost = 'ec2-107-21-109-15.compute-1.amazonaws.com';
 //    private static $port = '5432';
-//    private static $dbUsername = 'postgres';
-//    private static $dbUserPassword = '';
-//    private static $dbName = 'inventario';
+//    private static $dbUsername = 'acecaaiahgfvol';
+//    private static $dbUserPassword = 'f45deba1fa58e5bee297ba25915c38589eea1bade5653b8c0701c3f632d0eba6';
+    
+    private static $dbHost = 'localhost';
+    private static $port = '5432';
+    private static $dbUsername = 'postgres';
+    private static $dbUserPassword = '';
+    private static $dbName = 'inventario';
     
     
     //Propiedad para control de la conexion:

@@ -123,9 +123,11 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                                         <label class="control-label">Reportes <span class="caret"></span></label>
                                     </button>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownReportes">
-                                        <li><a href="../../View/Reportes/ReportesMovimientosProducto.php">Reportes de Movimientos</a></li>
-                                        <li><a href="../../View/Reportes/ReporteBodegueros.php">Reportes de Bodegueros</a></li>
-                                        <li><a href="../../View/Reportes/ReporteProductos.php">Reportes de Productos</a></li>
+                                        <li><a href="ReportesMovimientosProducto.php">Reportes de Movimientos</a></li>
+                                        <li><a href="ReporteBodegueros.php">Reportes de Bodegueros</a></li>
+                                        <li><a href="ReporteProductos.php">Reportes de Productos</a></li>
+                                        <li><a href="ReportesFacturacion.php">Web Service de Ventas</a></li>
+                                        <li><a href="ReportesCompras.php">Web Service de Compras</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -231,6 +233,6 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
     </html>
     <?php
 } else {
-    header('Location: ../login.php');
+    header('Location: ../Principal/iniciop.php');
 }
 ?>
