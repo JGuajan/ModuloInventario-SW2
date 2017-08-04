@@ -351,7 +351,17 @@ class AjustesModel {
         $consulta = $pdo->prepare($sql);
         try {
             $consulta->execute(array($MOTIVO_AJUSTE_PROD, $ID_AJUSTE_PROD));
-            //guardamos los detalles:
+                       
+            // Eliminacion de detalles en la edición
+            foreach ($listaDetPorEliminar as $elim) {
+                if (empty($this->getDetalle($elim)->getID_DETALLE_AJUSTE_PROD())) {
+                    $sql = 'delete from inv_tab_detalle_ajuste_prod where "ID_DETALLE_AJUSTE_PROD"=?';
+                    $consulta = $pdo->prepare($sql);
+                    $consulta->execute(array($elim));
+                }
+            }
+            
+            //guardamos los nuevos detalles:
             foreach ($listaAjusteDet as $det) {
                 if (is_null($this->getDetalle($det->getID_DETALLE_AJUSTE_PROD())->getID_DETALLE_AJUSTE_PROD())) {
                     $sql = 'insert into inv_tab_detalle_ajuste_prod("ID_DETALLE_AJUSTE_PROD", "ID_PROD", "ID_AJUSTE_PROD", "ID_USU", "CAMBIO_STOCK_PROD", "TIPOMOV_DETAJUSTE_PROD") values(?,?,?,?,?,?)';
@@ -368,15 +378,6 @@ class AjustesModel {
                         $det->getID_USU(),
                         $cantidad,
                         $det->getTIPOMOV_DETAJUSTE_PROD()));
-                }
-            }
-
-            // Eliminacion de detalles en la edición
-            foreach ($listaDetPorEliminar as $elim) {
-                if (!is_null($this->getDetalle($elim)->getID_DETALLE_AJUSTE_PROD())) {
-                    $sql = 'delete from inv_tab_detalle_ajuste_prod where "ID_DETALLE_AJUSTE_PROD"=?';
-                    $consulta = $pdo->prepare($sql);
-                    $consulta->execute(array($elim));
                 }
             }
         } catch (PDOException $e) {
