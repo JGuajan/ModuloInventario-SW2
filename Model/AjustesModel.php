@@ -254,7 +254,7 @@ class AjustesModel {
         }
 
         //adicionamos el nuevo detalle al array en memoria:
-        if (in_array($ajusteDet, $listaAjusteDet)) {
+        if (in_array($ajusteDet->getID_PROD(), $listaAjusteDet)) {
             $cont = 0;
             foreach ($listaAjusteDet as $ad) {
                 if ($ad->getID_PROD() == $ID_PROD) {
