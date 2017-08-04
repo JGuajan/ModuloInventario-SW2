@@ -158,6 +158,8 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
                         <ul class="nav nav-pills">
                             <li role="presentation"><a href="../../Controller/controller.php?opcion1=producto&opcion2=listar_productos&aux=producto"><h4>MOSTRAR TODOS</h4></a></li>
                             <li role="presentation"><a href="#nuevoPRO" data-toggle="modal"><h4>NUEVO PRODUCTO</h4></a></li>
+                            <a href="../../Controller/controller.php?opcion1=producto&opcion2=actualizarStock" id="btnGuardar" class="btn btn-danger">DBB</a>
+                            <a href="../../Controller/controller.php?opcion1=producto&opcion2=actualizarStock2" id="btnGuardar" class="btn btn-danger">Actualizar Stock</a>
                         </ul>
                     </div>
                 </div>
