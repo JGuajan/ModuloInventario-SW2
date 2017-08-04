@@ -136,6 +136,6 @@ if (isset($_SESSION['USUARIO_ACTIVO'])) {
     </html>
     <?php
 } else {
-    header('Location: ../View/Principal/iniciop.php');
+    header('Location: .login.php');
 }
 ?>
